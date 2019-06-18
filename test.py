@@ -3,10 +3,9 @@ from ahk import AHK, Hotkey
 from ahk.window import Window
 
 DB = Database()
-print(DB.query('SELECT * FROM abilitys'))
+print(DB.query('SELECT * FROM rogue'))
 
 
-while True:
-    pass
+
 
 
