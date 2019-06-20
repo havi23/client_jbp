@@ -2,14 +2,14 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import pyqtSlot
 from gnome import Ui_Dialog as Ui_GnomeDialog
 from main_window import Ui_Dialog as Ui_MainDialog
-from spec_be import SpecDialog
+from spec_be import ClassDialog
 import sys
 from db_connect import Database
 import time
 
 DB = Database()
 
-#  pyuic5 spec.ui -o spec.py
+#  pyuic5 spec_.ui -o spec_.py
 
 
 
@@ -54,31 +54,51 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.change_class.clicked.connect(self.change_class)
         self.ui.settings.clicked.connect(self.settings)
         self.ui.start.clicked.connect(self.start)
-        self.GnomeDialog = None
-        self.SpecDialog = None
-        wow_path = DB.query('SELECT * FROM system where variable="wow_path"')[0][1]
-        spec = DB.query('SELECT * FROM system where variable="spec"')[0][1]
-        if wow_path is None:
-            if not self.GnomeDialog:
-                self.GnomeDialog = GnomeDialog(14, 'Hello, my Friend!\n\n'
-                                                   'My name is Ho Linka and today i will help you to setup your routine.\n'
-                                                   'First of all I need to know where your WoW client is.\n\n'
-                                                   'Click "Settings"!')
-            self.GnomeDialog.show()
-        elif spec is None:
-            if not self.GnomeDialog:
-                self.GnomeDialog = GnomeDialog(14, 'Now you need to choose your class and specialisation\n\n\n'
-                                                   'Click "Class"!')
+        #QtWidgets.qApp.processEvents()
+
+    def event(self, event):
+        if event.type() == QtCore.QEvent.Show:
+            self.GnomeDialog = None
+            self.GnomeAwaits = None
+            self.ClassDialog = None
+            self.wow_path = DB.query('SELECT * FROM system where variable="wow_path"')[0][1]
+            self.spec = DB.query('SELECT * FROM system where variable="spec"')[0][1]
+            if self.wow_path is None:
+                if not self.GnomeDialog:
+                    self.GnomeDialog = GnomeDialog(14, 'Hello, my Friend!\n\n'
+                                                       'My name is Ho Linka and today i will help you to setup your routine.\n'
+                                                       'First of all I need to know where your WoW client is.\n\n'
+                                                       'Click "Settings"!')
                 self.GnomeDialog.show()
+                self.GnomeAwaits = 'settings'
+
+            elif self.spec is None:
+                if not self.GnomeDialog:
+                    self.GnomeDialog = GnomeDialog(14, 'Now you need to choose your class and specialisation\n\n\n'
+                                                       'Click "Class"!')
+                    self.GnomeDialog.show()
+                    self.GnomeAwaits = 'change_class'
+            elif self.spec is not None:
+                binds = DB.query(f'SELECT * FROM {self.spec}')
+                for bind in binds:
+                    if bind[3] and bind[2] is None:
+                        if not self.GnomeDialog:
+                            self.GnomeDialog = GnomeDialog(14,
+                                                           f'У тебя нет бинда на обязательной клавише: {bind[0]}\n\n'
+                                                           'Click "Binds"!')
+                        self.GnomeDialog.show()
+                        self.GnomeAwaits = 'binds'
+                        break
+        return super(MainDialog, self).event(event)
 
     def binds(self):
-        if self.GnomeDialog is not None:
+        if self.GnomeDialog is not None and self.GnomeAwaits != self.binds.__name__:
             self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return
         pass
 
     def start(self):
-        if self.GnomeDialog is not None:
+        if self.GnomeDialog is not None and self.GnomeAwaits != self.start.__name__:
             self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return
         pass
@@ -92,12 +112,14 @@ class MainDialog(QtWidgets.QMainWindow):
             print('Настройки без автогнома')
 
     def change_class(self):
-        if self.GnomeDialog is not None:
+        if self.GnomeDialog is not None and self.GnomeAwaits != self.change_class.__name__:
             self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return
         self.hide()
-        self.SpecDialog = SpecDialog(self)
-        self.SpecDialog.show()
+        if self.GnomeDialog is not None:
+            self.GnomeDialog.close()
+        self.ClassDialog = ClassDialog(self)
+        self.ClassDialog.show()
 
 
     def close(self):

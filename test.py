@@ -3,7 +3,7 @@ from ahk import AHK, Hotkey
 from ahk.window import Window
 
 DB = Database()
-print(DB.query('SELECT * FROM rogue'))
+print(DB.query('SELECT * FROM sub'))
 
 
 

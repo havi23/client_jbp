@@ -28,7 +28,7 @@ def get_wow(ahk):
     return 0
 
 def rotation(ahk, wow, dmg_):
-    spell, color, bind = DB.query('SELECT * FROM rogue')[0]
+    spell, color, bind = DB.query('SELECT * FROM sub')[0]
     print(spell, color, bind)
     script = \
         f'''
