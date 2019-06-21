@@ -67,6 +67,11 @@ class Ui_Dialog(object):
         self.close.setIcon(icon5)
         self.close.setIconSize(QtCore.QSize(200, 150))
         self.close.setObjectName("close")
+        self.label_2 = QtWidgets.QLabel(Dialog)
+        self.label_2.setGeometry(QtCore.QRect(80, 240, 141, 31))
+        self.label_2.setText("")
+        self.label_2.setPixmap(QtGui.QPixmap("ui/img/hider.png"))
+        self.label_2.setObjectName("label_2")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

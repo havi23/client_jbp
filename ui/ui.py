@@ -9,7 +9,7 @@ import time
 
 DB = Database()
 
-#  pyuic5 spec_.ui -o spec_.py
+#  pyuic5 main_window.ui -o main_window.py
 
 
 

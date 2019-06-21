@@ -19,11 +19,14 @@ class SpecDialog(QtWidgets.QDialog):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.ui.bg.setPixmap(QtGui.QPixmap(f"ui/img/class/spec/spec_{class_}.png"))
         #QtGui.QMouseEvent
-        if class_ not in ('DH', 'dru'):
+        if class_ not in ('dh', 'dru'):
             self.ui.spec_1.mousePressEvent = lambda event: self.spec(main, class_, 1)  # У друида и ДХ не по 3 спека
             self.ui.spec_2.mousePressEvent = lambda event: self.spec(main, class_, 2)
             self.ui.spec_3.mousePressEvent = lambda event: self.spec(main, class_, 3)
         else:
+            self.ui.spec_1.close()
+            self.ui.spec_2.close()
+            self.ui.spec_3.close()
             self.ui.spec_1_.mousePressEvent = lambda event: self.spec(main, class_, 1)  # 1-4 у друида, 2-3 у ДХ
             self.ui.spec_2_.mousePressEvent = lambda event: self.spec(main, class_, 2)
             self.ui.spec_3_.mousePressEvent = lambda event: self.spec(main, class_, 3)
