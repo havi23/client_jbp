@@ -1,8 +1,8 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import pyqtSlot
-from gnome import Ui_Dialog as Ui_GnomeDialog
-from main_window import Ui_Dialog as Ui_MainDialog
-from spec_be import ClassDialog
+from ui.gnome import Ui_Dialog as Ui_GnomeDialog
+from ui.main_window import Ui_Dialog as Ui_MainDialog
+from ui.spec_be import ClassDialog
 import sys
 from db_connect import Database
 import time
@@ -56,13 +56,16 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.start.clicked.connect(self.start)
         #QtWidgets.qApp.processEvents()
 
-    def event(self, event):
+    def event(self, event):  # Срабатывает при каждом вызове main.show()
         if event.type() == QtCore.QEvent.Show:
             self.GnomeDialog = None
             self.GnomeAwaits = None
             self.ClassDialog = None
-            self.wow_path = DB.query('SELECT * FROM system where variable="wow_path"')[0][1]
-            self.spec = DB.query('SELECT * FROM system where variable="spec"')[0][1]
+            self.wow_path = DB.query('SELECT data FROM system where variable="wow_path"')[0][0]
+            self.spec = DB.query('SELECT data FROM system where variable="spec"')[0][0]
+            self.class_= DB.query('SELECT data FROM system where variable="class"')[0][0]
+            if self.class_ is not None:
+                self.ui.label.setPixmap(QtGui.QPixmap(f"ui/img/{self.class_}.png"))
             if self.wow_path is None:
                 if not self.GnomeDialog:
                     self.GnomeDialog = GnomeDialog(14, 'Hello, my Friend!\n\n'
@@ -107,6 +110,10 @@ class MainDialog(QtWidgets.QMainWindow):
         if self.GnomeDialog:
             self.GnomeDialog.close()
             self.GnomeDialog = None
+            wow_path = QtWidgets.QFileDialog.getOpenFileName(parent=self, caption='Select your Wow.exe', filter="Wow*.exe")[0]
+            DB.query(f'UPDATE system SET data="{wow_path}" WHERE variable="wow_path"')
+            DB.commit()
+            print(wow_path)
             print('Настройки с автогномом')
         else:
             print('Настройки без автогнома')
@@ -135,13 +142,16 @@ class MainDialog(QtWidgets.QMainWindow):
         self.oldPos = event.globalPos()
 
 
-app = QtWidgets.QApplication([])
+
 '''
 gnome = GnomeDialog(16, 'Hello, my Friend!\n\n'
                        'My name is Ho Linka and today i will help you to setup your routine.\n\n'
                         '')
 '''
 #gnome.show()
-main = MainDialog()
-main.show()
-sys.exit(app.exec())
+
+if __name__ == '__main__':
+    app = QtWidgets.QApplication([])
+    main = MainDialog()
+    main.show()
+    sys.exit(app.exec())

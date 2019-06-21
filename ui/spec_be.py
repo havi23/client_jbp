@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import pyqtSlot
-from spec import Ui_Dialog as Ui_SpecDialog
-from spec_ import Ui_Dialog as Ui_SpecDialog_
+from ui.spec import Ui_Dialog as Ui_SpecDialog
+from ui.spec_ import Ui_Dialog as Ui_SpecDialog_
 from db_connect import Database
 
 

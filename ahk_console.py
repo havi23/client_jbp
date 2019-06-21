@@ -6,7 +6,7 @@ from db_connect import Database
 import psutil
 DB = Database()
 
-
+#TODO Переделать в класс
 def ahk_start():
     try:
         ahk = AHK(executable_path='C:\\Users\Max\\PycharmProjects\\client_jbp\\drivers\\a64.exe')
