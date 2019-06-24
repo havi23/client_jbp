@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['C:\\Users\\Havi\\Documents\\GitHub\\client_jbp'],
+             pathex=['C:\\Users\\Max\\PycharmProjects\\client_jbp'],
              binaries=[],
              datas=[],
              hiddenimports=[],

@@ -38,6 +38,7 @@ class Ui_Dialog(object):
         self.text.setObjectName("text")
         self.okay = QtWidgets.QPushButton(Dialog)
         self.okay.setGeometry(QtCore.QRect(340, 330, 111, 31))
+        self.okay.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.okay.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("ui/img/gnome/okdok1.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
