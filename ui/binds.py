@@ -1,64 +1,88 @@
-# -*- coding: utf-8 -*-
+from PyQt5 import QtGui, QtCore
+from PyQt5.QtWidgets import QComboBox, QApplication, QWidget, QScrollArea, QVBoxLayout, QGroupBox, QLabel, QPushButton, QFormLayout
+import sys
+from db_connect import Database
+DB = Database()
 
-# Form implementation generated from reading ui file 'binds.ui'
-#
-# Created by: PyQt5 UI code generator 5.12.2
-#
-# WARNING! All changes made in this file will be lost!
-
-from PyQt5 import QtCore, QtGui, QtWidgets
-
-
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(554, 535)
-        self.bg = QtWidgets.QLabel(Dialog)
-        self.bg.setGeometry(QtCore.QRect(30, 0, 501, 531))
+class Ui_Dialog(QWidget):
+    def __init__(self, main, spec):
+        super().__init__()
+        main.hide()
+        self.oldPos = self.pos()
+        self.title = "Bind settings"
+        self.resize(554, 535)
+        self.bg = QLabel(self)
+        self.bg.setGeometry(QtCore.QRect(0, 0, 581, 591))
         self.bg.setText("")
         self.bg.setPixmap(QtGui.QPixmap("ui/img/binds/binds_bg.png"))
         self.bg.setObjectName("bg")
-        self.scrollArea = QtWidgets.QScrollArea(Dialog)
-        self.scrollArea.setGeometry(QtCore.QRect(40, 60, 481, 371))
-        self.scrollArea.setWidgetResizable(True)
-        self.scrollArea.setObjectName("scrollArea")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 479, 369))
-        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.formLayoutWidget = QtWidgets.QWidget(self.scrollAreaWidgetContents)
-        self.formLayoutWidget.setGeometry(QtCore.QRect(0, 0, 481, 371))
-        self.formLayoutWidget.setObjectName("formLayoutWidget")
-        self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
-        self.formLayout.setFieldGrowthPolicy(QtWidgets.QFormLayout.FieldsStayAtSizeHint)
-        self.formLayout.setRowWrapPolicy(QtWidgets.QFormLayout.DontWrapRows)
-        self.formLayout.setContentsMargins(0, 0, 0, 0)
-        self.formLayout.setObjectName("formLayout")
-        self.combo_1 = QtWidgets.QComboBox(self.formLayoutWidget)
-        self.combo_1.setMinimumSize(QtCore.QSize(0, 28))
-        self.combo_1.setObjectName("combo_1")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.combo_1)
-        self.text_1 = QtWidgets.QLabel(self.formLayoutWidget)
-        self.font = QtGui.QFont()
-        self.font.setFamily("Futura-Normal")
-        self.font.setPointSize(22)
-        self.font.setBold(False)
-        self.font.setItalic(False)
-        self.font.setUnderline(False)
-        self.font.setWeight(50)
-        self.font.setStrikeOut(False)
-        self.font.setKerning(True)
-        self.text_1.setFont(self.font)
-        self.text_1.setStyleSheet("color: silver;")
-        self.text_1.setObjectName("text_1")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.text_1)
-        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        #self.setWindowIcon(QtGui.QIcon("icon.png"))
+        #self.setWindowTitle(self.title)
+        self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        font = QtGui.QFont()
+        font.setFamily("Futura-Normal")
+        font.setPointSize(22)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setUnderline(False)
+        font.setWeight(50)
+        font.setStrikeOut(False)
+        font.setKerning(True)
+        #self.setGeometry(self.left, self.top, self.width, self.height)
+        self.formLayout = QFormLayout()
+        groupBox = QGroupBox("")
+        widget_list = {}
+        bind_list = ['', 'F1', 'F2'] #  TODO ЗАПОЛНИТЬ
+        abils = DB.query(f"select * from {spec}")
+        for idx, abil in enumerate(abils, start=1):
+            bind = QComboBox()
+            if abil[2] is not None: bind.addItem(abil[2])
+            bind.addItems(bind_list)
+            bind.setMinimumSize(QtCore.QSize(0, 28))
+            bind.setStyleSheet("background-color: silver; color: black;")
+            spell = QLabel(f'{abil[0]}*' if abil[3] else abil[0])
+            spell.setFont(font)
+            spell.setStyleSheet("color: silver;")
+            spell.setMinimumSize(QtCore.QSize(0, 28))
+            widget_list.update({spell: bind})
+            self.formLayout.addRow(widget_list[spell], spell)
+        #for spell, bind in widget_list.items():
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        groupBox.setLayout(self.formLayout)
+        scroll = QScrollArea()
+        scroll.setWidget(groupBox)
+        scroll.setWidgetResizable(True)
+        scroll.setFixedSize(480, 367)
+        scroll.setStyleSheet("background-color:transparent;")
+        layout = QVBoxLayout(self)
+        layout.addWidget(scroll)
+        save = QLabel(self)
+        save.setGeometry(150, 470, 201, 61)
+        save.mousePressEvent = lambda event: self.save(main, spec, widget_list)
+        self.show()
 
-    def retranslateUi(self, Dialog):
-        _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.text_1.setText(_translate("Dialog", "TextLabel"))
+    def save(self, main, spec, widget_list):
+        try:
+            for spell, bind in widget_list.items():
+                new_bind = widget_list[spell].currentText()
+                DB.execute(f'UPDATE {spec} SET bind=? WHERE spell=?', (None if new_bind == '' else new_bind,
+                                                                       spell.text()))
+            DB.commit()
+        except Exception as E:
+            print('Проблема с уникальностью, либо: ')
+            print(E)
+            # TODO GNOME!!!
+        main.show()
+        self.close()
 
+    '''
+    def mousePressEvent(self, event):
+        self.oldPos = event.globalPos()
 
+    def mouseMoveEvent(self, event):
+        delta = QtCore.QPoint(event.globalPos() - self.oldPos)
+        self.move(self.x() + delta.x(), self.y() + delta.y())
+        self.oldPos = event.globalPos()
+    '''

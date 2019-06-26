@@ -65,13 +65,11 @@
     </column>
     <index id="49" parent="6" name="colors_ability_uindex">
       <ColNames>ability</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="50" parent="6" name="sqlite_autoindex_abilitys_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ability</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="51" parent="6" name="colors_pk">
@@ -103,7 +101,6 @@
     <index id="56" parent="7" name="sqlite_autoindex_affli_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="57" parent="7" name="affli_pk">
@@ -135,7 +132,6 @@
     <index id="62" parent="8" name="sqlite_autoindex_arcane_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="63" parent="8" name="arcane_pk">
@@ -167,7 +163,6 @@
     <index id="68" parent="9" name="sqlite_autoindex_arms_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="69" parent="9" name="arms_pk">
@@ -199,7 +194,6 @@
     <index id="74" parent="10" name="sqlite_autoindex_bear_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="75" parent="10" name="bear_pk">
@@ -231,7 +225,6 @@
     <index id="80" parent="11" name="sqlite_autoindex_blood_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="81" parent="11" name="blood_pk">
@@ -263,7 +256,6 @@
     <index id="86" parent="12" name="sqlite_autoindex_bmhun_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="87" parent="12" name="bmhun_pk">
@@ -295,7 +287,6 @@
     <index id="92" parent="13" name="sqlite_autoindex_bmmon_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="93" parent="13" name="bmmon_pk">
@@ -327,7 +318,6 @@
     <index id="98" parent="14" name="sqlite_autoindex_cat_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="99" parent="14" name="cat_pk">
@@ -342,13 +332,11 @@
     </column>
     <index id="101" parent="15" name="colors_color_uindex">
       <ColNames>color</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="102" parent="15" name="sqlite_autoindex_colors_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>color</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="103" parent="15" name="colors_pk">
@@ -380,7 +368,6 @@
     <index id="108" parent="16" name="sqlite_autoindex_demo_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="109" parent="16" name="demo_pk">
@@ -412,7 +399,6 @@
     <index id="114" parent="17" name="sqlite_autoindex_destr_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="115" parent="17" name="destr_pk">
@@ -444,7 +430,6 @@
     <index id="120" parent="18" name="sqlite_autoindex_disc_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="121" parent="18" name="disc_pk">
@@ -476,7 +461,6 @@
     <index id="126" parent="19" name="sqlite_autoindex_elem_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="127" parent="19" name="elem_pk">
@@ -508,7 +492,6 @@
     <index id="132" parent="20" name="sqlite_autoindex_enh_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="133" parent="20" name="enh_pk">
@@ -540,7 +523,6 @@
     <index id="138" parent="21" name="sqlite_autoindex_fdk_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="139" parent="21" name="fdk_pk">
@@ -572,7 +554,6 @@
     <index id="144" parent="22" name="sqlite_autoindex_fire_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="145" parent="22" name="fire_pk">
@@ -604,7 +585,6 @@
     <index id="150" parent="23" name="sqlite_autoindex_fmage_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="151" parent="23" name="fmage_pk">
@@ -636,7 +616,6 @@
     <index id="156" parent="24" name="sqlite_autoindex_fury_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="157" parent="24" name="fury_pk">
@@ -668,7 +647,6 @@
     <index id="162" parent="25" name="sqlite_autoindex_havoc_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="163" parent="25" name="havoc_pk">
@@ -700,7 +678,6 @@
     <index id="168" parent="26" name="sqlite_autoindex_hpal_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="169" parent="26" name="hpal_pk">
@@ -732,7 +709,6 @@
     <index id="174" parent="27" name="sqlite_autoindex_hpri_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="175" parent="27" name="hpri_pk">
@@ -764,7 +740,6 @@
     <index id="180" parent="28" name="sqlite_autoindex_mm_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="181" parent="28" name="mm_pk">
@@ -796,7 +771,6 @@
     <index id="186" parent="29" name="sqlite_autoindex_moon_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="187" parent="29" name="moon_pk">
@@ -828,7 +802,6 @@
     <index id="192" parent="30" name="sqlite_autoindex_mut_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="193" parent="30" name="mut_pk">
@@ -860,7 +833,6 @@
     <index id="198" parent="31" name="sqlite_autoindex_mw_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="199" parent="31" name="mw_pk">
@@ -892,7 +864,6 @@
     <index id="204" parent="32" name="sqlite_autoindex_outlaw_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="205" parent="32" name="outlaw_pk">
@@ -924,7 +895,6 @@
     <index id="210" parent="33" name="sqlite_autoindex_ppal_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="211" parent="33" name="ppal_pk">
@@ -956,7 +926,6 @@
     <index id="216" parent="34" name="sqlite_autoindex_pwarr_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="217" parent="34" name="pwarr_pk">
@@ -988,7 +957,6 @@
     <index id="222" parent="35" name="sqlite_autoindex_rdru_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="223" parent="35" name="rdru_pk">
@@ -1020,7 +988,6 @@
     <index id="228" parent="36" name="sqlite_autoindex_ret_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="229" parent="36" name="ret_pk">
@@ -1052,7 +1019,6 @@
     <index id="234" parent="37" name="sqlite_autoindex_rsha_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="235" parent="37" name="rsha_pk">
@@ -1084,7 +1050,6 @@
     <index id="240" parent="38" name="sqlite_autoindex_shadow_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="241" parent="38" name="shadow_pk">
@@ -1117,13 +1082,11 @@
     </column>
     <index id="247" parent="39" name="specs_class_uindex">
       <ColNames>class</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="248" parent="39" name="sqlite_autoindex_specs_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>class</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="249" parent="39" name="specs_pk">
@@ -1174,23 +1137,19 @@
     </column>
     <index id="259" parent="41" name="rogue_ability_uindex">
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="260" parent="41" name="sqlite_autoindex_sub_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="261" parent="41" name="rogue_color_uindex">
       <ColNames>color</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="262" parent="41" name="rogue_bind_uindex">
       <ColNames>bind</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="263" parent="41" name="rogue_pk">
@@ -1222,7 +1181,6 @@
     <index id="268" parent="42" name="sqlite_autoindex_surv_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="269" parent="42" name="surv_pk">
@@ -1242,12 +1200,10 @@
     <index id="272" parent="43" name="sqlite_autoindex_system_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>variable</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <index id="273" parent="43" name="system_variable_uindex">
       <ColNames>variable</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="274" parent="43" name="system_pk">
@@ -1279,7 +1235,6 @@
     <index id="279" parent="44" name="sqlite_autoindex_unh_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="280" parent="44" name="unh_pk">
@@ -1311,7 +1266,6 @@
     <index id="285" parent="45" name="sqlite_autoindex_veng_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="286" parent="45" name="veng_pk">
@@ -1343,7 +1297,6 @@
     <index id="291" parent="46" name="sqlite_autoindex_ww_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
     <key id="292" parent="46" name="ww_pk">

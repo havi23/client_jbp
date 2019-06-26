@@ -8,19 +8,21 @@ DB = Database()
 
 class BindsDialog(QtWidgets.QDialog):
     # clicked = QtCore.pyqtSignal(str)
-    def __init__(self, main, parent=None):
+    def __init__(self, main, spec, parent=None):
         super(BindsDialog, self).__init__(parent)
         self.oldPos = self.pos()
-        self.ui = Ui_BindsDialog_()
-        self.ui.setupUi(self)
+        self.ui = Ui_BindsDialog_(self, spec)
+        #self.ui.setupUi()#, spec)
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.ui.scrollArea.setStyleSheet("background-color:transparent;")
+        #self.ui.scrollArea.setStyleSheet("background-color:transparent;")
+        '''
         possible_binds = ['None', 'F1', 'F2', 'F3']
         self.ui.combo_1.addItems(possible_binds)
         self.ui.combo_1.setStyleSheet('color: red;')
-        abils = DB.query("select * from sub")
+        abils = DB.query("select * from ?", spec)
+        print(abils)
         for idx, abil in enumerate(abils, start=1):
             exec(f'self.ui.combo_{idx} = QtWidgets.QComboBox(self.ui.formLayoutWidget)')
             exec(f'self.ui.combo_{idx}.setMinimumSize(QtCore.QSize(0, 28))')
@@ -33,7 +35,7 @@ class BindsDialog(QtWidgets.QDialog):
             exec(f'self.ui.text_{idx}.setStyleSheet("color: silver;")')
             exec(f'self.ui.text_{idx}.setObjectName("text_{idx}")')
             exec(f'self.ui.formLayout.setWidget({idx}, QtWidgets.QFormLayout.FieldRole, self.ui.text_{idx})')
-
+'''
 
 
 # TODO узнать что под мышкой и переместить

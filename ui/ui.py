@@ -3,7 +3,7 @@ from PyQt5.QtCore import pyqtSlot
 from ui.gnome import Ui_Dialog as Ui_GnomeDialog
 from ui.main_window import Ui_Dialog as Ui_MainDialog
 from ui.spec_be import ClassDialog
-from ui.binds_be import BindsDialog
+from ui.binds import Ui_Dialog as BindsDialog
 from ui.settings import Ui_Dialog as Ui_SettingsDialog
 import sys
 from db_connect import Database
@@ -190,8 +190,8 @@ class MainDialog(QtWidgets.QMainWindow):
             self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return
         if not self.BindsDialog:
-            self.BindsDialog = BindsDialog(self)
-            self.BindsDialog.show()
+            self.BindsDialog = BindsDialog(self, self.spec)
+            #self.BindsDialog.show()
 
     def start(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.start.__name__:
