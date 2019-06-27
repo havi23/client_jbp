@@ -3,7 +3,7 @@ from PyQt5.QtCore import pyqtSlot
 from ui.spec import Ui_Dialog as Ui_SpecDialog
 from ui.spec_ import Ui_Dialog as Ui_SpecDialog_
 from db_connect import Database
-
+from ui.resource_to_exe import resource_path
 
 DB = Database()
 
@@ -17,7 +17,7 @@ class SpecDialog(QtWidgets.QDialog):
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.ui.bg.setPixmap(QtGui.QPixmap(f"ui/img/class/spec/spec_{class_}.png"))
+        self.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/class/spec/spec_{class_}.png")))
         #QtGui.QMouseEvent
         if class_ not in ('dh', 'dru'):
             self.ui.spec_1.mousePressEvent = lambda event: self.spec(main, class_, 1)  # У друида и ДХ не по 3 спека

@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from ui.resource_to_exe import resource_path
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -16,14 +16,14 @@ class Ui_Dialog(object):
         self.bg = QtWidgets.QLabel(Dialog)
         self.bg.setGeometry(QtCore.QRect(20, 20, 471, 401))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap("ui/img/settings/settings.png"))
+        self.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/settings/settings.png")))
         self.bg.setObjectName("bg")
         self.cwp = QtWidgets.QPushButton(Dialog)
         self.cwp.setGeometry(QtCore.QRect(260, 218, 181, 31))
         self.cwp.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.cwp.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui/img/settings/cwp.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/settings/cwp.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.cwp.setIcon(icon)
         self.cwp.setIconSize(QtCore.QSize(190, 74))
         self.cwp.setObjectName("cwp")
@@ -32,7 +32,7 @@ class Ui_Dialog(object):
         self.aim.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.aim.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("ui/img/settings/aim.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/settings/aim.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.aim.setIcon(icon1)
         self.aim.setIconSize(QtCore.QSize(193, 150))
         self.aim.setObjectName("aim")
@@ -41,7 +41,7 @@ class Ui_Dialog(object):
         self.save.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.save.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("ui/img/settings/save.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/settings/save.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.save.setIcon(icon2)
         self.save.setIconSize(QtCore.QSize(193, 150))
         self.save.setObjectName("save")

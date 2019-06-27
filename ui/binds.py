@@ -5,6 +5,7 @@ from db_connect import Database
 from ui.ui import GnomeDialog
 DB = Database()
 from drivers.key_dict import key_dict
+from ui.resource_to_exe import resource_path
 
 class Ui_Dialog(QWidget):
     def __init__(self, main, spec):
@@ -17,10 +18,8 @@ class Ui_Dialog(QWidget):
         self.bg = QLabel(self)
         self.bg.setGeometry(QtCore.QRect(0, 0, 581, 591))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap("ui/img/binds/binds_bg.png"))
+        self.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/binds/binds_bg.png")))
         self.bg.setObjectName("bg")
-        #self.setWindowIcon(QtGui.QIcon("icon.png"))
-        #self.setWindowTitle(self.title)
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
@@ -36,27 +35,25 @@ class Ui_Dialog(QWidget):
         self.formLayout = QFormLayout()
         groupBox = QGroupBox("")
         self.widget_list = {}
-        #bind_list = ['', 'F1', 'F2'] #  TODO ЗАПОЛНИТЬ
-        abils = DB.query(f"select * from {spec}")
+        abilitys = DB.query(f"select * from {spec}")
         self.input_waiting = None
-        for idx, abil in enumerate(abils, start=1):
+        for idx, spell in enumerate(abilitys, start=1):
             bind = QPushButton()
             #if abil[2] is not None: bind.addItem(abil[2])
-            if abil[2] is None:
+            if spell[2] is None:
                 bind.setText('CLICK TO BIND')
             else:
-                bind.setText(abil[2])
-            bind.setMinimumSize(QtCore.QSize(70, 28))
-            bind.setStyleSheet("color: silver;")
-            spell = QLabel(f'{abil[0]}*' if abil[3] else abil[0])
-            spell.setFont(font)
-            spell.setStyleSheet("color: silver;")
-            spell.setMinimumSize(QtCore.QSize(0, 28))
-            self.widget_list.update({spell: bind})
-            self.widget_list[spell].clicked.connect(lambda: self.key_input(spell))
-            #  TODO СЛОВАРЬ СООТВЕТСТВИЙ АЙТЕМА СО СПЕЛЛОМ
-            print(f'{self.widget_list[spell]} {spell}')
-            self.formLayout.addRow(self.widget_list[spell], spell)
+                bind.setText(spell[2])
+            bind.setMinimumSize(QtCore.QSize(85, 28))
+            bind.setStyleSheet("background-color: silver;")
+            spell_label = QLabel(f'{spell[0]}*' if spell[3] else spell[0])
+            spell_label.setFont(font)
+            spell_label.setStyleSheet("color: silver;")
+            spell_label.setMinimumSize(QtCore.QSize(0, 28))
+            self.widget_list.update({spell_label: bind})
+            self.widget_list[spell_label].setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+            self.widget_list[spell_label].clicked.connect(lambda state, key=spell_label: self.key_input(key))
+            self.formLayout.addRow(self.widget_list[spell_label], spell_label)
         groupBox.setLayout(self.formLayout)
         scroll = QScrollArea()
         scroll.setWidget(groupBox)
@@ -72,10 +69,26 @@ class Ui_Dialog(QWidget):
         save.setGeometry(150, 470, 201, 61)
         save.mousePressEvent = lambda event: self.save(main, spec)
         move_label = QLabel(self)
-        move_label.setGeometry(2, 36, 473, 41)
         move_label.mousePressEvent = lambda event: self.move_pressed(event)
+        move_label.setGeometry(2, 36, 473, 41)
         self.m_label = False #  Флаг нажатия на Label для перемещения окна
         self.show()
+
+    def key_input(self, spell_label):
+        if self.input_waiting is None:
+            self.input_waiting = spell_label
+            self.widget_list[spell_label].setText('PRESS KEY')
+            self.widget_list[spell_label].setStyleSheet("background-color: #606060;")
+        elif self.input_waiting == spell_label:
+            self.input_waiting = None
+            self.widget_list[spell_label].setText('CLICK TO BIND')
+            self.widget_list[spell_label].setStyleSheet("background-color: silver;")
+        else:
+            self.widget_list[self.input_waiting].setText('CLICK TO BIND')
+            self.widget_list[self.input_waiting].setStyleSheet("background-color: silver;")
+            self.input_waiting = spell_label
+            self.widget_list[spell_label].setText('PRESS KEY')
+            self.widget_list[spell_label].setStyleSheet("background-color: #606060;")
 
     def close_(self, main):
         main.show()
@@ -85,8 +98,9 @@ class Ui_Dialog(QWidget):
         try:
             DB.execute(f'UPDATE {spec} SET bind=Null')
             for spell, bind in self.widget_list.items():
-                new_bind = self.widget_list[spell].currentText()
-                DB.execute(f'UPDATE {spec} SET bind=? WHERE spell=?', (None if new_bind == '' else new_bind,
+                new_bind = self.widget_list[spell].text()
+                DB.execute(f'UPDATE {spec} SET bind=? WHERE spell=?', (None if len(new_bind) > 3
+                                                                       else new_bind,
                                                                        spell.text()[:-1] if '*' in spell.text()
                                                                        else spell.text()))
             DB.commit()
@@ -103,33 +117,41 @@ class Ui_Dialog(QWidget):
         main.show()
         self.close()
 
-    def key_input(self, spell):
-        print(spell)
-        if self.input_waiting != spell:
-            print('press')
-            self.input_waiting = spell
-            self.widget_list[spell].setText('PRESS KEY')
-        elif self.input_waiting == spell:
-            print('click')
-            self.input_waiting = [0, 0]
-            self.widget_list[spell].setText('CLICK TO BIND')
+    def set_text(self, text):
+        self.widget_list[self.input_waiting].setText(text)
+        self.widget_list[self.input_waiting].setStyleSheet("background-color: silver;")
+        self.input_waiting = None
 
     def keyPressEvent(self, QKeyEvent):
-        try:
-            print(key_dict[QKeyEvent.key()])
-        except Exception as E:
-            print(E.args)
+        if QKeyEvent.key() in (16777216, 16777249, 16777251, 16777248):  # esc
+            if self.input_waiting:
+                self.set_text('CLICK TO BIND')
+        elif len(str(QKeyEvent.key())) == 4 and str(QKeyEvent.key())[:2] == '10':
             if self.GnomeDialog:
                 self.GnomeDialog.close()
-            self.GnomeDialog = GnomeDialog(14, "\n\n\nOops, i guess you can bind only 0-9, F1-F12, A-Z keys", True)
+            self.GnomeDialog = GnomeDialog(14, "\n\n\nYou must change your keyboard layout to ENG, my friend.", True)
             self.GnomeDialog.show()
             return
+        if self.input_waiting:
+            try:
+                self.set_text(key_dict[QKeyEvent.key()])
+            except Exception as E:
+                print(E.args)
+                if self.GnomeDialog:
+                    self.GnomeDialog.close()
+                self.GnomeDialog = GnomeDialog(14, "\n\n\nOops, i guess you can bind only 0-9, F1-F12, A-Z keys", True)
+                self.GnomeDialog.show()
+                self.set_text('CLICK TO BIND')
+                return
 
     def move_pressed(self, event):
         self.oldPos = event.globalPos()
         self.m_label = True
 
+
     def mouseReleaseEvent(self, QMouseEvent):
+        if self.input_waiting:
+            self.set_text('CLICK TO BIND')
         self.m_label = False
 
     def mouseMoveEvent(self, event):

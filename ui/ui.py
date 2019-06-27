@@ -10,10 +10,13 @@ from db_connect import Database
 import time
 from pathlib import Path, PureWindowsPath
 import os
-
+from ui.resource_to_exe import resource_path
 DB = Database()
 
 #  pyuic5 binds.ui -o binds.py
+
+
+
 
 
 class SettingsDialog(QtWidgets.QDialog):
@@ -31,8 +34,7 @@ class SettingsDialog(QtWidgets.QDialog):
         self.ui.cwp.clicked.connect(self.cwp)
         self.ui.save.clicked.connect(lambda: self.save(main))
         if self.wow_path is None:
-            self.GnomeDialog = GnomeDialog(14, '\n\n\n'
-                                               'Click "Choose WoW path"!')
+            self.GnomeDialog = GnomeDialog(14, '\n\n\nClick "Choose WoW path"!')
             self.GnomeDialog.show()
             self.GnomeAwaits = self.cwp.__name__
 
@@ -43,7 +45,7 @@ class SettingsDialog(QtWidgets.QDialog):
 
     def cwp(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.cwp.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
+            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/gnome/nani.png")))
             return
         elif self.GnomeDialog is not None:
             self.GnomeDialog.close()
@@ -130,7 +132,8 @@ class MainDialog(QtWidgets.QMainWindow):
             self.spec = DB.query('SELECT data FROM system where variable="spec"')[0][0]
             self.class_= DB.query('SELECT data FROM system where variable="class"')[0][0]
             if self.class_ is not None:
-                self.ui.label.setPixmap(QtGui.QPixmap(f"ui/img/{self.class_}.png"))
+                self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'ui/img/{self.class_}.png')))
+
             if self.wow_path is None:
                 if not self.GnomeDialog:
                     self.GnomeDialog = GnomeDialog(14, 'Hello, my Friend!\n\n'
@@ -161,7 +164,7 @@ class MainDialog(QtWidgets.QMainWindow):
 
     def binds(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.binds.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
+            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/gnome/nani.png")))
             return
         if not self.BindsDialog:
             self.BindsDialog = BindsDialog(self, self.spec)
@@ -169,13 +172,13 @@ class MainDialog(QtWidgets.QMainWindow):
 
     def start(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.start.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
+            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/gnome/nani.png")))
             return
         pass
 
     def settings(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.settings.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
+            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/gnome/nani.png")))
             return
         self.hide()
         if self.GnomeDialog is not None:
@@ -185,7 +188,7 @@ class MainDialog(QtWidgets.QMainWindow):
 
     def change_class(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.change_class.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
+            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/gnome/nani.png")))
             return
         self.hide()
         if self.GnomeDialog is not None:

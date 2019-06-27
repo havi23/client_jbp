@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from ui.resource_to_exe import resource_path
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -17,14 +17,14 @@ class Ui_Dialog(object):
         self.label.setGeometry(QtCore.QRect(10, 3, 261, 461))
         self.label.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("ui/img/noclass.png"))
+        self.label.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/noclass.png")))
         self.label.setObjectName("label")
         self.settings = QtWidgets.QPushButton(Dialog)
         self.settings.setGeometry(QtCore.QRect(50, 123, 161, 23))
         self.settings.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.settings.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui/img/sett.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/sett.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.settings.setIcon(icon)
         self.settings.setIconSize(QtCore.QSize(200, 150))
         self.settings.setObjectName("settings")
@@ -33,7 +33,7 @@ class Ui_Dialog(object):
         self.binds.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.binds.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("ui/img/binds.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/binds.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.binds.setIcon(icon1)
         self.binds.setIconSize(QtCore.QSize(200, 150))
         self.binds.setObjectName("binds")
@@ -42,7 +42,7 @@ class Ui_Dialog(object):
         self.change_class.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.change_class.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("ui/img/class.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/class.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.change_class.setIcon(icon2)
         self.change_class.setIconSize(QtCore.QSize(200, 150))
         self.change_class.setObjectName("change_class")
@@ -51,7 +51,7 @@ class Ui_Dialog(object):
         self.start.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.start.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("ui/img/start.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.start.setIcon(icon3)
         self.start.setIconSize(QtCore.QSize(200, 150))
         self.start.setObjectName("start")
@@ -60,7 +60,7 @@ class Ui_Dialog(object):
         self.info.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.info.setText("")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("ui/img/info.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/info.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.info.setIcon(icon4)
         self.info.setIconSize(QtCore.QSize(200, 150))
         self.info.setObjectName("info")
@@ -69,14 +69,14 @@ class Ui_Dialog(object):
         self.close.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.close.setText("")
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("ui/img/close.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/close.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.close.setIcon(icon5)
         self.close.setIconSize(QtCore.QSize(200, 150))
         self.close.setObjectName("close")
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(80, 240, 141, 31))
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("ui/img/hider.png"))
+        self.label_2.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/hider.png")))
         self.label_2.setObjectName("label_2")
 
         self.retranslateUi(Dialog)
