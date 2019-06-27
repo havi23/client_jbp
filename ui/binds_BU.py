@@ -35,28 +35,21 @@ class Ui_Dialog(QWidget):
         font.setKerning(True)
         self.formLayout = QFormLayout()
         groupBox = QGroupBox("")
-        self.widget_list = {}
-        #bind_list = ['', 'F1', 'F2'] #  TODO ЗАПОЛНИТЬ
+        widget_list = {}
+        bind_list = ['', 'F1', 'F2'] #  TODO ЗАПОЛНИТЬ
         abils = DB.query(f"select * from {spec}")
-        self.input_waiting = None
         for idx, abil in enumerate(abils, start=1):
-            bind = QPushButton()
-            #if abil[2] is not None: bind.addItem(abil[2])
-            if abil[2] is None:
-                bind.setText('CLICK TO BIND')
-            else:
-                bind.setText(abil[2])
-            bind.setMinimumSize(QtCore.QSize(70, 28))
-            bind.setStyleSheet("color: silver;")
+            bind = QComboBox()
+            if abil[2] is not None: bind.addItem(abil[2])
+            bind.addItems(bind_list)
+            bind.setMinimumSize(QtCore.QSize(0, 28))
+            bind.setStyleSheet("background-color: silver; color: black;")
             spell = QLabel(f'{abil[0]}*' if abil[3] else abil[0])
             spell.setFont(font)
             spell.setStyleSheet("color: silver;")
             spell.setMinimumSize(QtCore.QSize(0, 28))
-            self.widget_list.update({spell: bind})
-            self.widget_list[spell].clicked.connect(lambda: self.key_input(spell))
-            #  TODO СЛОВАРЬ СООТВЕТСТВИЙ АЙТЕМА СО СПЕЛЛОМ
-            print(f'{self.widget_list[spell]} {spell}')
-            self.formLayout.addRow(self.widget_list[spell], spell)
+            widget_list.update({spell: bind})
+            self.formLayout.addRow(widget_list[spell], spell)
         groupBox.setLayout(self.formLayout)
         scroll = QScrollArea()
         scroll.setWidget(groupBox)
@@ -70,7 +63,7 @@ class Ui_Dialog(QWidget):
         close_.mousePressEvent = lambda event: self.close_(main)
         save = QLabel(self)
         save.setGeometry(150, 470, 201, 61)
-        save.mousePressEvent = lambda event: self.save(main, spec)
+        save.mousePressEvent = lambda event: self.save(main, spec, widget_list)
         move_label = QLabel(self)
         move_label.setGeometry(2, 36, 473, 41)
         move_label.mousePressEvent = lambda event: self.move_pressed(event)
@@ -81,11 +74,11 @@ class Ui_Dialog(QWidget):
         main.show()
         self.close()
 
-    def save(self, main, spec):
+    def save(self, main, spec, widget_list):
         try:
             DB.execute(f'UPDATE {spec} SET bind=Null')
-            for spell, bind in self.widget_list.items():
-                new_bind = self.widget_list[spell].currentText()
+            for spell, bind in widget_list.items():
+                new_bind = widget_list[spell].currentText()
                 DB.execute(f'UPDATE {spec} SET bind=? WHERE spell=?', (None if new_bind == '' else new_bind,
                                                                        spell.text()[:-1] if '*' in spell.text()
                                                                        else spell.text()))
@@ -102,17 +95,6 @@ class Ui_Dialog(QWidget):
             self.close()
         main.show()
         self.close()
-
-    def key_input(self, spell):
-        print(spell)
-        if self.input_waiting != spell:
-            print('press')
-            self.input_waiting = spell
-            self.widget_list[spell].setText('PRESS KEY')
-        elif self.input_waiting == spell:
-            print('click')
-            self.input_waiting = [0, 0]
-            self.widget_list[spell].setText('CLICK TO BIND')
 
     def keyPressEvent(self, QKeyEvent):
         try:

@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import pyqtSlot
-from ui.gnome import Ui_Dialog as Ui_GnomeDialog
+from ui.gnome_be import GnomeDialog
 from ui.main_window import Ui_Dialog as Ui_MainDialog
 from ui.spec_be import ClassDialog
 from ui.binds import Ui_Dialog as BindsDialog
@@ -75,6 +75,7 @@ class SettingsDialog(QtWidgets.QDialog):
                 line_dict.update({'Contrast': '"50"\n'})
                 line_dict.update({'Contrast': '"50"\n'})
                 line_dict.update({'colorblindSimulator': '"2"\n'})
+                #TODO Оконный режим
                 lines = ([f'SET {k} {v}' for k, v in line_dict.items()])
                 config_file = open(config_path, 'w', encoding='UTF-8')
                 config_file.writelines(lines)
@@ -101,33 +102,6 @@ class SettingsDialog(QtWidgets.QDialog):
         # print(delta)
         self.move(self.x() + delta.x(), self.y() + delta.y())
         self.oldPos = event.globalPos()
-
-class GnomeDialog(QtWidgets.QDialog):
-    # clicked = QtCore.pyqtSignal(str)
-    def __init__(self, size, text, button=None, parent=None):
-        super(GnomeDialog, self).__init__(parent)
-        self.ui = Ui_GnomeDialog()
-        self.ui.setupUi(self)
-        self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
-        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.FramelessWindowHint | QtCore.Qt.Tool)
-        ag = QtWidgets.QDesktopWidget().availableGeometry()
-        sg = QtWidgets.QDesktopWidget().screenGeometry()
-        widget = self.geometry()
-        x = ag.width() - widget.width()
-        y = 2 * ag.height() - sg.height() - widget.height()
-        self.move(x, y)
-        self.ui.text.setFont(QtGui.QFont("Times", size, QtGui.QFont.StyleItalic))
-        self.ui.text.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignHCenter)
-        self.ui.text.setText(text)
-        if button:
-            self.ui.okay.clicked.connect(self._exit)
-        else:
-            self.ui.okay.hide()
-
-    @pyqtSlot()
-    def _exit(self):
-        self.close()
 
 class MainDialog(QtWidgets.QMainWindow):
     def __init__(self):
