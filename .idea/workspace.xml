@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="67165dbc-47ed-475f-aaed-51ef5821bc36" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ui/binds_.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/client_jbp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/client_jbp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f41d6f6-cba8-43f5-932a-0512b30d8b7b.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/0f41d6f6-cba8-43f5-932a-0512b30d8b7b.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/drivers/key_dict.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/binds_BU.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/gnome_be.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/binds.ui" beforeDir="false" afterPath="$PROJECT_DIR$/binds.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data" beforeDir="false" afterPath="$PROJECT_DIR$/data" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-journal" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/binds.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/binds.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/binds_be.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/binds_be.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,12 +23,14 @@
     <option name="refreshInterval" value="1" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/client_jbp$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1561565639882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/client_jbp$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1561652836650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/client_jbp$test.coverage" NAME="test Coverage Results" MODIFIED="1560806096988" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/client_jbp$db_connect.coverage" NAME="db_connect Coverage Results" MODIFIED="1561096702289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/client_jbp$spec_be.coverage" NAME="spec_be Coverage Results" MODIFIED="1561097311839" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ui" />
     <SUITE FILE_PATH="coverage/client_jbp$ahk_console.coverage" NAME="ahk_console Coverage Results" MODIFIED="1560807073467" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/client_jbp$main.coverage" NAME="main Coverage Results" MODIFIED="1560883557646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/client_jbp$key_dict.coverage" NAME="key_dict Coverage Results" MODIFIED="1561650477420" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/drivers" />
+    <SUITE FILE_PATH="coverage/client_jbp$binds.coverage" NAME="binds Coverage Results" MODIFIED="1561649646509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ui" />
     <SUITE FILE_PATH="coverage/client_jbp$asd.coverage" NAME="asd Coverage Results" MODIFIED="1561110034271" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/client_jbp$ui__1_.coverage" NAME="ui (1) Coverage Results" MODIFIED="1561539602707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ui" />
     <SUITE FILE_PATH="coverage/client_jbp$ui.coverage" NAME="ui Coverage Results" MODIFIED="1561067491594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -82,8 +81,8 @@
       <file leaf-file-name="db_connect.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db_connect.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="211">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
             </state>
           </provider>
         </entry>
@@ -91,8 +90,20 @@
       <file leaf-file-name="ui.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui/ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="55" column="84" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="84" />
+            <state relative-caret-position="122">
+              <caret line="31" column="43" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="43" />
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gnome_be.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ui/gnome_be.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -103,11 +114,27 @@
       <file leaf-file-name="binds.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ui/binds.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="79" column="7" lean-forward="true" selection-start-line="79" selection-start-column="7" selection-end-line="79" selection-end-column="7" />
+            <state relative-caret-position="172">
+              <caret line="54" column="50" lean-forward="true" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="binds_BU.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ui/binds_BU.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1746" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="key_dict.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/drivers/key_dict.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="257">
+              <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -128,18 +155,6 @@
               <caret line="66" column="28" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
               <folding>
                 <element signature="e#194#239#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="binds_be.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui/binds_be.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#42#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -166,13 +181,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="spec_.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui/spec_.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-272" />
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -194,8 +202,14 @@
       <find>adj</find>
       <find>binds</find>
       <find>que</find>
-      <find>geome</find>
       <find>upda</find>
+      <find>gnome</find>
+      <find>save</find>
+      <find>geome</find>
+      <find>class G</find>
+      <find>PureWindowsPath</find>
+      <find>widget_list</find>
+      <find>lambda</find>
     </findStrings>
     <replaceStrings>
       <replace>0x</replace>
@@ -230,7 +244,9 @@
         <option value="$PROJECT_DIR$/ahk_console.py" />
         <option value="$PROJECT_DIR$/ui/binds_be.py" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/0f41d6f6-cba8-43f5-932a-0512b30d8b7b/console.sql" />
+        <option value="$PROJECT_DIR$/ui/gnome_be.py" />
         <option value="$PROJECT_DIR$/ui/ui.py" />
+        <option value="$PROJECT_DIR$/drivers/key_dict.py" />
         <option value="$PROJECT_DIR$/ui/binds.py" />
       </list>
     </option>
@@ -266,6 +282,11 @@
             <path>
               <item name="client_jbp" type="b2602c69:ProjectViewProjectNode" />
               <item name="client_jbp" type="462c0819:PsiDirectoryNode" />
+              <item name="drivers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="client_jbp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="client_jbp" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -289,6 +310,9 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Havi\Documents\GitHub\client_jbp\ui" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Havi\Documents\GitHub\client_jbp\ui" />
       <recent name="C:\Users\Max\PycharmProjects\client_jbp\ui" />
@@ -328,7 +352,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="db_connect" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="binds" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="client_jbp" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -336,12 +360,31 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ui" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/db_connect.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/binds.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="key_dict" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="client_jbp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/drivers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/drivers/key_dict.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -361,25 +404,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="spec_be" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="client_jbp" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ui" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/spec_be.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -406,18 +430,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.ui (1)" />
-      <item itemvalue="Python.db_connect" />
       <item itemvalue="Python.main (1)" />
-      <item itemvalue="Python.spec_be" />
       <item itemvalue="Python.asd" />
+      <item itemvalue="Python.key_dict" />
+      <item itemvalue="Python.binds" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main (1)" />
+        <item itemvalue="Python.key_dict" />
+        <item itemvalue="Python.binds" />
         <item itemvalue="Python.ui (1)" />
         <item itemvalue="Python.asd" />
-        <item itemvalue="Python.spec_be" />
-        <item itemvalue="Python.db_connect" />
       </list>
     </recent_temporary>
   </component>
@@ -507,9 +531,9 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.38880485" side_tool="true" visible="true" weight="0.26072606" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.39636913" side_tool="true" visible="true" weight="0.40429044" />
       <window_info anchor="bottom" id="Database Changes" order="11" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4417549" weight="0.32838285" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.43419063" weight="0.32838285" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.4978678" weight="0.32936078" />
       <window_info anchor="bottom" id="Python Console" order="14" weight="0.32936078" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.48108926" weight="0.32838285" />
@@ -520,7 +544,7 @@
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="15" sideWeight="0.49848714" weight="0.32838285" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.61119515" visible="true" weight="0.26072606" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.60363084" visible="true" weight="0.40429044" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="LuaCheck" order="7" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -549,10 +573,19 @@
     <MESSAGE value="test" />
     <option name="LAST_COMMIT_MESSAGE" value="test" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/binds.py</url>
+          <line>91</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="das://f5e53c63-2bf4-4716-b539-bc1741525f03/schema/main/table/colors" />
-    <entry file="das://f5e53c63-2bf4-4716-b539-bc1741525f03/schema/main/table/abilitys" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/os.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f5e53c63-2bf4-4716-b539-bc1741525f03/console_3.sql" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/ntpath.py" />
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/jinja2/loaders.py">
@@ -783,6 +816,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://0f41d6f6-cba8-43f5-932a-0512b30d8b7b/schema/main/table/system">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/0f41d6f6-cba8-43f5-932a-0512b30d8b7b/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="das://0f41d6f6-cba8-43f5-932a-0512b30d8b7b/schema/main/table/sub">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ui/binds_.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -793,44 +843,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://0f41d6f6-cba8-43f5-932a-0512b30d8b7b/schema/main/table/system">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://0f41d6f6-cba8-43f5-932a-0512b30d8b7b/schema/main/table/sub">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui/ui.py">
+    <entry file="file://$PROJECT_DIR$/db_connect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="55" column="84" lean-forward="true" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="84" />
+        <state relative-caret-position="211">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/gnome_be.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/0f41d6f6-cba8-43f5-932a-0512b30d8b7b/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db_connect.py">
+    <entry file="file://$PROJECT_DIR$/drivers/key_dict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="257">
+          <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/binds_BU.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1746" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="31" column="43" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ui/binds.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="79" column="7" lean-forward="true" selection-start-line="79" selection-start-column="7" selection-end-line="79" selection-end-column="7" />
+        <state relative-caret-position="172">
+          <caret line="54" column="50" lean-forward="true" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
