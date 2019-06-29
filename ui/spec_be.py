@@ -20,9 +20,16 @@ class SpecDialog(QtWidgets.QDialog):
         self.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/class/spec/spec_{class_}.png")))
         #QtGui.QMouseEvent
         if class_ not in ('dh', 'dru'):
+            self.ui.spec_1_.close()
+            self.ui.spec_2_.close()
+            self.ui.spec_3_.close()
+            self.ui.spec_4_.close()
             self.ui.spec_1.mousePressEvent = lambda event: self.spec(main, class_, 1)  # У друида и ДХ не по 3 спека
             self.ui.spec_2.mousePressEvent = lambda event: self.spec(main, class_, 2)
             self.ui.spec_3.mousePressEvent = lambda event: self.spec(main, class_, 3)
+            self.ui.spec_1.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+            self.ui.spec_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+            self.ui.spec_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         else:
             self.ui.spec_1.close()
             self.ui.spec_2.close()
@@ -31,6 +38,14 @@ class SpecDialog(QtWidgets.QDialog):
             self.ui.spec_2_.mousePressEvent = lambda event: self.spec(main, class_, 2)
             self.ui.spec_3_.mousePressEvent = lambda event: self.spec(main, class_, 3)
             self.ui.spec_4_.mousePressEvent = lambda event: self.spec(main, class_, 4)
+            self.ui.spec_2_.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+            self.ui.spec_3_.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+            if class_ == 'dru':
+                self.ui.spec_1_.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+                self.ui.spec_4_.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+            else:
+                self.ui.spec_1_.close()
+                self.ui.spec_4_.close()
 
     def mousePressEvent(self, event):
         self.oldPos = event.globalPos()

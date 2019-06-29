@@ -4,57 +4,53 @@ from ahk import AHK, Hotkey
 from ahk.window import Window
 from db_connect import Database
 import psutil
+from ui.resource_to_exe import resource_path
 DB = Database()
 
 #TODO Переделать в класс
-def ahk_start():
-    try:
-        ahk = AHK(executable_path='C:\\Users\Max\\PycharmProjects\\client_jbp\\drivers\\a64.exe')
+
+class ahk_console():
+    def __init__(self):
+        try:
+            self.ahk = AHK(executable_path=resource_path(f"/drivers/a64.exe"))
+            for proc in psutil.process_iter():
+                if proc.name() == 'a64.exe':
+                    self.ahk_pid = proc.pid
+                    break
+        except Exception as E:
+            print('Ошибка загрузки модуля AY')
+            print(repr(E))
+
+    def get_wow(self):
         for proc in psutil.process_iter():
-            if proc.name() == 'a64.exe':
-                ahk_pid = proc.pid
-                break
-        return ahk
-    except:
-        print('Ошибка загрузки модуля AY')
-        exit()
-
-def get_wow(ahk):
-    for proc in psutil.process_iter():
-        if proc.name() == 'Wow.exe':
-            wow = Window.from_pid(ahk, pid=proc.pid)
-            return wow
-    print('Не найден WoW')
-    return 0
-
-def rotation(ahk, wow, dmg_):
-    spell, color, bind = DB.query('SELECT * FROM sub')[0]
-    print(spell, color, bind)
-    script = \
-        f'''
-        #NoTrayIcon
-        ControlSend,, {bind}, ahk_id {wow.id};
-        '''
-    hk = Hotkey(ahk, dmg_, script)
-    hk.start()  # listener process activated
-    return hk
-
-
-def stop(hk):
-    try:
-        hk.stop()
-        return True
-    except:
+            if proc.name() == 'Wow.exe':
+                return Window.from_pid(self.ahk, pid=proc.pid)
+        print('Не найден WoW')
         return False
 
+    def rotation_listener(self, wow, dmg_):
+        #spell, color, bind = DB.query('SELECT * FROM sub')[0]
+        #print(spell, color, bind)
+        bind = 'TEST'
+        script = \
+            f'''
+            #NoTrayIcon
+            ControlSend,, {bind}, ahk_id {wow.id};
+            '''
+        hk = Hotkey(self.ahk, dmg_, script)
+        hk.start()  # listener process activated
+        return hk
+
+
 if __name__ == '__main__':
-    ahk = ahk_start()
-    wow = get_wow(ahk)
-    if wow != 0:
-        run_hk = rotation(ahk, wow, 'e')
-        while True:
-            pass
-        #stop(run_hk)
+    ahk = ahk_console()
+    wow = ahk.get_wow()
+    if wow:
+        listener = ahk.rotation_listener(wow, 'F1')
+
+    while True:
+        pass
+
 
 
 

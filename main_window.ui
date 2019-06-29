@@ -204,6 +204,92 @@
     <pixmap>ui/img/hider.png</pixmap>
    </property>
   </widget>
+  <widget class="QPushButton" name="start_wow">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>212</y>
+     <width>96</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: transpanent;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>ui/img/start_wow.png</normaloff>ui/img/start_wow.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>116</width>
+     <height>102</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLabel" name="wow_text">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>249</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Futura-Normal</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>WhatsThisCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: green</string>
+   </property>
+   <property name="text">
+    <string>WoW is not started</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="reload">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>218</y>
+     <width>21</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>ui/img/reload.bmp</normaloff>ui/img/reload.bmp</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>200</width>
+     <height>150</height>
+    </size>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -108,7 +108,7 @@ class Ui_Dialog(QWidget):
             if 'UNIQUE' in repr(E).upper():
                 if self.GnomeDialog:
                     self.GnomeDialog.close()
-                self.GnomeDialog = GnomeDialog(14, "\n\n\nYou can't bind one button twice", True)
+                self.GnomeDialog = GnomeDialog(14, "\n\n\nYou can't bind one button twice", True, self)
                 self.GnomeDialog.show()
             print(E)
             return
@@ -129,7 +129,7 @@ class Ui_Dialog(QWidget):
         elif len(str(QKeyEvent.key())) == 4 and str(QKeyEvent.key())[:2] == '10':
             if self.GnomeDialog:
                 self.GnomeDialog.close()
-            self.GnomeDialog = GnomeDialog(14, "\n\n\nYou must change your keyboard layout to ENG, my friend.", True)
+            self.GnomeDialog = GnomeDialog(14, "\n\n\nYou must change your keyboard layout to ENG, my friend.", True, self)
             self.GnomeDialog.show()
             return
         if self.input_waiting:
@@ -139,7 +139,8 @@ class Ui_Dialog(QWidget):
                 print(E.args)
                 if self.GnomeDialog:
                     self.GnomeDialog.close()
-                self.GnomeDialog = GnomeDialog(14, "\n\n\nOops, i guess you can bind only 0-9, F1-F12, A-Z keys", True)
+                self.GnomeDialog = GnomeDialog(14, "\n\n\nOops, i guess you can bind only 0-9, F1-F12, A-Z keys",
+                                               True, self)
                 self.GnomeDialog.show()
                 self.set_text('CLICK TO BIND')
                 return

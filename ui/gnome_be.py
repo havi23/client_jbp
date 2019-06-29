@@ -5,7 +5,7 @@ from ui.gnome import Ui_Dialog as Ui_GnomeDialog
 
 class GnomeDialog(QtWidgets.QDialog):
     # clicked = QtCore.pyqtSignal(str)
-    def __init__(self, size, text, button=None, parent=None):
+    def __init__(self, size, text, button=None, main=None, parent=None):
         super(GnomeDialog, self).__init__(parent)
         self.ui = Ui_GnomeDialog()
         self.ui.setupUi(self)
@@ -22,11 +22,13 @@ class GnomeDialog(QtWidgets.QDialog):
         self.ui.text.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignHCenter)
         self.ui.text.setText(text)
         if button:
-            self.ui.okay.clicked.connect(self._exit)
+            self.ui.okay.clicked.connect(lambda: self._exit(main))
         else:
             self.ui.okay.hide()
 
     @pyqtSlot()
-    def _exit(self):
+    def _exit(self, main):
+        if main:
+            main.GnomeDialog = None
         self.close()
 

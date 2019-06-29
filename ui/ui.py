@@ -12,11 +12,9 @@ from pathlib import Path, PureWindowsPath
 import os
 from ui.resource_to_exe import resource_path
 DB = Database()
+from ahk_console import ahk_console
 
-#  pyuic5 binds.ui -o binds.py
-
-
-
+#  pyuic5 main_window.ui -o main_window.py
 
 
 class SettingsDialog(QtWidgets.QDialog):
@@ -59,7 +57,6 @@ class SettingsDialog(QtWidgets.QDialog):
         DB.commit()
         self.default_config(wow_path)
         # TODO Проверить аддон, загрузить, если его нет, настроить ТМВ, переписать конфиг
-
 
     def default_config(self, wow_path):
         wow_path = PureWindowsPath(os.path.dirname(os.path.abspath(wow_path)))
@@ -108,6 +105,7 @@ class SettingsDialog(QtWidgets.QDialog):
 class MainDialog(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainDialog, self).__init__()
+        self.wow_correct = None
         self.oldPos = self.pos()
         self.ui = Ui_MainDialog()
         self.ui.setupUi(self)
@@ -119,7 +117,88 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.change_class.clicked.connect(self.change_class)
         self.ui.settings.clicked.connect(self.settings)
         self.ui.start.clicked.connect(self.start)
+        self.ui.start_wow.clicked.connect(self.start_wow)
+        self.ui.reload.clicked.connect(self.relaod_UI)
+        self.ui.wow_text.mouseReleaseEvent = lambda event: self.wow_text_tooltip()
+        self.start_icon = QtGui.QIcon()
+        self.start_icon.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.stop_icon = QtGui.QIcon()
+        self.stop_icon.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/stop.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.listener = None
+        self.m_label = None
         #QtWidgets.qApp.processEvents()
+
+    def wow_text_tooltip(self):
+        print('ОТКРОЕТСЯ САЙТ')
+
+    def relaod_UI(self):
+        self.check_wow()
+
+    def start_wow(self):
+        self.check_wow()
+        if self.wow_correct is not None:
+            return
+        def default_config(wow_path):
+            wow_path = PureWindowsPath(os.path.dirname(os.path.abspath(wow_path)))
+            config_path = Path(wow_path) / 'WTF' / 'Config.wtf'
+            old_config_path = Path(wow_path) / 'WTF' / 'Config.wtf.old'
+            if config_path.exists():
+                import shutil
+                shutil.copy(config_path, old_config_path)
+                with open(config_path, 'r', encoding='UTF-8') as config_file:
+                    lines = config_file.readlines()
+                    line_dict = dict()
+                    [line_dict.update({line.split(' ')[1]: line.split(' ')[2]}) for line in lines]
+                    line_dict.update({'Gamma': '"1"\n'})
+                    line_dict.update({'Brightness': '"50"\n'})
+                    line_dict.update({'Contrast': '"50"\n'})
+                    line_dict.update({'Contrast': '"50"\n'})
+                    line_dict.update({'colorblindSimulator': '"2"\n'})
+                    # TODO Оконный режим
+                    lines = ([f'SET {k} {v}' for k, v in line_dict.items()])
+                    config_file = open(config_path, 'w', encoding='UTF-8')
+                    config_file.writelines(lines)
+                    config_file.close()
+        try:
+            default_config(self.wow_path)
+            # TODO ПРОВЕРИТЬ ПРОФИЛЬ
+            os.startfile(self.wow_path)
+            self.wow_correct = True
+            self.check_wow()
+        except Exception as E:
+            print(repr(E))
+
+    def check_wow(self):
+        def is_wow_launched():
+            import psutil
+            for proc in psutil.process_iter():
+                if proc.name() == 'Wow.exe':
+                    return True
+            return False
+
+        if self.GnomeDialog: #  Если необходима настройка скрипта
+            self.ui.wow_text.setText('You must configure\nthe script before run WoW')
+            self.ui.wow_text.setStyleSheet('color: red;')
+            self.ui.start_wow.setCursor(QtGui.QCursor(QtCore.Qt.ForbiddenCursor))
+            self.wow_correct = None
+        else:
+            wow_process = is_wow_launched()
+            if wow_process and not self.wow_correct:
+                self.ui.wow_text.setText('WoW launched incorrectly')
+                self.ui.start_wow.setCursor(QtGui.QCursor(QtCore.Qt.ForbiddenCursor))
+                self.ui.wow_text.setStyleSheet('color: red;')
+                self.wow_correct = False
+            elif wow_process:
+                self.ui.wow_text.setText('WoW launched correctly')
+                self.ui.start_wow.setCursor(QtGui.QCursor(QtCore.Qt.ForbiddenCursor))
+                self.ui.wow_text.setStyleSheet('color: green;')
+                self.wow_correct = True
+            else:
+                self.ui.wow_text.setText('WoW is not launched')
+                self.ui.start_wow.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+                self.ui.wow_text.setStyleSheet('color: blue;')
+                self.wow_correct = None
+
 
     def event(self, event):  # Срабатывает при каждом вызове main.show()
         if event.type() == QtCore.QEvent.Show and not self.isHidden():
@@ -160,6 +239,7 @@ class MainDialog(QtWidgets.QMainWindow):
                         self.GnomeDialog.show()
                         self.GnomeAwaits = self.binds.__name__
                         break
+            self.check_wow()
         return super(MainDialog, self).event(event)
 
     def binds(self):
@@ -174,7 +254,22 @@ class MainDialog(QtWidgets.QMainWindow):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.start.__name__:
             self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/gnome/nani.png")))
             return
-        pass
+        elif self.GnomeDialog is None and not self.wow_correct:
+            self.GnomeDialog = GnomeDialog(14, "\nYou can't run routine while WoW launched not with script"
+                                               "or not launched at all\n\n"
+                                               "You must launch WoW with 'Start WoW' button", True, self)
+            self.GnomeDialog.show()
+            return
+        if self.listener:
+            self.ui.start.setIcon(self.start_icon)
+            self.listener.stop()
+            self.listener = None
+        else:
+            self.ui.start.setIcon(self.stop_icon)
+            ahk = ahk_console()
+            wow = ahk.get_wow()
+            if wow:
+                self.listener = ahk.rotation_listener(wow, 'F1')
 
     def settings(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.settings.__name__:
@@ -202,14 +297,16 @@ class MainDialog(QtWidgets.QMainWindow):
 
     def mousePressEvent(self, event):
         self.oldPos = event.globalPos()
+        self.m_label = True
+
+    def mouseReleaseEvent(self, event):
+        self.m_label = False
 
     def mouseMoveEvent(self, event):
-        delta = QtCore.QPoint(event.globalPos() - self.oldPos)
-        # print(delta)
-        self.move(self.x() + delta.x(), self.y() + delta.y())
-        self.oldPos = event.globalPos()
-
-
+        if self.m_label:
+            delta = QtCore.QPoint(event.globalPos() - self.oldPos)
+            self.move(self.x() + delta.x(), self.y() + delta.y())
+            self.oldPos = event.globalPos()
 
 '''
 gnome = GnomeDialog(16, 'Hello, my Friend!\n\n'
