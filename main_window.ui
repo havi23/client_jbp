@@ -217,7 +217,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="autoFillBackground">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: transpanent;</string>
@@ -287,6 +287,38 @@
     <size>
      <width>200</width>
      <height>150</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="bug_report">
+   <property name="geometry">
+    <rect>
+     <x>108</x>
+     <y>68</y>
+     <width>82</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: transpanent;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>ui/img/bug_report.bmp</normaloff>ui/img/bug_report.bmp</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>116</width>
+     <height>102</height>
     </size>
    </property>
   </widget>

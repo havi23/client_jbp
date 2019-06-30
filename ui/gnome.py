@@ -21,7 +21,7 @@ class Ui_Dialog(object):
         sizePolicy.setHeightForWidth(self.bg.sizePolicy().hasHeightForWidth())
         self.bg.setSizePolicy(sizePolicy)
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap(resource_path("ui/img/gnome/empty.png")))
+        self.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/empty.png"))
         self.bg.setScaledContents(True)
         self.bg.setAlignment(QtCore.Qt.AlignCenter)
         self.bg.setWordWrap(False)
@@ -41,7 +41,7 @@ class Ui_Dialog(object):
         self.okay.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.okay.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(resource_path("ui/img/gnome/okdok1.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("ui/img/gnome/okdok1.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.okay.setIcon(icon)
         self.okay.setIconSize(QtCore.QSize(180, 90))
         self.okay.setShortcut("")
@@ -50,7 +50,6 @@ class Ui_Dialog(object):
         self.okay.setAutoExclusive(False)
         self.okay.setFlat(True)
         self.okay.setObjectName("okay")
-
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 

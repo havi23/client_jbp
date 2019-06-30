@@ -18,7 +18,7 @@ class Ui_Dialog(QWidget):
         self.bg = QLabel(self)
         self.bg.setGeometry(QtCore.QRect(0, 0, 581, 591))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/binds/binds_bg.png")))
+        self.bg.setPixmap(QtGui.QPixmap("ui/img/binds/binds_bg.png"))
         self.bg.setObjectName("bg")
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)

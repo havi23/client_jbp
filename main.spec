@@ -6,7 +6,7 @@ block_cipher = None
 a = Analysis(['main.py'],
              pathex=['C:\\Users\\Max\\PycharmProjects\\client_jbp'],
              binaries=[],
-             datas=[],
+             datas=[("C:\\Users\\Max\\PycharmProjects\\client_jbp\\ui\\img\\class.bmp", ".")],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
@@ -17,6 +17,9 @@ a = Analysis(['main.py'],
              noarchive=False)
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
+
+#a.datas += [("\\ui", "img")]
+
 exe = EXE(pyz,
           a.scripts,
           a.binaries,

@@ -5,16 +5,20 @@ from ui.main_window import Ui_Dialog as Ui_MainDialog
 from ui.spec_be import ClassDialog
 from ui.binds import Ui_Dialog as BindsDialog
 from ui.settings import Ui_Dialog as Ui_SettingsDialog
+from ui.bug_report_BE import BugReportDialog
 import sys
 from db_connect import Database
 import time
 from pathlib import Path, PureWindowsPath
 import os
 from ui.resource_to_exe import resource_path
-DB = Database()
+
+
 from ahk_console import ahk_console
 
-#  pyuic5 main_window.ui -o main_window.py
+DB = Database()
+
+#  pyuic5 bug_report.ui -o bug_report.py
 
 
 class SettingsDialog(QtWidgets.QDialog):
@@ -43,7 +47,7 @@ class SettingsDialog(QtWidgets.QDialog):
 
     def cwp(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.cwp.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/gnome/nani.png")))
+            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return
         elif self.GnomeDialog is not None:
             self.GnomeDialog.close()
@@ -118,14 +122,16 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.settings.clicked.connect(self.settings)
         self.ui.start.clicked.connect(self.start)
         self.ui.start_wow.clicked.connect(self.start_wow)
+        self.ui.bug_report.clicked.connect(self.bug_report)
         self.ui.reload.clicked.connect(self.relaod_UI)
         self.ui.wow_text.mouseReleaseEvent = lambda event: self.wow_text_tooltip()
         self.start_icon = QtGui.QIcon()
-        self.start_icon.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.start_icon.addPixmap(QtGui.QPixmap("ui/img/start.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.stop_icon = QtGui.QIcon()
-        self.stop_icon.addPixmap(QtGui.QPixmap(resource_path(f"ui/img/stop.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.stop_icon.addPixmap(QtGui.QPixmap("ui/img/stop.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.listener = None
         self.m_label = None
+
         #QtWidgets.qApp.processEvents()
 
     def wow_text_tooltip(self):
@@ -133,6 +139,12 @@ class MainDialog(QtWidgets.QMainWindow):
 
     def relaod_UI(self):
         self.check_wow()
+
+    def bug_report(self):
+        if not self.BugReport:
+            self.BugReport = BugReportDialog(self)
+            self.BugReport.show()
+
 
     def start_wow(self):
         self.check_wow()
@@ -207,11 +219,12 @@ class MainDialog(QtWidgets.QMainWindow):
             self.ClassDialog = None
             self.SettingsDialog = None
             self.BindsDialog = None
+            self.BugReport = None
             self.wow_path = DB.query('SELECT data FROM system where variable="wow_path"')[0][0]
             self.spec = DB.query('SELECT data FROM system where variable="spec"')[0][0]
             self.class_= DB.query('SELECT data FROM system where variable="class"')[0][0]
             if self.class_ is not None:
-                self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'ui/img/{self.class_}.png')))
+                self.ui.label.setPixmap(QtGui.QPixmap(f'ui/img/{self.class_}.png'))
 
             if self.wow_path is None:
                 if not self.GnomeDialog:
@@ -244,36 +257,36 @@ class MainDialog(QtWidgets.QMainWindow):
 
     def binds(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.binds.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/gnome/nani.png")))
+            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return
         if not self.BindsDialog:
             self.BindsDialog = BindsDialog(self, self.spec)
-            #self.BindsDialog.show()
+            self.BindsDialog.show()
 
     def start(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.start.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/gnome/nani.png")))
+            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return
-        elif self.GnomeDialog is None and not self.wow_correct:
-            self.GnomeDialog = GnomeDialog(14, "\nYou can't run routine while WoW launched not with script"
-                                               "or not launched at all\n\n"
-                                               "You must launch WoW with 'Start WoW' button", True, self)
-            self.GnomeDialog.show()
-            return
-        if self.listener:
-            self.ui.start.setIcon(self.start_icon)
-            self.listener.stop()
-            self.listener = None
-        else:
-            self.ui.start.setIcon(self.stop_icon)
+        #TODO УБРАТЬ КОММЕНТ #elif self.GnomeDialog is None and not self.wow_correct:
+            #elf.GnomeDialog = GnomeDialog(14, "\nYou can't run routine while WoW launched not with script"
+            #                                   "or not launched at all\n\n"
+            #                                   "You must launch WoW with 'Start WoW' button", True, self)
+            #self.GnomeDialog.show()
+            #return
+        if not self.listener:
             ahk = ahk_console()
             wow = ahk.get_wow()
             if wow:
+                self.ui.start.setIcon(self.stop_icon)
                 self.listener = ahk.rotation_listener(wow, 'F1')
+        else:
+            self.ui.start.setIcon(self.start_icon)
+            self.listener.stop()
+            self.listener = None
 
     def settings(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.settings.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/gnome/nani.png")))
+            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return
         self.hide()
         if self.GnomeDialog is not None:
@@ -283,7 +296,7 @@ class MainDialog(QtWidgets.QMainWindow):
 
     def change_class(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.change_class.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/gnome/nani.png")))
+            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return
         self.hide()
         if self.GnomeDialog is not None:
@@ -307,16 +320,3 @@ class MainDialog(QtWidgets.QMainWindow):
             delta = QtCore.QPoint(event.globalPos() - self.oldPos)
             self.move(self.x() + delta.x(), self.y() + delta.y())
             self.oldPos = event.globalPos()
-
-'''
-gnome = GnomeDialog(16, 'Hello, my Friend!\n\n'
-                       'My name is Ho Linka and today i will help you to setup your routine.\n\n'
-                        '')
-'''
-#gnome.show()
-
-if __name__ == '__main__':
-    app = QtWidgets.QApplication([])
-    main = MainDialog()
-    main.show()
-    sys.exit(app.exec())

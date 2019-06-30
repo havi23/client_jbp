@@ -17,7 +17,7 @@ class SpecDialog(QtWidgets.QDialog):
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"ui/img/class/spec/spec_{class_}.png")))
+        self.ui.bg.setPixmap(QtGui.QPixmap(f"ui/img/class/spec/spec_{class_}.png"))
         #QtGui.QMouseEvent
         if class_ not in ('dh', 'dru'):
             self.ui.spec_1_.close()

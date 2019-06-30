@@ -1,27 +1,24 @@
-from pathlib import Path, PureWindowsPath
-import os
+from ahk import AHK
 
+ahk = AHK(executable_path="drivers/a64.exe")
+ahk.run_script('Run Notepad')
+win = ahk.find_window(title=b'Untitled - Notepad')
+win.send('hello')  # send keys directly to a window (does not need focus!)
+win.move(x=200, y=300, width=500, height=800)
+win.activate()  # give the window focus
+win.disable()  # make the window non-interactable
+win.enable()  # enable it again
+win.to_top()  # moves window on top of other windows
+win.to_bottom()
+win.always_on_top = True  # make the windows always on top
+win.close()
 
-wow_path = 'H:/World of Warcraft/_retail_/Wow.exe'
+for window in ahk.windows():
+    print(window.title)
 
-wow_path = PureWindowsPath(os.path.dirname(os.path.abspath(wow_path)))
-config_path = Path(wow_path) / 'WTF' / 'Config.wtf'
-old_config_path = Path(wow_path) / 'WTF' / 'Config.wtf.old'
-if config_path.exists():
-    import shutil
-    shutil.copy(config_path, old_config_path)
-    with open(config_path, 'r', encoding='UTF-8') as config_file:
-        lines = config_file.readlines()
-        line_dict = dict()
-        [line_dict.update({line.split(' ')[1]: line.split(' ')[2]}) for line in lines]
-        line_dict.update({'Gamma': '"1"\n'})
-        line_dict.update({'Brightness': '"50"\n'})
-        line_dict.update({'Contrast': '"50"\n'})
-        line_dict.update({'Contrast': '"50"\n'})
-        line_dict.update({'colorblindSimulator': '"2"\n'})
-        lines = ([f'SET {k} {v}' for k, v in line_dict.items()])
-        print(type(lines))
-        print(lines)
-        config_file = open(config_path, 'w', encoding='UTF-8')
-        config_file.writelines(lines)
-        config_file.close()
+#  some more attributes
+print(window.text)
+print(window.rect)  # (x, y, width, height)
+print(window.id)  # ahk_id
+print(window.pid)
+print(window.process)

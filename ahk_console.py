@@ -1,5 +1,3 @@
-#pyuic5 gnome.ui -o gnome.py
-
 from ahk import AHK, Hotkey
 from ahk.window import Window
 from db_connect import Database
@@ -7,12 +5,11 @@ import psutil
 from ui.resource_to_exe import resource_path
 DB = Database()
 
-#TODO Переделать в класс
 
 class ahk_console():
     def __init__(self):
         try:
-            self.ahk = AHK(executable_path=resource_path(f"/drivers/a64.exe"))
+            self.ahk = AHK(executable_path=resource_path(f"drivers/a64.exe"))
             for proc in psutil.process_iter():
                 if proc.name() == 'a64.exe':
                     self.ahk_pid = proc.pid
@@ -24,6 +21,8 @@ class ahk_console():
     def get_wow(self):
         for proc in psutil.process_iter():
             if proc.name() == 'Wow.exe':
+                print(proc)
+                print(proc.name())
                 return Window.from_pid(self.ahk, pid=proc.pid)
         print('Не найден WoW')
         return False

@@ -3,7 +3,7 @@ import sys
 from PyQt5 import QtWidgets
 import os
 
-import os
+
 
 
 if __name__ == '__main__':

@@ -1,6 +1,10 @@
 import os
 import sys
 
-def resource_path(relative):
-    project_path = os.path.dirname(sys.modules['__main__'].__file__)
-    return (f'C:/Users/Max/PycharmProjects/client_jbp/{relative}')
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
