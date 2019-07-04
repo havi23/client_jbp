@@ -47,6 +47,7 @@ if __name__ == '__main__':
     if wow:
         listener = ahk.rotation_listener(wow, 'F1')
 
+
     while True:
         pass
 

@@ -5,142 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="67165dbc-47ed-475f-aaed-51ef5821bc36" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/server/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/server_console.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/bug_report_BE.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ahk_console.py" beforeDir="false" afterPath="$PROJECT_DIR$/ahk_console.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/Analysis-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/EXE-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/PKG-00.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/PKG-00.pkg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/PKG-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/PYZ-00.pyz" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/PYZ-00.pyz" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/PYZ-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/PYZ-00.toc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/base_library.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/warn-main.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/warn-main.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/xref-main.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/xref-main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data" beforeDir="false" afterPath="$PROJECT_DIR$/data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/data" beforeDir="false" afterPath="$PROJECT_DIR$/dist/data" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main.exe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/1arrow.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/2arrow.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/3arrow.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/4arrow.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/aim.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/aimauto.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/binds.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/binds/binds_bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/change.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/chkb_off.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/chkb_on.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/dh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/dk.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/dru.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/hun.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/mag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/mon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/pal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/pri.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/rog.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/sha.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/warl.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/buttons/warr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/ccfront.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_dh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_dk.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_dru.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_hun.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_mag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_mon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_pal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_pri.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_rog.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_sha.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_warl.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec/spec_warr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_dem.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_dk.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_dru.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_hun.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_mag.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_mon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_pal.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_pri.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_rog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_sha.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_war.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/class/spec_Old/spec_warl.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/close.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/closemain.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/closesettings.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/cog.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/copy.BMP" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/copyD.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/delete.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/dh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/dk.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/dru.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/empty.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gb.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/1.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/2.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/3.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/binds.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/class.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/empty.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/nani.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/next.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/ok.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/okdok1.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/orig.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/prev.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/gnome/settings.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/hider.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/hun.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/info.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/lang.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/mag.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/mon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/noclass.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/pal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/pri.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/qsm0.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/qsm1.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/radioOff.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/radioOn.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/rog.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/save.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/select_mode_off.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/select_mode_on.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/sett.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/settings.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/settings.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/settings/aim.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/settings/cwp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/settings/save.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/settings/settings.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/settings/settings.psd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/sha.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/slider.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/sliderBG.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/start.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/war.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/ui1/img/warl.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/Архив WinRAR.rar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.spec" beforeDir="false" afterPath="$PROJECT_DIR$/main.spec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_window.ui" beforeDir="false" afterPath="$PROJECT_DIR$/main_window.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/binds.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/binds.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/gnome.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/gnome.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/resource_to_exe.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/resource_to_exe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/spec.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/spec.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/spec_be.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/spec_be.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -156,7 +21,7 @@
     <SUITE FILE_PATH="coverage/client_jbp$ui.coverage" NAME="ui Coverage Results" MODIFIED="1561067491594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/client_jbp$test.coverage" NAME="test Coverage Results" MODIFIED="1561919382340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/client_jbp$ui__1_.coverage" NAME="ui (1) Coverage Results" MODIFIED="1561818273437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ui" />
-    <SUITE FILE_PATH="coverage/client_jbp$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1561928087271" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/client_jbp$main__1_.coverage" NAME="main (1) Coverage Results" MODIFIED="1561928739047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/client_jbp$ahk_console.coverage" NAME="ahk_console Coverage Results" MODIFIED="1561919134657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/client_jbp$db_connect.coverage" NAME="db_connect Coverage Results" MODIFIED="1561096702289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/client_jbp$spec_be.coverage" NAME="spec_be Coverage Results" MODIFIED="1561097311839" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ui" />
@@ -199,13 +64,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ui/ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="31" column="27" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="27" />
+            <state relative-caret-position="160">
+              <caret line="270" column="102" lean-forward="true" selection-start-line="270" selection-start-column="102" selection-end-line="270" selection-end-column="102" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ahk_console.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="29" column="25" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -224,22 +101,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ahk_console.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="77" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
-              <folding>
-                <element signature="e#0#27#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ui/bug_report.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="50" column="66" lean-forward="true" selection-start-line="50" selection-start-column="66" selection-end-line="50" selection-end-column="66" />
+              <caret line="50" column="66" selection-start-line="50" selection-start-column="66" selection-end-line="50" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -287,7 +152,7 @@
         <entry file="file://$PROJECT_DIR$/ui/spec_be.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="28" column="85" lean-forward="true" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="85" />
+              <caret line="28" column="85" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="85" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -323,12 +188,13 @@
       <find>img</find>
       <find>resourc</find>
       <find>{</find>
-      <find>start</find>
       <find>close</find>
       <find>run ro</find>
       <find>Futura</find>
       <find>SEND</find>
       <find>GnomeDialog(1</find>
+      <find>start</find>
+      <find>def start</find>
     </findStrings>
     <replaceStrings>
       <replace>0x</replace>
@@ -376,13 +242,13 @@
         <option value="$PROJECT_DIR$/main.spec" />
         <option value="$PROJECT_DIR$/ui/main_window.py" />
         <option value="$PROJECT_DIR$/ui/spec_be.py" />
-        <option value="$PROJECT_DIR$/ahk_console.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/ui/gnome.py" />
         <option value="$PROJECT_DIR$/server/server_console.py" />
-        <option value="$PROJECT_DIR$/ui/ui.py" />
         <option value="$PROJECT_DIR$/ui/bug_report_BE.py" />
         <option value="$PROJECT_DIR$/ui/bug_report.py" />
+        <option value="$PROJECT_DIR$/ahk_console.py" />
+        <option value="$PROJECT_DIR$/ui/ui.py" />
       </list>
     </option>
   </component>
@@ -410,11 +276,6 @@
               <item name="client_jbp" type="b2602c69:ProjectViewProjectNode" />
               <item name="client_jbp" type="462c0819:PsiDirectoryNode" />
               <item name="drivers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="client_jbp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="client_jbp" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="client_jbp" type="b2602c69:ProjectViewProjectNode" />
@@ -609,7 +470,7 @@
       <workItem from="1561838002855" duration="919000" />
       <workItem from="1561847073772" duration="5229000" />
       <workItem from="1561888103335" duration="1798000" />
-      <workItem from="1561917147199" duration="9341000" />
+      <workItem from="1561917147199" duration="10121000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1560721405509</created>
@@ -671,7 +532,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="108704000" />
+    <option name="totallyTimeSpent" value="109484000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -682,8 +543,8 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989339" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.44083154" weight="0.32827735" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.6076759" visible="true" weight="0.39869988" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4402985" visible="true" weight="0.32827735" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.6076759" weight="0.39869988" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -693,7 +554,7 @@
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.4978678" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="11" weight="0.32936078" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.47228146" weight="0.32827735" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.3923241" side_tool="true" visible="true" weight="0.39869988" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5597015" side_tool="true" visible="true" weight="0.32827735" />
       <window_info anchor="bottom" id="Python Console" order="14" weight="0.32936078" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="15" sideWeight="0.49924356" weight="0.32838285" />
       <window_info anchor="bottom" id="SQL Generator" order="16" sideWeight="0.49924356" weight="0.32838285" />
@@ -959,7 +820,7 @@
     <entry file="file://$PROJECT_DIR$/ui/spec_be.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="28" column="85" lean-forward="true" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="85" />
+          <caret line="28" column="85" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="85" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>
@@ -973,13 +834,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/ui.py">
+    <entry file="file://$PROJECT_DIR$/ui/bug_report.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="31" column="27" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="289">
+          <caret line="50" column="66" selection-start-line="50" selection-start-column="66" selection-end-line="50" selection-end-column="66" />
         </state>
       </provider>
     </entry>
@@ -995,18 +853,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ahk_console.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="77" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
+        <state relative-caret-position="221">
+          <caret line="29" column="25" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="25" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/bug_report.py">
+    <entry file="file://$PROJECT_DIR$/ui/ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="50" column="66" lean-forward="true" selection-start-line="50" selection-start-column="66" selection-end-line="50" selection-end-column="66" />
+        <state relative-caret-position="160">
+          <caret line="270" column="102" lean-forward="true" selection-start-line="270" selection-start-column="102" selection-end-line="270" selection-end-column="102" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
