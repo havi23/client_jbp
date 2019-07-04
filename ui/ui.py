@@ -19,7 +19,36 @@ from ahk_console import ahk_console
 DB = Database()
 
 #  pyuic5 bug_report.ui -o bug_report.py
-
+def default_config(window, wow_path):
+    wow_path = PureWindowsPath(os.path.dirname(os.path.abspath(wow_path)))
+    config_path = Path(wow_path) / 'WTF' / 'Config.wtf'
+    old_config_path = Path(wow_path) / 'WTF' / 'Config.wtf.old'
+    if config_path.exists():
+        import shutil
+        shutil.copy(config_path, old_config_path)
+        with open(config_path, 'r', encoding='UTF-8') as config_file:
+            lines = config_file.readlines()
+            line_dict = dict()
+            [line_dict.update({line.split(' ')[1]: line.split(' ')[2]}) for line in lines]
+            line_dict.update({'Gamma': '"1"\n'})
+            line_dict.update({'Brightness': '"50"\n'})
+            line_dict.update({'Contrast': '"50"\n'})
+            line_dict.update({'Contrast': '"50"\n'})
+            line_dict.update({'colorblindSimulator': '"2"\n'})
+            # TODO Оконный режим
+            lines = ([f'SET {k} {v}' for k, v in line_dict.items()])
+            config_file = open(config_path, 'w', encoding='UTF-8')
+            config_file.writelines(lines)
+            config_file.close()
+    else:
+        if not window.GnomeDialog:
+            window.GnomeDialog = GnomeDialog(14, 'Something going wrong!\n'
+                                                 'I guess you must choose WoW directory again.\n\n'
+                                                 'Go Settings > Click "Choose WoW directory"!')
+            window.GnomeDialog.show()
+            window.GnomeAwaits = 'settings'
+        print('Не найден файл Config.wtf')
+        return
 
 class SettingsDialog(QtWidgets.QDialog):
     def __init__(self, main, parent=None):
@@ -59,38 +88,10 @@ class SettingsDialog(QtWidgets.QDialog):
             return
         DB.query(f'UPDATE system SET data=? WHERE variable="wow_path"', (wow_path,))
         DB.commit()
-        self.default_config(wow_path)
+        default_config(self, wow_path)
         # TODO Проверить аддон, загрузить, если его нет, настроить ТМВ, переписать конфиг
 
-    def default_config(self, wow_path):
-        wow_path = PureWindowsPath(os.path.dirname(os.path.abspath(wow_path)))
-        config_path = Path(wow_path) / 'WTF' / 'Config.wtf'
-        old_config_path = Path(wow_path) / 'WTF' / 'Config.wtf.old'
-        if config_path.exists():
-            import shutil
-            shutil.copy(config_path, old_config_path)
-            with open(config_path, 'r', encoding='UTF-8') as config_file:
-                lines = config_file.readlines()
-                line_dict = dict()
-                [line_dict.update({line.split(' ')[1]: line.split(' ')[2]}) for line in lines]
-                line_dict.update({'Gamma': '"1"\n'})
-                line_dict.update({'Brightness': '"50"\n'})
-                line_dict.update({'Contrast': '"50"\n'})
-                line_dict.update({'Contrast': '"50"\n'})
-                line_dict.update({'colorblindSimulator': '"2"\n'})
-                #TODO Оконный режим
-                lines = ([f'SET {k} {v}' for k, v in line_dict.items()])
-                config_file = open(config_path, 'w', encoding='UTF-8')
-                config_file.writelines(lines)
-                config_file.close()
-        else:
-            if not self.GnomeDialog:
-                self.GnomeDialog = GnomeDialog(14, 'Something going wrong!\n'
-                                                   'I guess you must choose WoW directory again.\n\n'
-                                                   'Click "Choose WoW directory"!')
-                self.GnomeAwaits = self.cwp.__name__
-            print('Не найден файл Config.wtf')
-            return
+
 
 
     @pyqtSlot()
@@ -150,29 +151,8 @@ class MainDialog(QtWidgets.QMainWindow):
         self.check_wow()
         if self.wow_correct is not None:
             return
-        def default_config(wow_path):
-            wow_path = PureWindowsPath(os.path.dirname(os.path.abspath(wow_path)))
-            config_path = Path(wow_path) / 'WTF' / 'Config.wtf'
-            old_config_path = Path(wow_path) / 'WTF' / 'Config.wtf.old'
-            if config_path.exists():
-                import shutil
-                shutil.copy(config_path, old_config_path)
-                with open(config_path, 'r', encoding='UTF-8') as config_file:
-                    lines = config_file.readlines()
-                    line_dict = dict()
-                    [line_dict.update({line.split(' ')[1]: line.split(' ')[2]}) for line in lines]
-                    line_dict.update({'Gamma': '"1"\n'})
-                    line_dict.update({'Brightness': '"50"\n'})
-                    line_dict.update({'Contrast': '"50"\n'})
-                    line_dict.update({'Contrast': '"50"\n'})
-                    line_dict.update({'colorblindSimulator': '"2"\n'})
-                    # TODO Оконный режим
-                    lines = ([f'SET {k} {v}' for k, v in line_dict.items()])
-                    config_file = open(config_path, 'w', encoding='UTF-8')
-                    config_file.writelines(lines)
-                    config_file.close()
         try:
-            default_config(self.wow_path)
+            default_config(self, self.wow_path)
             # TODO ПРОВЕРИТЬ ПРОФИЛЬ
             os.startfile(self.wow_path)
             self.wow_correct = True
@@ -267,12 +247,13 @@ class MainDialog(QtWidgets.QMainWindow):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.start.__name__:
             self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return
-        #TODO УБРАТЬ КОММЕНТ #elif self.GnomeDialog is None and not self.wow_correct:
-            #elf.GnomeDialog = GnomeDialog(14, "\nYou can't run routine while WoW launched not with script"
-            #                                   "or not launched at all\n\n"
-            #                                   "You must launch WoW with 'Start WoW' button", True, self)
-            #self.GnomeDialog.show()
-            #return
+        # TODO Проверить \/
+        elif self.GnomeDialog is None and not self.wow_correct:
+            self.GnomeDialog = GnomeDialog(14, "\nYou can't run routine while WoW launched not with script"
+                                               "or not launched at all\n\n"
+                                               "You must launch WoW with 'Start WoW' button", True, self)
+            self.GnomeDialog.show()
+            return
         if not self.listener:
             ahk = ahk_console()
             wow = ahk.get_wow()
@@ -285,6 +266,7 @@ class MainDialog(QtWidgets.QMainWindow):
             self.listener = None
 
     def settings(self):
+        print(self.settings.__name__)
         if self.GnomeDialog is not None and self.GnomeAwaits != self.settings.__name__:
             self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return

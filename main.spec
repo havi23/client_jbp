@@ -4,9 +4,11 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['C:\\Users\\Max\\PycharmProjects\\client_jbp'],
+             #pathex=['C:\\Users\\Max\\PycharmProjects\\client_jbp'],
+             pathex=['C:\\Users\\Havi\\Documents\\GitHub\\client_jbp'],
              binaries=[],
-             datas=[("C:\\Users\\Max\\PycharmProjects\\client_jbp\\ui\\img\\class.bmp", ".")],
+             #datas=[("C:\Users\Havi\Documents\GitHub\client_jbp\ui\img\class.bmp", ".")],
+             datas=[],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],

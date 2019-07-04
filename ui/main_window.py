@@ -91,6 +91,7 @@ class Ui_Dialog(object):
         self.start_wow.setObjectName("start_wow")
         self.wow_text = QtWidgets.QLabel(Dialog)
         self.wow_text.setGeometry(QtCore.QRect(30, 249, 201, 31))
+        QtGui.QFontDatabase.addApplicationFont('ui/font/Futura-Normal.ttf')
         font = QtGui.QFont()
         font.setFamily("Futura-Normal")
         font.setPointSize(12)
