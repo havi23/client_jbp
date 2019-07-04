@@ -37,6 +37,7 @@ class Ui_Dialog(QWidget):
         self.widget_list = {}
         abilitys = DB.query(f"select * from {spec}")
         self.input_waiting = None
+        self.old_bind = None
         for idx, spell in enumerate(abilitys, start=1):
             bind = QPushButton()
             #if abil[2] is not None: bind.addItem(abil[2])
@@ -74,19 +75,52 @@ class Ui_Dialog(QWidget):
         self.m_label = False #  Флаг нажатия на Label для перемещения окна
         self.show()
 
+
+    def set_text(self, text):
+        self.widget_list[self.input_waiting].setText(text)
+        self.widget_list[self.input_waiting].setStyleSheet("background-color: silver;")
+        self.input_waiting = None
+
+    def keyPressEvent(self, QKeyEvent):
+        if QKeyEvent.key() in (16777216, 16777249, 16777251, 16777248):  # esc
+            if self.input_waiting:
+                self.set_text(self.old_bind)
+                #return
+        elif len(str(QKeyEvent.key())) == 4 and str(QKeyEvent.key())[:2] == '10':  # если клавиша из русской раскладки
+            if self.GnomeDialog:
+                self.GnomeDialog.close()
+            self.GnomeDialog = GnomeDialog(14, "\n\n\nYou must change your keyboard layout to ENG, my friend.", True, self)
+            self.GnomeDialog.show()
+            #return
+        elif self.input_waiting:
+            try:
+                self.set_text(key_dict[QKeyEvent.key()])
+            except Exception as E:
+                print(E.args)
+                if self.GnomeDialog:
+                    self.GnomeDialog.close()
+                self.GnomeDialog = GnomeDialog(14, "\n\n\nOops, i guess you can bind only 0-9, F1-F12, A-Z keys",
+                                               True, self)
+                self.GnomeDialog.show()
+                self.set_text(self.old_bind)
+                #return
+
+
     def key_input(self, spell_label):
-        if self.input_waiting is None:
+        if self.input_waiting is None: #  Первый клик
             self.input_waiting = spell_label
+            self.old_bind = self.widget_list[spell_label].text()
             self.widget_list[spell_label].setText('PRESS KEY')
             self.widget_list[spell_label].setStyleSheet("background-color: #606060;")
-        elif self.input_waiting == spell_label:
+        elif self.input_waiting == spell_label:  # Повторный клик туда же
             self.input_waiting = None
-            self.widget_list[spell_label].setText('CLICK TO BIND')
+            self.widget_list[spell_label].setText(self.old_bind)
             self.widget_list[spell_label].setStyleSheet("background-color: silver;")
-        else:
-            self.widget_list[self.input_waiting].setText('CLICK TO BIND')
+        else: #  Клик в другое место
+            self.widget_list[self.input_waiting].setText(self.old_bind)
             self.widget_list[self.input_waiting].setStyleSheet("background-color: silver;")
             self.input_waiting = spell_label
+            self.old_bind = self.widget_list[spell_label].text()
             self.widget_list[spell_label].setText('PRESS KEY')
             self.widget_list[spell_label].setStyleSheet("background-color: #606060;")
 
@@ -117,34 +151,6 @@ class Ui_Dialog(QWidget):
         main.show()
         self.close()
 
-    def set_text(self, text):
-        self.widget_list[self.input_waiting].setText(text)
-        self.widget_list[self.input_waiting].setStyleSheet("background-color: silver;")
-        self.input_waiting = None
-
-    def keyPressEvent(self, QKeyEvent):
-        if QKeyEvent.key() in (16777216, 16777249, 16777251, 16777248):  # esc
-            if self.input_waiting:
-                self.set_text('CLICK TO BIND')
-        elif len(str(QKeyEvent.key())) == 4 and str(QKeyEvent.key())[:2] == '10':
-            if self.GnomeDialog:
-                self.GnomeDialog.close()
-            self.GnomeDialog = GnomeDialog(14, "\n\n\nYou must change your keyboard layout to ENG, my friend.", True, self)
-            self.GnomeDialog.show()
-            return
-        if self.input_waiting:
-            try:
-                self.set_text(key_dict[QKeyEvent.key()])
-            except Exception as E:
-                print(E.args)
-                if self.GnomeDialog:
-                    self.GnomeDialog.close()
-                self.GnomeDialog = GnomeDialog(14, "\n\n\nOops, i guess you can bind only 0-9, F1-F12, A-Z keys",
-                                               True, self)
-                self.GnomeDialog.show()
-                self.set_text('CLICK TO BIND')
-                return
-
     def move_pressed(self, event):
         self.oldPos = event.globalPos()
         self.m_label = True
@@ -152,7 +158,7 @@ class Ui_Dialog(QWidget):
 
     def mouseReleaseEvent(self, QMouseEvent):
         if self.input_waiting:
-            self.set_text('CLICK TO BIND')
+            self.set_text(self.old_bind)
         self.m_label = False
 
     def mouseMoveEvent(self, event):
