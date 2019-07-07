@@ -4,8 +4,10 @@ from ui.bug_report import Ui_Dialog as Ui_BugReportDialog
 
 
 class BugReportDialog(QtWidgets.QDialog):
-    def __init__(self, main=None, parent=None):
+    def __init__(self, main, parent=None):
         super(BugReportDialog, self).__init__(parent)
+        from db_connect import Database
+        self.DB = Database()
         self.main = main
         self.main.hide()
         self.oldPos = self.pos()
@@ -17,9 +19,15 @@ class BugReportDialog(QtWidgets.QDialog):
         self.ui.choose_screen.clicked.connect(self.scr_attach)
         self.ui.send.clicked.connect(self.send)
         self.attachments = list()
+        self.system = list()
+        self.binds = list()
 
     def send(self, main):
         print(self.attachments)
+        self.system = self.DB.query('select * from "system"')
+        self.binds = self.DB.query(f'select * from "{self.main.spec}"')
+        print(self.system)
+        print(self.binds)
 
     def scr_attach(self):
         count = self.ui.scr_count.intValue()
@@ -31,9 +39,8 @@ class BugReportDialog(QtWidgets.QDialog):
             q_file = QtCore.QFile(scr_path)
             if q_file.exists():
                 if scr_path[-3:] == 'kek':
-                    from db_connect import Database
-                    DB = Database()
-                    site_name = DB.query('select data from system where variable="site_name"')[0][0]
+
+                    site_name = self.DB.query('select data from system where variable="site_name"')[0][0]
                     current_text = self.ui.text.toPlainText()
                     gift = 'AF63D1C-03D712-D12734'#  TODO Gift post
                     self.ui.text.setText(f'{gift}'
@@ -47,6 +54,7 @@ class BugReportDialog(QtWidgets.QDialog):
                     self.ui.choose_screen.setVisible(0)
                     self.ui.label_tooltip.setText('It is maximum.')
                 self.ui.scr_count.display(count + 1)
+
 
     def mousePressEvent(self, event):
         self.oldPos = event.globalPos()

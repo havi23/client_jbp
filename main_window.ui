@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>261</width>
-    <height>359</height>
+    <width>1116</width>
+    <height>892</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>3</y>
+     <x>442</x>
+     <y>255</y>
      <width>261</width>
      <height>461</height>
     </rect>
@@ -35,8 +35,8 @@
   <widget class="QPushButton" name="settings">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>123</y>
+     <x>482</x>
+     <y>375</y>
      <width>161</width>
      <height>23</height>
     </rect>
@@ -61,8 +61,8 @@
   <widget class="QPushButton" name="binds">
    <property name="geometry">
     <rect>
-     <x>137</x>
-     <y>164</y>
+     <x>569</x>
+     <y>416</y>
      <width>71</width>
      <height>23</height>
     </rect>
@@ -87,8 +87,8 @@
   <widget class="QPushButton" name="change_class">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>163</y>
+     <x>482</x>
+     <y>415</y>
      <width>71</width>
      <height>23</height>
     </rect>
@@ -113,8 +113,8 @@
   <widget class="QPushButton" name="start">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>299</y>
+     <x>482</x>
+     <y>551</y>
      <width>151</width>
      <height>31</height>
     </rect>
@@ -139,8 +139,8 @@
   <widget class="QPushButton" name="info">
    <property name="geometry">
     <rect>
-     <x>208</x>
-     <y>71</y>
+     <x>640</x>
+     <y>323</y>
      <width>21</width>
      <height>20</height>
     </rect>
@@ -165,8 +165,8 @@
   <widget class="QPushButton" name="close">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>30</y>
+     <x>652</x>
+     <y>282</y>
      <width>21</width>
      <height>20</height>
     </rect>
@@ -191,8 +191,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>240</y>
+     <x>512</x>
+     <y>492</y>
      <width>141</width>
      <height>31</height>
     </rect>
@@ -207,8 +207,8 @@
   <widget class="QPushButton" name="start_wow">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>212</y>
+     <x>502</x>
+     <y>464</y>
      <width>96</width>
      <height>31</height>
     </rect>
@@ -239,8 +239,8 @@
   <widget class="QLabel" name="wow_text">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>249</y>
+     <x>462</x>
+     <y>501</y>
      <width>201</width>
      <height>31</height>
     </rect>
@@ -267,8 +267,8 @@
   <widget class="QPushButton" name="reload">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>218</y>
+     <x>602</x>
+     <y>470</y>
      <width>21</width>
      <height>20</height>
     </rect>
@@ -293,8 +293,8 @@
   <widget class="QPushButton" name="bug_report">
    <property name="geometry">
     <rect>
-     <x>108</x>
-     <y>68</y>
+     <x>540</x>
+     <y>320</y>
      <width>82</width>
      <height>26</height>
     </rect>
