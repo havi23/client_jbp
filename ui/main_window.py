@@ -127,7 +127,7 @@ class Ui_Dialog(object):
             return os.path.join(base_path, relative_path)
         icon8 = QtGui.QIcon()
         print(resource_path("ui\\img\\bug_report.bmp"))
-        icon8.addPixmap(QtGui.QPixmap(resource_path("bug_report.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon8.addPixmap(QtGui.QPixmap(resource_path("ui\\img\\bug_report.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bug_report.setIcon(icon8)
         self.bug_report.setIconSize(QtCore.QSize(116, 102))
         self.bug_report.setObjectName("bug_report")

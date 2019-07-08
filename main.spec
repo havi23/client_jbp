@@ -4,8 +4,8 @@ block_cipher = None
 
 
 a = Analysis(['main.py'],
-             pathex=['C:\\Users\\Max\\PycharmProjects\\client_jbp'],
-             #pathex=['C:\\Users\\Havi\\Documents\\GitHub\\client_jbp'],
+             #pathex=['C:\\Users\\Max\\PycharmProjects\\client_jbp'],
+             pathex=['C:\\Users\\Havi\\Documents\\GitHub\\client_jbp'],
              binaries=[],
              #datas=[("C:\\Users\\Max\\PycharmProjects\\client_jbp\\ui\\img", "ui")],
              datas=[],
@@ -20,7 +20,8 @@ a = Analysis(['main.py'],
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 
-a.datas += [("bug_report.bmp", "C:\\Users\\Max\PycharmProjects\\client_jbp\\ui\\img\\bug_report.bmp", "DATA")]
+#a.datas += [("bug_report.bmp", "C:\\Users\\Max\PycharmProjects\\client_jbp\\ui\\img\\bug_report.bmp", "DATA")]
+a.datas += [("bug_report.bmp", "C:\\Users\\Havi\\Documents\\GitHub\\client_jbp\\ui\\img\\bug_report.bmp", "DATA")]
 
 exe = EXE(pyz,
           a.scripts,
