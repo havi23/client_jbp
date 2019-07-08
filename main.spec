@@ -20,8 +20,11 @@ a = Analysis(['main.py'],
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 
-#a.datas += [("bug_report.bmp", "C:\\Users\\Max\PycharmProjects\\client_jbp\\ui\\img\\bug_report.bmp", "DATA")]
-a.datas += [("bug_report.bmp", "C:\\Users\\Havi\\Documents\\GitHub\\client_jbp\\ui\\img\\bug_report.bmp", "DATA")]
+#a.datas += [("ui\\img\\bug_report.bmp", "C:\\Users\\Havi\\Documents\\GitHub\\client_jbp\\ui\\img\\bug_report.bmp", "DATA")]
+a.datas += [("ui\\img\\bug_report.bmp", "C:\\Users\\Max\Documents\\GitHub\\client_jbp\\ui\\img\\bug_report.bmp", "DATA")]
+a.datas += [("ui\\img\\info_bg.png", "C:\\Users\\Max\Documents\\GitHub\\client_jbp\\ui\\img\\info_bg.png", "DATA")]
+a.datas += [("data", "C:\\Users\\Max\Documents\\GitHub\\client_jbp\\data", "DATA")]
+
 
 exe = EXE(pyz,
           a.scripts,

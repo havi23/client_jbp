@@ -5,10 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="67165dbc-47ed-475f-aaed-51ef5821bc36" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/script_launcher.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/client_jbp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/client_jbp.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/dist.rar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/img/info_bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/img/info_c.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/img/info_c.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/img/info_frame.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/img/info_screen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/исходники/info.psd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/client_jbp.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f41d6f6-cba8-43f5-932a-0512b30d8b7b.corrupted.20190621-083701.reason.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f41d6f6-cba8-43f5-932a-0512b30d8b7b.corrupted.20190621-083701.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f41d6f6-cba8-43f5-932a-0512b30d8b7b.corrupted.20190702-092520.reason.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f41d6f6-cba8-43f5-932a-0512b30d8b7b.corrupted.20190702-092520.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f41d6f6-cba8-43f5-932a-0512b30d8b7b.corrupted.20190702-115953.reason.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f41d6f6-cba8-43f5-932a-0512b30d8b7b.corrupted.20190702-115953.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f41d6f6-cba8-43f5-932a-0512b30d8b7b.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/0f41d6f6-cba8-43f5-932a-0512b30d8b7b/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6a19ade3-eea9-4400-bf62-8d38e6cf0d39/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a6b900db-1fcf-4a6e-84c7-a3939f99053a/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f5e53c63-2bf4-4716-b539-bc1741525f03/storage_v2/_src_/schema/main.uQUzAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace_PC.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace_PC0.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/Analysis-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/EXE-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/PKG-00.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/PKG-00.pkg" afterDir="false" />
@@ -16,12 +41,18 @@
       <change beforePath="$PROJECT_DIR$/build/main/PYZ-00.pyz" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/PYZ-00.pyz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/PYZ-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/PYZ-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/base_library.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/main/main.exe.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/main.exe.manifest" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/main/main.exe.manifest" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/warn-main.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/warn-main.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/xref-main.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/xref-main.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data" beforeDir="false" afterPath="$PROJECT_DIR$/data" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_connect.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_connect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/data" beforeDir="false" afterPath="$PROJECT_DIR$/null_data" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/main.exe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.spec" beforeDir="false" afterPath="$PROJECT_DIR$/main.spec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_window.ui" beforeDir="false" afterPath="$PROJECT_DIR$/main_window.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/bug_report_BE.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/bug_report_BE.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/main_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -123,11 +154,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main_window.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main_window.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ui/main_window.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="197">
-              <caret line="130" column="38" selection-start-line="130" selection-start-column="38" selection-end-line="130" selection-end-column="38" />
+            <state relative-caret-position="192">
+              <caret line="122" selection-start-line="122" selection-end-line="122" />
+              <folding>
+                <element signature="e#200#242#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -156,7 +190,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="script_launcher.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="script_launcher.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/script_launcher.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -177,8 +211,8 @@
       <file leaf-file-name="bug_report_BE.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui/bug_report_BE.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+            <state relative-caret-position="170">
+              <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -263,8 +297,8 @@
         <option value="$PROJECT_DIR$/ui/bug_report_BE.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/main.spec" />
-        <option value="$PROJECT_DIR$/ui/main_window.py" />
         <option value="$PROJECT_DIR$/script_launcher.py" />
+        <option value="$PROJECT_DIR$/ui/main_window.py" />
       </list>
     </option>
   </component>
@@ -782,8 +816,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ui/bug_report_BE.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+        <state relative-caret-position="170">
+          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -830,13 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/main_window.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="130" column="38" selection-start-line="130" selection-start-column="38" selection-end-line="130" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -858,6 +885,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/main_window.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="122" selection-start-line="122" selection-end-line="122" />
+          <folding>
+            <element signature="e#200#242#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -18,7 +18,7 @@ from ahk_console import ahk_console
 
 DB = Database()
 
-#  pyuic5 bug_report.ui -o bug_report.py
+#  pyuic5 main_window.ui -o main_window.py
 def default_config(window, wow_path):
     wow_path = PureWindowsPath(os.path.dirname(os.path.abspath(wow_path)))
     config_path = Path(wow_path) / 'WTF' / 'Config.wtf'
@@ -132,8 +132,40 @@ class MainDialog(QtWidgets.QMainWindow):
         self.stop_icon.addPixmap(QtGui.QPixmap("ui/img/stop.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.listener = None
         self.m_label = None
+        self.info_active = None
+        self.ui.info.clicked.connect(self.info_frame)
 
-        #QtWidgets.qApp.processEvents()
+
+    def info_frame(self):
+        if self.info_active:
+            icon4 = QtGui.QIcon()
+            icon4.addPixmap(QtGui.QPixmap("ui/img/info.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.ui.info.setIcon(icon4)
+            self.ui.label.setGeometry(QtCore.QRect(442, 255, 261, 461))
+            '''
+            self.ui.info.setIcon(icon4)
+            self.ui.info_bg = QtWidgets.QLabel()
+            self.ui.info_bg.setGeometry(QtCore.QRect(120, 22, 981, 831))
+            self.ui.info_bg.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+            self.ui.info_bg.setText("")
+            self.ui.info_bg.setPixmap(QtGui.QPixmap("ui/img/info.png"))
+            self.ui.info_bg.setObjectName("bg")
+            '''
+            if self.class_ is not None:
+                self.ui.label.setPixmap(QtGui.QPixmap(f'ui/img/{self.class_}.png'))
+            else:
+                self.ui.label.setPixmap(QtGui.QPixmap(f'ui/img/noclass.png'))
+            self.info_active = False
+        else:
+            icon4 = QtGui.QIcon()
+            icon4.addPixmap(QtGui.QPixmap("ui/img/info_c.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.ui.info.setIcon(icon4)
+            self.ui.label.setGeometry(QtCore.QRect(121, 7, 1021, 861))
+            self.ui.label.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+            self.ui.label.setText("")
+            self.ui.label.setPixmap(QtGui.QPixmap(resource_path("ui\\img\\info_bg.png")))
+            self.ui.label.setObjectName("info_bg")
+            self.info_active = True
 
     def wow_text_tooltip(self):
         print('ОТКРОЕТСЯ САЙТ')
@@ -203,9 +235,9 @@ class MainDialog(QtWidgets.QMainWindow):
             self.wow_path = DB.query('SELECT data FROM system where variable="wow_path"')[0][0]
             self.spec = DB.query('SELECT data FROM system where variable="spec"')[0][0]
             self.class_= DB.query('SELECT data FROM system where variable="class"')[0][0]
+
             if self.class_ is not None:
                 self.ui.label.setPixmap(QtGui.QPixmap(f'ui/img/{self.class_}.png'))
-
             if self.wow_path is None:
                 if not self.GnomeDialog:
                     self.GnomeDialog = GnomeDialog(14, 'Hello, my Friend!\n\n'
@@ -233,6 +265,7 @@ class MainDialog(QtWidgets.QMainWindow):
                         self.GnomeAwaits = self.binds.__name__
                         break
             self.check_wow()
+
         return super(MainDialog, self).event(event)
 
     def binds(self):

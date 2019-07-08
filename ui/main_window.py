@@ -7,29 +7,28 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from ui.resource_to_exe import resource_path
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(261, 359)
+        Dialog.resize(1116, 892)
         self.label = QtWidgets.QLabel(Dialog)
-        self.label.setGeometry(QtCore.QRect(10, 3, 261, 461))
+        self.label.setGeometry(QtCore.QRect(442, 255, 261, 461))
         self.label.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap("ui/img/noclass.png"))
         self.label.setObjectName("label")
         self.settings = QtWidgets.QPushButton(Dialog)
-        self.settings.setGeometry(QtCore.QRect(50, 123, 161, 23))
+        self.settings.setGeometry(QtCore.QRect(482, 375, 161, 23))
         self.settings.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.settings.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("ui/img/sett.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.settings.setIcon(icon)
         self.settings.setIconSize(QtCore.QSize(200, 150))
         self.settings.setObjectName("settings")
         self.binds = QtWidgets.QPushButton(Dialog)
-        self.binds.setGeometry(QtCore.QRect(137, 164, 71, 23))
+        self.binds.setGeometry(QtCore.QRect(569, 416, 71, 23))
         self.binds.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.binds.setText("")
         icon1 = QtGui.QIcon()
@@ -38,7 +37,7 @@ class Ui_Dialog(object):
         self.binds.setIconSize(QtCore.QSize(200, 150))
         self.binds.setObjectName("binds")
         self.change_class = QtWidgets.QPushButton(Dialog)
-        self.change_class.setGeometry(QtCore.QRect(50, 163, 71, 23))
+        self.change_class.setGeometry(QtCore.QRect(482, 415, 71, 23))
         self.change_class.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.change_class.setText("")
         icon2 = QtGui.QIcon()
@@ -47,7 +46,7 @@ class Ui_Dialog(object):
         self.change_class.setIconSize(QtCore.QSize(200, 150))
         self.change_class.setObjectName("change_class")
         self.start = QtWidgets.QPushButton(Dialog)
-        self.start.setGeometry(QtCore.QRect(50, 299, 151, 31))
+        self.start.setGeometry(QtCore.QRect(482, 551, 151, 31))
         self.start.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.start.setText("")
         icon3 = QtGui.QIcon()
@@ -56,7 +55,7 @@ class Ui_Dialog(object):
         self.start.setIconSize(QtCore.QSize(200, 150))
         self.start.setObjectName("start")
         self.info = QtWidgets.QPushButton(Dialog)
-        self.info.setGeometry(QtCore.QRect(208, 71, 21, 20))
+        self.info.setGeometry(QtCore.QRect(640, 323, 21, 20))
         self.info.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.info.setText("")
         icon4 = QtGui.QIcon()
@@ -65,7 +64,7 @@ class Ui_Dialog(object):
         self.info.setIconSize(QtCore.QSize(200, 150))
         self.info.setObjectName("info")
         self.close = QtWidgets.QPushButton(Dialog)
-        self.close.setGeometry(QtCore.QRect(220, 30, 21, 20))
+        self.close.setGeometry(QtCore.QRect(652, 282, 21, 20))
         self.close.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.close.setText("")
         icon5 = QtGui.QIcon()
@@ -74,12 +73,12 @@ class Ui_Dialog(object):
         self.close.setIconSize(QtCore.QSize(200, 150))
         self.close.setObjectName("close")
         self.label_2 = QtWidgets.QLabel(Dialog)
-        self.label_2.setGeometry(QtCore.QRect(80, 240, 141, 31))
+        self.label_2.setGeometry(QtCore.QRect(512, 492, 141, 31))
         self.label_2.setText("")
         self.label_2.setPixmap(QtGui.QPixmap("ui/img/hider.png"))
         self.label_2.setObjectName("label_2")
         self.start_wow = QtWidgets.QPushButton(Dialog)
-        self.start_wow.setGeometry(QtCore.QRect(70, 212, 96, 31))
+        self.start_wow.setGeometry(QtCore.QRect(502, 464, 96, 31))
         self.start_wow.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.start_wow.setAutoFillBackground(False)
         self.start_wow.setStyleSheet("background-color: transpanent;")
@@ -90,8 +89,7 @@ class Ui_Dialog(object):
         self.start_wow.setIconSize(QtCore.QSize(116, 102))
         self.start_wow.setObjectName("start_wow")
         self.wow_text = QtWidgets.QLabel(Dialog)
-        self.wow_text.setGeometry(QtCore.QRect(30, 249, 201, 31))
-        QtGui.QFontDatabase.addApplicationFont('ui/font/Futura-Normal.ttf')
+        self.wow_text.setGeometry(QtCore.QRect(462, 501, 201, 31))
         font = QtGui.QFont()
         font.setFamily("Futura-Normal")
         font.setPointSize(12)
@@ -101,7 +99,7 @@ class Ui_Dialog(object):
         self.wow_text.setAlignment(QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
         self.wow_text.setObjectName("wow_text")
         self.reload = QtWidgets.QPushButton(Dialog)
-        self.reload.setGeometry(QtCore.QRect(170, 218, 21, 20))
+        self.reload.setGeometry(QtCore.QRect(602, 470, 21, 20))
         self.reload.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.reload.setText("")
         icon7 = QtGui.QIcon()
@@ -110,27 +108,20 @@ class Ui_Dialog(object):
         self.reload.setIconSize(QtCore.QSize(200, 150))
         self.reload.setObjectName("reload")
         self.bug_report = QtWidgets.QPushButton(Dialog)
-        self.bug_report.setGeometry(QtCore.QRect(108, 68, 82, 26))
+        self.bug_report.setGeometry(QtCore.QRect(540, 320, 82, 26))
         self.bug_report.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.bug_report.setAutoFillBackground(False)
         self.bug_report.setStyleSheet("background-color: transpanent;")
         self.bug_report.setText("")
-        import os
-        import sys
-
-        def resource_path(relative_path):
-            try:
-                base_path = sys._MEIPASS
-            except Exception:
-                base_path = os.path.abspath(".")
-
-            return os.path.join(base_path, relative_path)
         icon8 = QtGui.QIcon()
         print(resource_path("ui\\img\\bug_report.bmp"))
         icon8.addPixmap(QtGui.QPixmap(resource_path("ui\\img\\bug_report.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bug_report.setIcon(icon8)
         self.bug_report.setIconSize(QtCore.QSize(116, 102))
         self.bug_report.setObjectName("bug_report")
+
+
+
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)

@@ -1,9 +1,9 @@
 import sqlite3
-
+from ui.resource_to_exe import resource_path
 
 class Database:
     def __init__(self):
-        self._conn = sqlite3.connect(database='data')
+        self._conn = sqlite3.connect(database=resource_path('data'))
         self._cursor = self._conn.cursor()
 
     def __enter__(self):
