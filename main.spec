@@ -2,7 +2,7 @@
 
 block_cipher = None
 
-
+# pyinstaller --onefile --noconsole main.spec
 a = Analysis(['main.py'],
              pathex=['C:\\Users\\Max\\PycharmProjects\\client_jbp'],
              #pathex=['C:\\Users\\Havi\\Documents\\GitHub\\client_jbp'],
@@ -19,8 +19,8 @@ a = Analysis(['main.py'],
              noarchive=False)
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
-
 a.datas += [("ui\\img\\bug_report.bmp", "C:\\Users\\Max\Documents\\GitHub\\client_jbp\\ui\\img\\bug_report.bmp", "DATA")]
+a.datas += [("ui\\img\\info_bg.png", "C:\\Users\\Max\Documents\\GitHub\\client_jbp\\ui\\img\\info_bg.png", "DATA")]
 a.datas += [("data", "C:\\Users\\Max\Documents\\GitHub\\client_jbp\\data", "DATA")]
 
 exe = EXE(pyz,
