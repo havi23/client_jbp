@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from ui.resource_to_exe import resource_path
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -114,7 +114,8 @@ class Ui_Dialog(object):
         self.bug_report.setStyleSheet("background-color: transpanent;")
         self.bug_report.setText("")
         icon8 = QtGui.QIcon()
-        icon8.addPixmap(QtGui.QPixmap("ui/img/bug_report.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        print(resource_path("ui\\img\\bug_report.bmp"))
+        icon8.addPixmap(QtGui.QPixmap(resource_path("ui\\img\\bug_report.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.bug_report.setIcon(icon8)
         self.bug_report.setIconSize(QtCore.QSize(116, 102))
         self.bug_report.setObjectName("bug_report")
