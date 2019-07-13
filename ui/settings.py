@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from ui.resource_to_exe import resource_path
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -66,6 +66,24 @@ class Ui_Dialog(object):
         self.label_3.setMouseTracking(False)
         self.label_3.setText("")
         self.label_3.setObjectName("label_3")
+        self.character_label = QtWidgets.QLabel(Dialog)
+        self.character_label.setGeometry(QtCore.QRect(253, 302, 119, 16))
+        font = QtGui.QFont()
+        font.setFamily("Futura-Normal")
+        font.setPointSize(12)
+        self.character_label.setFont(font)
+        self.character_label.setStyleSheet("color: orange;")
+        self.character_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.character_label.setObjectName("character_label")
+        self.character_change = QtWidgets.QPushButton(Dialog)
+        self.character_change.setGeometry(QtCore.QRect(377, 296, 65, 26))
+        self.character_change.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.character_change.setText("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("ui/img/settings/change.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.character_change.setIcon(icon3)
+        self.character_change.setIconSize(QtCore.QSize(193, 150))
+        self.character_change.setObjectName("character_change")
 
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -73,5 +91,6 @@ class Ui_Dialog(object):
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        self.character_label.setText(_translate("Dialog", "Choose character"))
 
 

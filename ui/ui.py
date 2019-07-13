@@ -9,49 +9,21 @@ from ui.bug_report_BE import BugReportDialog
 import sys
 from db_connect import Database
 import time
-from pathlib import Path, PureWindowsPath
+
 import os
 from ui.resource_to_exe import resource_path
+from bin import wow_config as wow_folder
 
 
 from ahk_console import ahk_console
 
 DB = Database()
 
-#  pyuic5 main_window.ui -o main_window.py
-def default_config(window, wow_path):
-    wow_path = PureWindowsPath(os.path.dirname(os.path.abspath(wow_path)))
-    config_path = Path(wow_path) / 'WTF' / 'Config.wtf'
-    old_config_path = Path(wow_path) / 'WTF' / 'Config.wtf.old'
-    if config_path.exists():
-        import shutil
-        shutil.copy(config_path, old_config_path)
-        with open(config_path, 'r', encoding='UTF-8') as config_file:
-            lines = config_file.readlines()
-            line_dict = dict()
-            [line_dict.update({line.split(' ')[1]: line.split(' ')[2]}) for line in lines]
-            line_dict.update({'Gamma': '"1"\n'})
-            line_dict.update({'Brightness': '"50"\n'})
-            line_dict.update({'Contrast': '"50"\n'})
-            line_dict.update({'Contrast': '"50"\n'})
-            line_dict.update({'colorblindSimulator': '"2"\n'})
-            # TODO Оконный режим
-            lines = ([f'SET {k} {v}' for k, v in line_dict.items()])
-            config_file = open(config_path, 'w', encoding='UTF-8')
-            config_file.writelines(lines)
-            config_file.close()
-    else:
-        if not window.GnomeDialog:
-            window.GnomeDialog = GnomeDialog(14, 'Something going wrong!\n'
-                                                 'I guess you must choose WoW directory again.\n\n'
-                                                 'Go Settings > Click "Choose WoW directory"!')
-            window.GnomeDialog.show()
-            window.GnomeAwaits = 'settings'
-        print('Не найден файл Config.wtf')
-        return
+#  pyuic5 settings.ui -o settings.py
+
 
 class SettingsDialog(QtWidgets.QDialog):
-    def __init__(self, main, parent=None):
+    def __init__(self, main, character, parent=None):
         super(SettingsDialog, self).__init__(parent)
         self.ui = Ui_SettingsDialog()
         self.oldPos = self.pos()
@@ -64,10 +36,17 @@ class SettingsDialog(QtWidgets.QDialog):
         self.wow_path = DB.query('SELECT data FROM system where variable="wow_path"')[0][0]
         self.ui.cwp.clicked.connect(self.cwp)
         self.ui.save.clicked.connect(lambda: self.save(main))
+        self.ui.character_label.setText(character)
+        self.ui.character_change.clicked.connect(self.character_change)
         if self.wow_path is None:
             self.GnomeDialog = GnomeDialog(14, '\n\n\nClick "Choose WoW path"!')
             self.GnomeDialog.show()
             self.GnomeAwaits = self.cwp.__name__
+
+    def character_change(self):
+        if not self.GnomeDialog:
+            self.GnomeDialog = GnomeDialog(main=self, type='account', DB=DB, wow_path=self.wow_path)
+            self.GnomeDialog.show()
 
     def save(self, main):
         if main is not None:
@@ -88,7 +67,7 @@ class SettingsDialog(QtWidgets.QDialog):
             return
         DB.query(f'UPDATE system SET data=? WHERE variable="wow_path"', (wow_path,))
         DB.commit()
-        default_config(self, wow_path)
+        wow_folder.default_config(self, GnomeDialog, wow_path)
         # TODO Проверить аддон, загрузить, если его нет, настроить ТМВ, переписать конфиг
 
 
@@ -134,6 +113,12 @@ class MainDialog(QtWidgets.QMainWindow):
         self.m_label = None
         self.info_active = None
         self.ui.info.clicked.connect(self.info_frame)
+        self.GnomeDialog = None
+        self.GnomeAwaits = None
+        self.ClassDialog = None
+        self.SettingsDialog = None
+        self.BindsDialog = None
+        self.BugReport = None
 
 
     def info_frame(self):
@@ -142,15 +127,6 @@ class MainDialog(QtWidgets.QMainWindow):
             icon4.addPixmap(QtGui.QPixmap("ui/img/info.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             self.ui.info.setIcon(icon4)
             self.ui.label.setGeometry(QtCore.QRect(442, 255, 261, 461))
-            '''
-            self.ui.info.setIcon(icon4)
-            self.ui.info_bg = QtWidgets.QLabel()
-            self.ui.info_bg.setGeometry(QtCore.QRect(120, 22, 981, 831))
-            self.ui.info_bg.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
-            self.ui.info_bg.setText("")
-            self.ui.info_bg.setPixmap(QtGui.QPixmap("ui/img/info.png"))
-            self.ui.info_bg.setObjectName("bg")
-            '''
             if self.class_ is not None:
                 self.ui.label.setPixmap(QtGui.QPixmap(f'ui/img/{self.class_}.png'))
             else:
@@ -184,7 +160,7 @@ class MainDialog(QtWidgets.QMainWindow):
         if self.wow_correct is not None:
             return
         try:
-            default_config(self, self.wow_path)
+            wow_folder.default_config(self, GnomeDialog, self.wow_path)
             # TODO ПРОВЕРИТЬ ПРОФИЛЬ
             os.startfile(self.wow_path)
             self.wow_correct = True
@@ -226,15 +202,10 @@ class MainDialog(QtWidgets.QMainWindow):
 
     def event(self, event):  # Срабатывает при каждом вызове main.show()
         if event.type() == QtCore.QEvent.Show and not self.isHidden():
-            self.GnomeDialog = None
-            self.GnomeAwaits = None
-            self.ClassDialog = None
-            self.SettingsDialog = None
-            self.BindsDialog = None
-            self.BugReport = None
             self.wow_path = DB.query('SELECT data FROM system where variable="wow_path"')[0][0]
             self.spec = DB.query('SELECT data FROM system where variable="spec"')[0][0]
             self.class_= DB.query('SELECT data FROM system where variable="class"')[0][0]
+            self.account_data = DB.query('SELECT data FROM system where variable in ("account", "server", "character")')
 
             if self.class_ is not None:
                 self.ui.label.setPixmap(QtGui.QPixmap(f'ui/img/{self.class_}.png'))
@@ -246,7 +217,9 @@ class MainDialog(QtWidgets.QMainWindow):
                                                        'Click "Settings"!')
                 self.GnomeDialog.show()
                 self.GnomeAwaits = self.settings.__name__
-
+            elif not (self.account_data[1][0] or self.GnomeDialog):
+                self.GnomeDialog = GnomeDialog(main=self, type='account', DB=DB, wow_path=self.wow_path)
+                self.GnomeDialog.show()
             elif self.spec is None:
                 if not self.GnomeDialog:
                     self.GnomeDialog = GnomeDialog(14, 'Now you need to choose your class and specialisation\n\n\n'
@@ -265,7 +238,6 @@ class MainDialog(QtWidgets.QMainWindow):
                         self.GnomeAwaits = self.binds.__name__
                         break
             self.check_wow()
-
         return super(MainDialog, self).event(event)
 
     def binds(self):
@@ -299,14 +271,13 @@ class MainDialog(QtWidgets.QMainWindow):
             self.listener = None
 
     def settings(self):
-        print(self.settings.__name__)
         if self.GnomeDialog is not None and self.GnomeAwaits != self.settings.__name__:
             self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("ui/img/gnome/nani.png"))
             return
         self.hide()
         if self.GnomeDialog is not None:
             self.GnomeDialog.close()
-        self.SettingsDialog = SettingsDialog(self)
+        self.SettingsDialog = SettingsDialog(self, self.account_data[1][0])
         self.SettingsDialog.show()
 
     def change_class(self):
