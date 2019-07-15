@@ -7,6 +7,9 @@ from bin.bug_report import BugReportDialog
 import sys
 from db_connect import Database
 from bin.settings import SettingsDialog
+
+import time
+
 import os
 from bin.resource_to_exe import resource_path
 from bin.wow import wow_config as wow_folder
