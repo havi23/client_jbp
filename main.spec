@@ -2,7 +2,7 @@
 
 block_cipher = None
 
-
+# pyinstaller --onefile --noconsole main.spec
 a = Analysis(['main.py'],
              #pathex=['C:\\Users\\Max\\PycharmProjects\\client_jbp'],
              pathex=['C:\\Users\\Havi\\Documents\\GitHub\\client_jbp'],
