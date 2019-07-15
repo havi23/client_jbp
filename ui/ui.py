@@ -8,6 +8,7 @@ from ui.settings import Ui_Dialog as Ui_SettingsDialog
 from ui.bug_report_BE import BugReportDialog
 import sys
 from db_connect import Database
+
 import time
 from pathlib import Path, PureWindowsPath
 import os
@@ -17,7 +18,6 @@ from ui.resource_to_exe import resource_path
 from ahk_console import ahk_console
 
 DB = Database()
-
 #  pyuic5 main_window.ui -o main_window.py
 def default_config(window, wow_path):
     wow_path = PureWindowsPath(os.path.dirname(os.path.abspath(wow_path)))
