@@ -17,7 +17,7 @@ import sys
 # TODO В разработке
 DB = Database()
 server_version = 0.0 #  POST-запрос, отдать ключ, получить версию программы
-local_version = float(DB.query('select data from system where variable="version"')[0][0])
+local_version = float(DB.query('select data.db from system where variable="version"')[0][0])
 
 def run_UI():
     from ui.ui import MainDialog

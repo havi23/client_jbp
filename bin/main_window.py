@@ -17,13 +17,14 @@ from bin.wow import wow_config as wow_folder
 
 from bin.wow.ahk_console import ahk_console
 
-DB = Database()
+
 #  pyuic5 settings.bin -o settings_Qt.py
 
 
 class MainDialog(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainDialog, self).__init__()
+        self.DB = Database()
         self.wow_correct = None
         self.oldPos = self.pos()
         self.ui = Ui_MainDialog()
@@ -137,10 +138,10 @@ class MainDialog(QtWidgets.QMainWindow):
 
     def event(self, event):  # Срабатывает при каждом вызове main.show()
         if event.type() == QtCore.QEvent.Show and not self.isHidden():
-            self.wow_path = DB.query('SELECT data FROM system where variable="wow_path"')[0][0]
-            self.spec = DB.query('SELECT data FROM system where variable="spec"')[0][0]
-            self.class_= DB.query('SELECT data FROM system where variable="class"')[0][0]
-            self.account_data = DB.query('SELECT data FROM system where variable in ("account", "server", "character")')
+            self.wow_path = self.DB.query('SELECT data FROM system where variable="wow_path"')[0][0]
+            self.spec = self.DB.query('SELECT data FROM system where variable="spec"')[0][0]
+            self.class_= self.DB.query('SELECT data FROM system where variable="class"')[0][0]
+            self.account_data = self.DB.query('SELECT data FROM system where variable in ("account", "server", "character")')
 
             if self.class_ is not None:
                 self.ui.label.setPixmap(QtGui.QPixmap(f'bin/img/{self.class_}.png'))
@@ -153,7 +154,7 @@ class MainDialog(QtWidgets.QMainWindow):
                 self.GnomeDialog.show()
                 self.GnomeAwaits = self.settings.__name__
             elif not (self.account_data[1][0] or self.GnomeDialog):
-                self.GnomeDialog = GnomeDialog(main=self, type='account', DB=DB, wow_path=self.wow_path)
+                self.GnomeDialog = GnomeDialog(main=self, type='account', DB=self.DB, wow_path=self.wow_path)
                 self.GnomeDialog.show()
             elif self.spec is None:
                 if not self.GnomeDialog:
@@ -162,7 +163,7 @@ class MainDialog(QtWidgets.QMainWindow):
                     self.GnomeDialog.show()
                     self.GnomeAwaits = self.change_class.__name__
             elif self.spec is not None:
-                binds = DB.query(f'SELECT * FROM {self.spec}')
+                binds = self.DB.query(f'SELECT * FROM {self.spec}')
                 for bind in binds:
                     if bind[3] and bind[2] is None:
                         if not self.GnomeDialog:

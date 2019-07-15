@@ -85,7 +85,7 @@ class GnomeDialog(QtWidgets.QDialog):
             main.ui.character_change
             main.ui.character_label.setText(self.character_edit.currentText())
         except:
-            main.account_data = DB.query('SELECT data FROM system where variable in ("account", "server", "character")')
+            main.account_data = DB.query('SELECT data.db FROM system where variable in ("account", "server", "character")')
         self._close(main)
 
     def _close(self, main):

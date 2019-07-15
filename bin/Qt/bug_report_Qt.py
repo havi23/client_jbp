@@ -19,7 +19,7 @@ class Ui_Dialog(object):
         self.bg = QtWidgets.QLabel(Dialog)
         self.bg.setGeometry(QtCore.QRect(-2, 0, 281, 263))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap("bin/img/bug_report.png"))
+        self.bg.setPixmap(QtGui.QPixmap("bin\\img\\bug_report.png"))
         self.bg.setObjectName("bg")
         self.send = QtWidgets.QPushButton(Dialog)
         self.send.setGeometry(QtCore.QRect(211, 232, 61, 21))

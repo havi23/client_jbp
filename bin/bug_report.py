@@ -40,7 +40,7 @@ class BugReportDialog(QtWidgets.QDialog):
             if q_file.exists():
                 if scr_path[-3:] == 'kek':
 
-                    site_name = self.DB.query('select data from system where variable="site_name"')[0][0]
+                    site_name = self.DB.query('select data.db from system where variable="site_name"')[0][0]
                     current_text = self.ui.text.toPlainText()
                     gift = 'AF63D1C-03D712-D12734'#  TODO Gift post
                     self.ui.text.setText(f'{gift}'
