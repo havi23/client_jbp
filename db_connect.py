@@ -1,5 +1,5 @@
 import sqlite3
-from ui.resource_to_exe import resource_path
+from bin.resource_to_exe import resource_path
 
 class Database:
     def __init__(self):

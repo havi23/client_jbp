@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'binds.ui'
+# Form implementation generated from reading bin file 'binds.bin'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -18,7 +18,7 @@ class Ui_Dialog(object):
         self.bg = QtWidgets.QLabel(Dialog)
         self.bg.setGeometry(QtCore.QRect(30, 0, 501, 531))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap("ui/img/binds/binds_bg.png"))
+        self.bg.setPixmap(QtGui.QPixmap("bin/img/binds/binds_bg.png"))
         self.bg.setObjectName("bg")
         self.scrollArea = QtWidgets.QScrollArea(Dialog)
         self.scrollArea.setGeometry(QtCore.QRect(40, 60, 481, 371))

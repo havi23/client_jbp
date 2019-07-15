@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import pyqtSlot
-from ui.main_window import Ui_Dialog as Ui_MainDialog
+from bin.Qt.main_window_Qt import Ui_Dialog as Ui_MainDialog
 import sys
 
 

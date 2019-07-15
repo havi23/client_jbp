@@ -1,10 +1,9 @@
 from PyQt5 import QtGui, QtCore
-from PyQt5.QtWidgets import QComboBox, QApplication, QWidget, QScrollArea, QVBoxLayout, QGroupBox, QLabel, QPushButton, QFormLayout
-import sys
+from PyQt5.QtWidgets import QComboBox, QWidget, QScrollArea, QVBoxLayout, QGroupBox, QLabel, QFormLayout
 from db_connect import Database
-from ui.ui import GnomeDialog
+from bin.main_window import GnomeDialog
 DB = Database()
-from drivers.key_dict import key_dict
+from bin.wow.drivers.key_dict import key_dict
 
 class Ui_Dialog(QWidget):
     def __init__(self, main, spec):
@@ -17,7 +16,7 @@ class Ui_Dialog(QWidget):
         self.bg = QLabel(self)
         self.bg.setGeometry(QtCore.QRect(0, 0, 581, 591))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap("ui/img/binds/binds_bg.png"))
+        self.bg.setPixmap(QtGui.QPixmap("bin/img/binds/binds_bg.png"))
         self.bg.setObjectName("bg")
         #self.setWindowIcon(QtGui.QIcon("icon.png"))
         #self.setWindowTitle(self.title)

@@ -1,5 +1,6 @@
 from db_connect import Database
 
+# TODO В разработке
 DB = Database()
 
 current_version = DB.query('select data from system where variable="version"')[0][0]

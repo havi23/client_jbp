@@ -1,13 +1,13 @@
-from ui.ui import MainDialog
+from bin.main_window import MainDialog
 import sys
-from PyQt5 import QtWidgets
+import PyQt5
 import os
 
 
 
 
 if __name__ == '__main__':
-    app = QtWidgets.QApplication([])
+    app = PyQt5.QtWidgets.QApplication([])
     main = MainDialog()
     main.show()
     sys.exit(app.exec())

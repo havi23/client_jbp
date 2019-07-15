@@ -1,6 +1,8 @@
-import esky
-import sys
+from db_connect import Database
 
-if hasattr(sys,"frozen"):
-    app = esky.Esky(sys.executable,"http://teenspirit.com.br/exemplo_boneca/")
-    app.auto_update()
+# TODO В разработке
+DB = Database()
+
+current_version = DB.query('select data from system where variable="version"')[0][0]
+print(type(current_version))
+print(type(float(current_version)))
