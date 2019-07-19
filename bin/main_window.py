@@ -18,13 +18,20 @@ from bin.wow import wow_config as wow_folder
 from bin.wow.ahk_console import ahk_console
 
 
-#  pyuic5 settings.bin -o settings_Qt.py
+#  pyuic5 license_key.py.ui -o license_key_Qt.py
 
 
 class MainDialog(QtWidgets.QMainWindow):
-    def __init__(self):
+    def __init__(self, server, LicenseKeyDialog=None):
         super(MainDialog, self).__init__()
         self.DB = Database()
+        self.server = server
+        self.LicenseKeyDialog = LicenseKeyDialog
+        if self.LicenseKeyDialog:
+            self.LicenseKeyDialog.close()
+        self.options = server.options
+        self.options = self.options.split('|')
+        print(self.options)
         self.wow_correct = None
         self.oldPos = self.pos()
         self.ui = Ui_MainDialog()

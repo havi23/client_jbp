@@ -3,7 +3,7 @@ from bin.resource_to_exe import resource_path
 
 class Database:
     def __init__(self):
-        self._conn = sqlite3.connect(database=resource_path('data.db'))
+        self._conn = sqlite3.connect(database=resource_path('data'))
         self._cursor = self._conn.cursor()
 
     def __enter__(self):

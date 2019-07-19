@@ -3,6 +3,7 @@ from PyQt5.QtCore import pyqtSlot
 from bin.Qt.class_Qt import Ui_Dialog as Ui_SpecDialog
 from bin.Qt.spec_Qt import Ui_Dialog as Ui_SpecDialog_
 from db_connect import Database
+from bin.gnome import GnomeDialog
 
 DB = Database()
 
@@ -12,11 +13,13 @@ class SpecDialog(QtWidgets.QDialog):
         super(SpecDialog, self).__init__(parent)
         self.oldPos = self.pos()
         self.ui = Ui_SpecDialog_()
+        print(class_)
         self.ui.setupUi(self)
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.ui.bg.setPixmap(QtGui.QPixmap(f"ui/img/class/spec/spec_{class_}.png"))
+        self.ui.bg.setPixmap(QtGui.QPixmap(f"bin/img/class/spec/spec_{class_}.png"))
+        self.GnomeDialog = None
         #QtGui.QMouseEvent
         if class_ not in ('dh', 'dru'):
             self.ui.spec_1_.close()
@@ -56,6 +59,12 @@ class SpecDialog(QtWidgets.QDialog):
 
     def spec(self, main, class_, spec):
         spec = DB.query(f'select * from specs where class="{class_}";')[0][spec]
+        if spec not in main.options:
+            if self.GnomeDialog is None:
+                self.GnomeDialog = GnomeDialog(14, f"\n\nYou dont have this spec on your key\n"
+                                                   "You can buy it on our Web-Site", True, self)
+                self.GnomeDialog.show()
+            return
         DB.query(f'update system set data = "{spec}" where variable ="spec";')
         DB.query(f'update system set data = "{class_}" where variable ="class";')
         DB.commit()
@@ -101,7 +110,7 @@ class ClassDialog(QtWidgets.QDialog):
         if self.SpecDialog is None:
             self.SpecDialog = SpecDialog(main, class_)
             self.SpecDialog.show()
-            self.close()
+            self.hide()
 
     @pyqtSlot()
     def back(self, main):
