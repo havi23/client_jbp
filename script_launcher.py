@@ -14,6 +14,8 @@
 from db_connect import Database
 from server import Server
 import sys
+from PyQt5 import QtWidgets
+import uuid
 
 DB = Database()
 server_version = 1.0 #  POST-запрос, отдать ключ, получить версию программы
@@ -28,29 +30,31 @@ def run_UI(server):
     main.show()
     sys.exit(app.exec())
 
-def hwid_generate():
-    import uuid
-    return uuid.UUID(int=uuid.getnode())
+def auth(key=None):
+    app = QtWidgets.QApplication([])
+    if not key:
+        key = DB.query('SELECT data FROM system WHERE variable="license_key"')[0][0]
+    if key:
+        hwid = uuid.UUID(int=uuid.getnode())
+        server = Server()
+        status = server.connect(url, key, hwid)
+        if status:
+            run_UI(server)
+        else:
+            DB.execute('UPDATE system SET data=? WHERE variable="license_key"', (None,))
+            DB.commit()
+            auth()
+    else:
+        from bin.license_key import LicenseKeyDialog
+        LicenseKeyDialog = LicenseKeyDialog(url)
+        LicenseKeyDialog.show()
+        sys.exit(app.exec())
 
 if server_version > local_version:
     print('update')
-
 elif server_version == local_version:
-    #  TODO Если нет key - запросить.
-    from PyQt5 import QtWidgets
-    from bin.license_key import LicenseKeyDialog
-    app = QtWidgets.QApplication([])
-    LicenseKeyDialog = LicenseKeyDialog(url)
-    LicenseKeyDialog.show()
-    sys.exit(app.exec())
+    auth()
 else:
     print('dev version started ')
-    url = 'http://127.0.0.1:8000/'
     key = '0300d200b078e4d1a4f522536220d133'
-    hwid = hwid_generate()
-    server = Server()
-    status = server.connect(url, key, hwid)
-    if status:
-        run_UI(server)
-
-
+    auth(key)

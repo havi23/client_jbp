@@ -8,7 +8,7 @@ class Server():
 
     def connect(self, url, key, hwid):
         try:
-            response = requests.get(url + f'auth/?key={key}&hwid={hwid}').json()
+            response = requests.get(url + f'api/auth/?key={key}&hwid={hwid}').json()
             status = response['status']
             error = response['error']
             self.token = response['token']

@@ -26,9 +26,9 @@ class SpecDialog(QtWidgets.QDialog):
             self.ui.spec_2_.close()
             self.ui.spec_3_.close()
             self.ui.spec_4_.close()
-            self.ui.spec_1.mousePressEvent = lambda event: self.spec(main, class_, 1)  # У друида и ДХ не по 3 спека
-            self.ui.spec_2.mousePressEvent = lambda event: self.spec(main, class_, 2)
-            self.ui.spec_3.mousePressEvent = lambda event: self.spec(main, class_, 3)
+            self.ui.spec_1.mouseReleaseEvent = lambda event: self.spec(main, class_, 1)  # У друида и ДХ не по 3 спека
+            self.ui.spec_2.mouseReleaseEvent = lambda event: self.spec(main, class_, 2)
+            self.ui.spec_3.mouseReleaseEvent = lambda event: self.spec(main, class_, 3)
             self.ui.spec_1.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
             self.ui.spec_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
             self.ui.spec_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -36,10 +36,10 @@ class SpecDialog(QtWidgets.QDialog):
             self.ui.spec_1.close()
             self.ui.spec_2.close()
             self.ui.spec_3.close()
-            self.ui.spec_1_.mousePressEvent = lambda event: self.spec(main, class_, 1)  # 1-4 у друида, 2-3 у ДХ
-            self.ui.spec_2_.mousePressEvent = lambda event: self.spec(main, class_, 2)
-            self.ui.spec_3_.mousePressEvent = lambda event: self.spec(main, class_, 3)
-            self.ui.spec_4_.mousePressEvent = lambda event: self.spec(main, class_, 4)
+            self.ui.spec_1_.mouseReleaseEvent = lambda event: self.spec(main, class_, 1)  # 1-4 у друида, 2-3 у ДХ
+            self.ui.spec_2_.mouseReleaseEvent = lambda event: self.spec(main, class_, 2)
+            self.ui.spec_3_.mouseReleaseEvent = lambda event: self.spec(main, class_, 3)
+            self.ui.spec_4_.mouseReleaseEvent = lambda event: self.spec(main, class_, 4)
             self.ui.spec_2_.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
             self.ui.spec_3_.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
             if class_ == 'dru':

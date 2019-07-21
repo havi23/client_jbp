@@ -11,73 +11,79 @@
     <collation id="3" parent="1" name="BINARY"/>
     <collation id="4" parent="1" name="NOCASE"/>
     <collation id="5" parent="1" name="RTRIM"/>
-    <table id="6" parent="2" name="abilitys"/>
-    <table id="7" parent="2" name="affli"/>
-    <table id="8" parent="2" name="arcane"/>
-    <table id="9" parent="2" name="arms"/>
-    <table id="10" parent="2" name="bear"/>
-    <table id="11" parent="2" name="blood"/>
-    <table id="12" parent="2" name="bmhun"/>
-    <table id="13" parent="2" name="bmmon"/>
-    <table id="14" parent="2" name="cat"/>
-    <table id="15" parent="2" name="colors"/>
-    <table id="16" parent="2" name="demo"/>
-    <table id="17" parent="2" name="destr"/>
-    <table id="18" parent="2" name="disc"/>
-    <table id="19" parent="2" name="elem"/>
-    <table id="20" parent="2" name="enh"/>
-    <table id="21" parent="2" name="fdk"/>
-    <table id="22" parent="2" name="fire"/>
-    <table id="23" parent="2" name="fmage"/>
-    <table id="24" parent="2" name="fury"/>
-    <table id="25" parent="2" name="havoc"/>
-    <table id="26" parent="2" name="hpal"/>
-    <table id="27" parent="2" name="hpri"/>
-    <table id="28" parent="2" name="mm"/>
-    <table id="29" parent="2" name="moon"/>
-    <table id="30" parent="2" name="mut"/>
-    <table id="31" parent="2" name="mw"/>
-    <table id="32" parent="2" name="outlaw"/>
-    <table id="33" parent="2" name="ppal"/>
-    <table id="34" parent="2" name="pwarr"/>
-    <table id="35" parent="2" name="rdru"/>
-    <table id="36" parent="2" name="ret"/>
-    <table id="37" parent="2" name="rsha"/>
-    <table id="38" parent="2" name="shadow"/>
-    <table id="39" parent="2" name="specs"/>
-    <table id="40" parent="2" name="sqlite_master">
+    <table id="6" parent="2" name="affli"/>
+    <table id="7" parent="2" name="arcane"/>
+    <table id="8" parent="2" name="arms"/>
+    <table id="9" parent="2" name="bear"/>
+    <table id="10" parent="2" name="blood"/>
+    <table id="11" parent="2" name="bmhun"/>
+    <table id="12" parent="2" name="bmmon"/>
+    <table id="13" parent="2" name="cat"/>
+    <table id="14" parent="2" name="colors"/>
+    <table id="15" parent="2" name="demo"/>
+    <table id="16" parent="2" name="destr"/>
+    <table id="17" parent="2" name="disc"/>
+    <table id="18" parent="2" name="elem"/>
+    <table id="19" parent="2" name="enh"/>
+    <table id="20" parent="2" name="fdk"/>
+    <table id="21" parent="2" name="fire"/>
+    <table id="22" parent="2" name="fmage"/>
+    <table id="23" parent="2" name="fury"/>
+    <table id="24" parent="2" name="havoc"/>
+    <table id="25" parent="2" name="hpal"/>
+    <table id="26" parent="2" name="hpri"/>
+    <table id="27" parent="2" name="mm"/>
+    <table id="28" parent="2" name="moon"/>
+    <table id="29" parent="2" name="mut"/>
+    <table id="30" parent="2" name="mw"/>
+    <table id="31" parent="2" name="outlaw"/>
+    <table id="32" parent="2" name="ppal"/>
+    <table id="33" parent="2" name="pwarr"/>
+    <table id="34" parent="2" name="rdru"/>
+    <table id="35" parent="2" name="ret"/>
+    <table id="36" parent="2" name="rsha"/>
+    <table id="37" parent="2" name="shadow"/>
+    <table id="38" parent="2" name="specs"/>
+    <table id="39" parent="2" name="sqlite_master">
       <System>1</System>
     </table>
-    <table id="41" parent="2" name="sub"/>
-    <table id="42" parent="2" name="surv"/>
-    <table id="43" parent="2" name="system"/>
-    <table id="44" parent="2" name="unh"/>
-    <table id="45" parent="2" name="veng"/>
-    <table id="46" parent="2" name="ww"/>
-    <column id="47" parent="6" name="ability">
+    <table id="40" parent="2" name="sub"/>
+    <table id="41" parent="2" name="surv"/>
+    <table id="42" parent="2" name="system"/>
+    <table id="43" parent="2" name="unh"/>
+    <table id="44" parent="2" name="veng"/>
+    <table id="45" parent="2" name="ww"/>
+    <column id="46" parent="6" name="spell">
       <Position>1</Position>
       <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="48" parent="6" name="color">
+    <column id="47" parent="6" name="color">
       <Position>2</Position>
       <DataType>varchar(8)|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
-    <index id="49" parent="6" name="colors_ability_uindex">
-      <ColNames>ability</ColNames>
-      <ColumnCollations></ColumnCollations>
-      <Unique>1</Unique>
-    </index>
-    <index id="50" parent="6" name="sqlite_autoindex_abilitys_1">
+    <column id="48" parent="6" name="bind">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+      <DefaultExpression>NULL</DefaultExpression>
+    </column>
+    <column id="49" parent="6" name="critical">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <index id="50" parent="6" name="sqlite_autoindex_affli_1">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>ability</ColNames>
+      <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="51" parent="6" name="colors_pk">
-      <ColNames>ability</ColNames>
+    <key id="51" parent="6" name="affli_pk">
+      <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_abilitys_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_affli_1</UnderlyingIndexName>
     </key>
     <column id="52" parent="7" name="spell">
       <Position>1</Position>
@@ -100,16 +106,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="56" parent="7" name="sqlite_autoindex_affli_1">
+    <index id="56" parent="7" name="sqlite_autoindex_arcane_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="57" parent="7" name="affli_pk">
+    <key id="57" parent="7" name="arcane_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_affli_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_arcane_1</UnderlyingIndexName>
     </key>
     <column id="58" parent="8" name="spell">
       <Position>1</Position>
@@ -132,16 +138,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="62" parent="8" name="sqlite_autoindex_arcane_1">
+    <index id="62" parent="8" name="sqlite_autoindex_arms_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="63" parent="8" name="arcane_pk">
+    <key id="63" parent="8" name="arms_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_arcane_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_arms_1</UnderlyingIndexName>
     </key>
     <column id="64" parent="9" name="spell">
       <Position>1</Position>
@@ -164,16 +170,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="68" parent="9" name="sqlite_autoindex_arms_1">
+    <index id="68" parent="9" name="sqlite_autoindex_bear_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="69" parent="9" name="arms_pk">
+    <key id="69" parent="9" name="bear_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_arms_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_bear_1</UnderlyingIndexName>
     </key>
     <column id="70" parent="10" name="spell">
       <Position>1</Position>
@@ -196,16 +202,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="74" parent="10" name="sqlite_autoindex_bear_1">
+    <index id="74" parent="10" name="sqlite_autoindex_blood_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="75" parent="10" name="bear_pk">
+    <key id="75" parent="10" name="blood_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_bear_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_blood_1</UnderlyingIndexName>
     </key>
     <column id="76" parent="11" name="spell">
       <Position>1</Position>
@@ -228,16 +234,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="80" parent="11" name="sqlite_autoindex_blood_1">
+    <index id="80" parent="11" name="sqlite_autoindex_bmhun_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="81" parent="11" name="blood_pk">
+    <key id="81" parent="11" name="bmhun_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_blood_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_bmhun_1</UnderlyingIndexName>
     </key>
     <column id="82" parent="12" name="spell">
       <Position>1</Position>
@@ -260,16 +266,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="86" parent="12" name="sqlite_autoindex_bmhun_1">
+    <index id="86" parent="12" name="sqlite_autoindex_bmmon_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="87" parent="12" name="bmhun_pk">
+    <key id="87" parent="12" name="bmmon_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_bmhun_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_bmmon_1</UnderlyingIndexName>
     </key>
     <column id="88" parent="13" name="spell">
       <Position>1</Position>
@@ -292,69 +298,69 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="92" parent="13" name="sqlite_autoindex_bmmon_1">
+    <index id="92" parent="13" name="sqlite_autoindex_cat_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="93" parent="13" name="bmmon_pk">
+    <key id="93" parent="13" name="cat_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_bmmon_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_cat_1</UnderlyingIndexName>
     </key>
-    <column id="94" parent="14" name="spell">
+    <column id="94" parent="14" name="color">
+      <Position>1</Position>
+      <DataType>varchar(8)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="95" parent="14" name="colors_color_uindex">
+      <ColNames>color</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <index id="96" parent="14" name="sqlite_autoindex_colors_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>color</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="97" parent="14" name="colors_pk">
+      <ColNames>color</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_colors_1</UnderlyingIndexName>
+    </key>
+    <column id="98" parent="15" name="spell">
       <Position>1</Position>
       <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="95" parent="14" name="color">
+    <column id="99" parent="15" name="color">
       <Position>2</Position>
       <DataType>varchar(8)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="96" parent="14" name="bind">
+    <column id="100" parent="15" name="bind">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>NULL</DefaultExpression>
     </column>
-    <column id="97" parent="14" name="critical">
+    <column id="101" parent="15" name="critical">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="98" parent="14" name="sqlite_autoindex_cat_1">
+    <index id="102" parent="15" name="sqlite_autoindex_demo_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="99" parent="14" name="cat_pk">
+    <key id="103" parent="15" name="demo_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_cat_1</UnderlyingIndexName>
-    </key>
-    <column id="100" parent="15" name="color">
-      <Position>1</Position>
-      <DataType>varchar(8)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="101" parent="15" name="colors_color_uindex">
-      <ColNames>color</ColNames>
-      <ColumnCollations></ColumnCollations>
-      <Unique>1</Unique>
-    </index>
-    <index id="102" parent="15" name="sqlite_autoindex_colors_1">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>color</ColNames>
-      <ColumnCollations></ColumnCollations>
-      <Unique>1</Unique>
-    </index>
-    <key id="103" parent="15" name="colors_pk">
-      <ColNames>color</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_colors_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_demo_1</UnderlyingIndexName>
     </key>
     <column id="104" parent="16" name="spell">
       <Position>1</Position>
@@ -377,16 +383,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="108" parent="16" name="sqlite_autoindex_demo_1">
+    <index id="108" parent="16" name="sqlite_autoindex_destr_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="109" parent="16" name="demo_pk">
+    <key id="109" parent="16" name="destr_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_demo_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_destr_1</UnderlyingIndexName>
     </key>
     <column id="110" parent="17" name="spell">
       <Position>1</Position>
@@ -409,16 +415,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="114" parent="17" name="sqlite_autoindex_destr_1">
+    <index id="114" parent="17" name="sqlite_autoindex_disc_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="115" parent="17" name="destr_pk">
+    <key id="115" parent="17" name="disc_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_destr_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_disc_1</UnderlyingIndexName>
     </key>
     <column id="116" parent="18" name="spell">
       <Position>1</Position>
@@ -441,16 +447,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="120" parent="18" name="sqlite_autoindex_disc_1">
+    <index id="120" parent="18" name="sqlite_autoindex_elem_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="121" parent="18" name="disc_pk">
+    <key id="121" parent="18" name="elem_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_disc_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_elem_1</UnderlyingIndexName>
     </key>
     <column id="122" parent="19" name="spell">
       <Position>1</Position>
@@ -473,16 +479,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="126" parent="19" name="sqlite_autoindex_elem_1">
+    <index id="126" parent="19" name="sqlite_autoindex_enh_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="127" parent="19" name="elem_pk">
+    <key id="127" parent="19" name="enh_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_elem_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_enh_1</UnderlyingIndexName>
     </key>
     <column id="128" parent="20" name="spell">
       <Position>1</Position>
@@ -505,16 +511,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="132" parent="20" name="sqlite_autoindex_enh_1">
+    <index id="132" parent="20" name="sqlite_autoindex_fdk_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="133" parent="20" name="enh_pk">
+    <key id="133" parent="20" name="fdk_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_enh_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_fdk_1</UnderlyingIndexName>
     </key>
     <column id="134" parent="21" name="spell">
       <Position>1</Position>
@@ -537,16 +543,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="138" parent="21" name="sqlite_autoindex_fdk_1">
+    <index id="138" parent="21" name="sqlite_autoindex_fire_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="139" parent="21" name="fdk_pk">
+    <key id="139" parent="21" name="fire_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_fdk_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_fire_1</UnderlyingIndexName>
     </key>
     <column id="140" parent="22" name="spell">
       <Position>1</Position>
@@ -569,16 +575,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="144" parent="22" name="sqlite_autoindex_fire_1">
+    <index id="144" parent="22" name="sqlite_autoindex_fmage_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="145" parent="22" name="fire_pk">
+    <key id="145" parent="22" name="fmage_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_fire_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_fmage_1</UnderlyingIndexName>
     </key>
     <column id="146" parent="23" name="spell">
       <Position>1</Position>
@@ -601,16 +607,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="150" parent="23" name="sqlite_autoindex_fmage_1">
+    <index id="150" parent="23" name="sqlite_autoindex_fury_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="151" parent="23" name="fmage_pk">
+    <key id="151" parent="23" name="fury_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_fmage_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_fury_1</UnderlyingIndexName>
     </key>
     <column id="152" parent="24" name="spell">
       <Position>1</Position>
@@ -633,16 +639,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="156" parent="24" name="sqlite_autoindex_fury_1">
+    <index id="156" parent="24" name="sqlite_autoindex_havoc_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="157" parent="24" name="fury_pk">
+    <key id="157" parent="24" name="havoc_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_fury_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_havoc_1</UnderlyingIndexName>
     </key>
     <column id="158" parent="25" name="spell">
       <Position>1</Position>
@@ -665,16 +671,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="162" parent="25" name="sqlite_autoindex_havoc_1">
+    <index id="162" parent="25" name="sqlite_autoindex_hpal_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="163" parent="25" name="havoc_pk">
+    <key id="163" parent="25" name="hpal_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_havoc_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_hpal_1</UnderlyingIndexName>
     </key>
     <column id="164" parent="26" name="spell">
       <Position>1</Position>
@@ -697,16 +703,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="168" parent="26" name="sqlite_autoindex_hpal_1">
+    <index id="168" parent="26" name="sqlite_autoindex_hpri_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="169" parent="26" name="hpal_pk">
+    <key id="169" parent="26" name="hpri_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_hpal_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_hpri_1</UnderlyingIndexName>
     </key>
     <column id="170" parent="27" name="spell">
       <Position>1</Position>
@@ -729,16 +735,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="174" parent="27" name="sqlite_autoindex_hpri_1">
+    <index id="174" parent="27" name="sqlite_autoindex_mm_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="175" parent="27" name="hpri_pk">
+    <key id="175" parent="27" name="mm_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_hpri_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_mm_1</UnderlyingIndexName>
     </key>
     <column id="176" parent="28" name="spell">
       <Position>1</Position>
@@ -761,16 +767,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="180" parent="28" name="sqlite_autoindex_mm_1">
+    <index id="180" parent="28" name="sqlite_autoindex_moon_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="181" parent="28" name="mm_pk">
+    <key id="181" parent="28" name="moon_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_mm_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_moon_1</UnderlyingIndexName>
     </key>
     <column id="182" parent="29" name="spell">
       <Position>1</Position>
@@ -793,16 +799,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="186" parent="29" name="sqlite_autoindex_moon_1">
+    <index id="186" parent="29" name="sqlite_autoindex_mut_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="187" parent="29" name="moon_pk">
+    <key id="187" parent="29" name="mut_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_moon_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_mut_1</UnderlyingIndexName>
     </key>
     <column id="188" parent="30" name="spell">
       <Position>1</Position>
@@ -825,16 +831,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="192" parent="30" name="sqlite_autoindex_mut_1">
+    <index id="192" parent="30" name="sqlite_autoindex_mw_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="193" parent="30" name="mut_pk">
+    <key id="193" parent="30" name="mw_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_mut_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_mw_1</UnderlyingIndexName>
     </key>
     <column id="194" parent="31" name="spell">
       <Position>1</Position>
@@ -857,16 +863,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="198" parent="31" name="sqlite_autoindex_mw_1">
+    <index id="198" parent="31" name="sqlite_autoindex_outlaw_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="199" parent="31" name="mw_pk">
+    <key id="199" parent="31" name="outlaw_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_mw_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_outlaw_1</UnderlyingIndexName>
     </key>
     <column id="200" parent="32" name="spell">
       <Position>1</Position>
@@ -889,16 +895,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="204" parent="32" name="sqlite_autoindex_outlaw_1">
+    <index id="204" parent="32" name="sqlite_autoindex_ppal_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="205" parent="32" name="outlaw_pk">
+    <key id="205" parent="32" name="ppal_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_outlaw_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_ppal_1</UnderlyingIndexName>
     </key>
     <column id="206" parent="33" name="spell">
       <Position>1</Position>
@@ -921,16 +927,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="210" parent="33" name="sqlite_autoindex_ppal_1">
+    <index id="210" parent="33" name="sqlite_autoindex_pwarr_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="211" parent="33" name="ppal_pk">
+    <key id="211" parent="33" name="pwarr_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_ppal_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_pwarr_1</UnderlyingIndexName>
     </key>
     <column id="212" parent="34" name="spell">
       <Position>1</Position>
@@ -953,16 +959,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="216" parent="34" name="sqlite_autoindex_pwarr_1">
+    <index id="216" parent="34" name="sqlite_autoindex_rdru_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="217" parent="34" name="pwarr_pk">
+    <key id="217" parent="34" name="rdru_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_pwarr_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_rdru_1</UnderlyingIndexName>
     </key>
     <column id="218" parent="35" name="spell">
       <Position>1</Position>
@@ -985,16 +991,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="222" parent="35" name="sqlite_autoindex_rdru_1">
+    <index id="222" parent="35" name="sqlite_autoindex_ret_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="223" parent="35" name="rdru_pk">
+    <key id="223" parent="35" name="ret_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_rdru_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_ret_1</UnderlyingIndexName>
     </key>
     <column id="224" parent="36" name="spell">
       <Position>1</Position>
@@ -1017,16 +1023,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="228" parent="36" name="sqlite_autoindex_ret_1">
+    <index id="228" parent="36" name="sqlite_autoindex_rsha_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="229" parent="36" name="ret_pk">
+    <key id="229" parent="36" name="rsha_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_ret_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_rsha_1</UnderlyingIndexName>
     </key>
     <column id="230" parent="37" name="spell">
       <Position>1</Position>
@@ -1049,211 +1055,211 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="234" parent="37" name="sqlite_autoindex_rsha_1">
+    <index id="234" parent="37" name="sqlite_autoindex_shadow_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="235" parent="37" name="rsha_pk">
-      <ColNames>spell</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_rsha_1</UnderlyingIndexName>
-    </key>
-    <column id="236" parent="38" name="spell">
-      <Position>1</Position>
-      <DataType>varchar(150)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="237" parent="38" name="color">
-      <Position>2</Position>
-      <DataType>varchar(8)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="238" parent="38" name="bind">
-      <Position>3</Position>
-      <DataType>int|0s</DataType>
-      <DefaultExpression>NULL</DefaultExpression>
-    </column>
-    <column id="239" parent="38" name="critical">
-      <Position>4</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>0</DefaultExpression>
-    </column>
-    <index id="240" parent="38" name="sqlite_autoindex_shadow_1">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
-      <Unique>1</Unique>
-    </index>
-    <key id="241" parent="38" name="shadow_pk">
+    <key id="235" parent="37" name="shadow_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_shadow_1</UnderlyingIndexName>
     </key>
-    <column id="242" parent="39" name="class">
+    <column id="236" parent="38" name="class">
       <Position>1</Position>
       <DataType>varchar(14)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="243" parent="39" name="spec_1">
+    <column id="237" parent="38" name="spec_1">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <column id="244" parent="39" name="spec_2">
+    <column id="238" parent="38" name="spec_2">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="245" parent="39" name="spec_3">
+    <column id="239" parent="38" name="spec_3">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="246" parent="39" name="spec_4">
+    <column id="240" parent="38" name="spec_4">
       <Position>5</Position>
       <DataType>varchar(20)|0s</DataType>
     </column>
-    <index id="247" parent="39" name="specs_class_uindex">
+    <index id="241" parent="38" name="specs_class_uindex">
       <ColNames>class</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <index id="248" parent="39" name="sqlite_autoindex_specs_1">
+    <index id="242" parent="38" name="sqlite_autoindex_specs_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>class</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="249" parent="39" name="specs_pk">
+    <key id="243" parent="38" name="specs_pk">
       <ColNames>class</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_specs_1</UnderlyingIndexName>
     </key>
-    <column id="250" parent="40" name="type">
+    <column id="244" parent="39" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="251" parent="40" name="name">
+    <column id="245" parent="39" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="252" parent="40" name="tbl_name">
+    <column id="246" parent="39" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="253" parent="40" name="rootpage">
+    <column id="247" parent="39" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="254" parent="40" name="sql">
+    <column id="248" parent="39" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="255" parent="41" name="spell">
+    <column id="249" parent="40" name="spell">
       <Position>1</Position>
       <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="256" parent="41" name="color">
+    <column id="250" parent="40" name="color">
       <Position>2</Position>
       <DataType>varchar(8)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="257" parent="41" name="bind">
+    <column id="251" parent="40" name="bind">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>NULL</DefaultExpression>
     </column>
-    <column id="258" parent="41" name="critical">
+    <column id="252" parent="40" name="critical">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="259" parent="41" name="rogue_ability_uindex">
+    <index id="253" parent="40" name="rogue_ability_uindex">
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <index id="260" parent="41" name="sqlite_autoindex_sub_1">
+    <index id="254" parent="40" name="sqlite_autoindex_sub_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <index id="261" parent="41" name="rogue_color_uindex">
+    <index id="255" parent="40" name="rogue_color_uindex">
       <ColNames>color</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <index id="262" parent="41" name="rogue_bind_uindex">
+    <index id="256" parent="40" name="rogue_bind_uindex">
       <ColNames>bind</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="263" parent="41" name="rogue_pk">
+    <key id="257" parent="40" name="rogue_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_sub_1</UnderlyingIndexName>
     </key>
-    <column id="264" parent="42" name="spell">
+    <column id="258" parent="41" name="spell">
       <Position>1</Position>
       <DataType>varchar(150)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="265" parent="42" name="color">
+    <column id="259" parent="41" name="color">
       <Position>2</Position>
       <DataType>varchar(8)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="266" parent="42" name="bind">
+    <column id="260" parent="41" name="bind">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>NULL</DefaultExpression>
     </column>
-    <column id="267" parent="42" name="critical">
+    <column id="261" parent="41" name="critical">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="268" parent="42" name="sqlite_autoindex_surv_1">
+    <index id="262" parent="41" name="sqlite_autoindex_surv_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="269" parent="42" name="surv_pk">
+    <key id="263" parent="41" name="surv_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_surv_1</UnderlyingIndexName>
     </key>
-    <column id="270" parent="43" name="variable">
+    <column id="264" parent="42" name="variable">
       <Position>1</Position>
       <DataType>varchar(256)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="271" parent="43" name="data">
+    <column id="265" parent="42" name="data">
       <Position>2</Position>
       <DataType>varchar(2000)|0s</DataType>
     </column>
-    <index id="272" parent="43" name="sqlite_autoindex_system_1">
+    <index id="266" parent="42" name="sqlite_autoindex_system_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>variable</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <index id="273" parent="43" name="system_variable_uindex">
+    <index id="267" parent="42" name="system_variable_uindex">
       <ColNames>variable</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="274" parent="43" name="system_pk">
+    <key id="268" parent="42" name="system_pk">
       <ColNames>variable</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_system_1</UnderlyingIndexName>
+    </key>
+    <column id="269" parent="43" name="spell">
+      <Position>1</Position>
+      <DataType>varchar(150)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="270" parent="43" name="color">
+      <Position>2</Position>
+      <DataType>varchar(8)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="271" parent="43" name="bind">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+      <DefaultExpression>NULL</DefaultExpression>
+    </column>
+    <column id="272" parent="43" name="critical">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <index id="273" parent="43" name="sqlite_autoindex_unh_1">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>spell</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="274" parent="43" name="unh_pk">
+      <ColNames>spell</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>sqlite_autoindex_unh_1</UnderlyingIndexName>
     </key>
     <column id="275" parent="44" name="spell">
       <Position>1</Position>
@@ -1276,16 +1282,16 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="279" parent="44" name="sqlite_autoindex_unh_1">
+    <index id="279" parent="44" name="sqlite_autoindex_veng_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="280" parent="44" name="unh_pk">
+    <key id="280" parent="44" name="veng_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_unh_1</UnderlyingIndexName>
+      <UnderlyingIndexName>sqlite_autoindex_veng_1</UnderlyingIndexName>
     </key>
     <column id="281" parent="45" name="spell">
       <Position>1</Position>
@@ -1308,45 +1314,13 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="285" parent="45" name="sqlite_autoindex_veng_1">
+    <index id="285" parent="45" name="sqlite_autoindex_ww_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>spell</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="286" parent="45" name="veng_pk">
-      <ColNames>spell</ColNames>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_veng_1</UnderlyingIndexName>
-    </key>
-    <column id="287" parent="46" name="spell">
-      <Position>1</Position>
-      <DataType>varchar(150)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="288" parent="46" name="color">
-      <Position>2</Position>
-      <DataType>varchar(8)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="289" parent="46" name="bind">
-      <Position>3</Position>
-      <DataType>int|0s</DataType>
-      <DefaultExpression>NULL</DefaultExpression>
-    </column>
-    <column id="290" parent="46" name="critical">
-      <Position>4</Position>
-      <DataType>int|0s</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>0</DefaultExpression>
-    </column>
-    <index id="291" parent="46" name="sqlite_autoindex_ww_1">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>spell</ColNames>
-      <ColumnCollations></ColumnCollations>
-      <Unique>1</Unique>
-    </index>
-    <key id="292" parent="46" name="ww_pk">
+    <key id="286" parent="45" name="ww_pk">
       <ColNames>spell</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_ww_1</UnderlyingIndexName>
