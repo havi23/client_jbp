@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from bin.resource_to_exe import resource_path
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -15,7 +16,7 @@ class Ui_Dialog(object):
         self.bg = QtWidgets.QLabel(Dialog)
         self.bg.setGeometry(QtCore.QRect(10, 10, 291, 141))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap("bin/img/license/license_key.png"))
+        self.bg.setPixmap(QtGui.QPixmap(resource_path("bin\\img\\license\\license_key.png")))
         self.bg.setObjectName("bg")
         self.key_edit = QtWidgets.QLineEdit(Dialog)
         self.key_edit.setGeometry(QtCore.QRect(24, 86, 188, 20))

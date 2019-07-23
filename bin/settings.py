@@ -4,6 +4,8 @@ from bin.gnome import GnomeDialog
 from bin.Qt.settings_Qt import Ui_Dialog as Ui_SettingsDialog
 from bin.wow import wow_config as wow_folder
 from db_connect import Database
+from bin.resource_to_exe import resource_path
+
 DB = Database()
 
 class SettingsDialog(QtWidgets.QDialog):
@@ -39,7 +41,7 @@ class SettingsDialog(QtWidgets.QDialog):
 
     def cwp(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.cwp.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap("bin/img/gnome/nani.png"))
+            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path("bin/img/gnome/nani.png")))
             return
         elif self.GnomeDialog is not None:
             self.GnomeDialog.close()

@@ -4,7 +4,7 @@ from db_connect import Database
 from bin.main_window import GnomeDialog
 DB = Database()
 from bin.wow.drivers.key_dict import key_dict
-
+from bin.resource_to_exe import resource_path
 
 class Ui_Dialog(QWidget):
     def __init__(self, main, spec):
@@ -17,7 +17,7 @@ class Ui_Dialog(QWidget):
         self.bg = QLabel(self)
         self.bg.setGeometry(QtCore.QRect(0, 0, 581, 591))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap("bin/img/binds/binds_bg.png"))
+        self.bg.setPixmap(QtGui.QPixmap(resource_path("bin/img/binds/binds_bg.png")))
         self.bg.setObjectName("bg")
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)

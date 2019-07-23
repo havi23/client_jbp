@@ -7,6 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from bin.resource_to_exe import resource_path
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -19,7 +20,7 @@ class Ui_Dialog(object):
         self.bg = QtWidgets.QLabel(Dialog)
         self.bg.setGeometry(QtCore.QRect(-2, 0, 281, 263))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap("bin\\img\\bug_report.png"))
+        self.bg.setPixmap(QtGui.QPixmap(resource_path("bin\\img\\bug_report.png")))
         self.bg.setObjectName("bg")
         self.send = QtWidgets.QPushButton(Dialog)
         self.send.setGeometry(QtCore.QRect(211, 232, 61, 21))

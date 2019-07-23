@@ -4,6 +4,7 @@ from bin.Qt.class_Qt import Ui_Dialog as Ui_SpecDialog
 from bin.Qt.spec_Qt import Ui_Dialog as Ui_SpecDialog_
 from db_connect import Database
 from bin.gnome import GnomeDialog
+from bin.resource_to_exe import resource_path
 
 DB = Database()
 
@@ -18,7 +19,7 @@ class SpecDialog(QtWidgets.QDialog):
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.ui.bg.setPixmap(QtGui.QPixmap(f"bin/img/class/spec/spec_{class_}.png"))
+        self.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"bin/img/class/spec/spec_{class_}.png")))
         self.GnomeDialog = None
         #QtGui.QMouseEvent
         if class_ not in ('dh', 'dru'):

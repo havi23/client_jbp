@@ -35,8 +35,8 @@ class LicenseKeyDialog(QtWidgets.QMainWindow):
             DB = Database()
             DB.execute('UPDATE system SET data=? WHERE variable="license_key"', (key,))
             DB.commit()
-            MainDialog = MainDialog(server, self)
-            MainDialog.show()
+            main = MainDialog(server, self)
+            main.show()
 
     def exit_(self):
         exit()

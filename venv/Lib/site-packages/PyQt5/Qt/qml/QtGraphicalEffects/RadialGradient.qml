@@ -85,10 +85,7 @@ Item {
     property bool cached: false
 
     /*!
-        \qmlproperty real RadialGradient::horizontalOffset
-        \qmlproperty real RadialGradient::verticalOffset
-
-        The horizontalOffset and verticalOffset properties define the offset in
+        The HorizontalOffset and verticalOffset properties define the offset in
         pixels for the center point of the gradient compared to the item center.
 
         The values range from -inf to inf. By default, these properties are set
@@ -130,10 +127,7 @@ Item {
     property real verticalOffset: 0.0
 
     /*!
-        \qmlproperty real RadialGradient::horizontalRadius
-        \qmlproperty real RadialGradient::verticalRadius
-
-        The horizontalRadius and verticalRadius properties define the shape and
+        The HorizontalRadius and verticalRadius properties define the shape and
         size of the radial gradient. If the radiuses are equal, the shape of the
         gradient is a circle. If the horizontal and vertical radiuses differ,
         the shape is elliptical. The radiuses are given in pixels.

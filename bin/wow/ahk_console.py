@@ -2,14 +2,13 @@ from ahk import AHK, Hotkey
 from ahk.window import Window
 from db_connect import Database
 import psutil
-from bin.resource_to_exe import resource_path
 DB = Database()
 
 
 class ahk_console():
     def __init__(self):
         try:
-            self.ahk = AHK(executable_path=resource_path(f"bin/wow/drivers/a64.exe"))
+            self.ahk = AHK(executable_path=f"bin/wow/drivers/a64.exe")
             for proc in psutil.process_iter():
                 if proc.name() == 'a64.exe':
                     self.ahk_pid = proc.pid
