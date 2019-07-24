@@ -15,10 +15,8 @@ from db_connect import Database
 from server import Server
 import sys
 from PyQt5 import QtWidgets
-import uuid
 
 DB = Database()
-server_version = 1.0 #  POST-запрос, отдать ключ, получить версию программы
 local_version = float(DB.query('select data from system where variable="version"')[0][0])
 url = 'http://127.0.0.1:8000/'
 
@@ -30,31 +28,35 @@ def run_UI(server):
     main.show()
     sys.exit(app.exec())
 
+def update_check(server):
+    update = server.check_update(url)
+    if update:
+        global_version = float(update)
+        if local_version < global_version:
+            print('running updater')
+            server.load_updater(url)
+            import ctypes
+            ctypes.windll.user32.MessageBoxW(0, "You must run update.exe before starting", "Update required", 0)
+            sys.exit()
 def auth(key=None):
     app = QtWidgets.QApplication([])
     if not key:
         key = DB.query('SELECT data FROM system WHERE variable="license_key"')[0][0]
     if key:
-        hwid = uuid.UUID(int=uuid.getnode())
         server = Server()
-        status = server.connect(url, key, hwid)
-        if status:
-            run_UI(server)
-        else:
+        connected = server.connect(url, key)
+        update_check(server)
+        if not connected:
             DB.execute('UPDATE system SET data=? WHERE variable="license_key"', (None,))
             DB.commit()
             auth()
+        else:
+            run_UI(server)
     else:
         from bin.license_key import LicenseKeyDialog
-        LicenseKeyDialog = LicenseKeyDialog(url)
-        LicenseKeyDialog.show()
+        KeyDialog = LicenseKeyDialog(url)
+        KeyDialog.show()
         sys.exit(app.exec())
 
-if server_version > local_version:
-    print('update')
-elif server_version == local_version:
+if __name__ == '__main__':
     auth()
-else:
-    print('dev version started ')
-    key = '0300d200b078e4d1a4f522536220d133'
-    auth(key)
