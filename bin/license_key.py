@@ -1,16 +1,14 @@
 from bin.Qt.license_key_Qt import Ui_Dialog as Ui_LicenseKeyDialog
 from PyQt5 import QtWidgets, QtCore
 from server import Server
-import uuid
 from db_connect import Database
 from bin.main_window import MainDialog
 
 class LicenseKeyDialog(QtWidgets.QMainWindow):
-    def __init__(self, url, parent=None):
+    def __init__(self, parent=None):
         super(LicenseKeyDialog, self).__init__(parent)
         from db_connect import Database
         self.DB = Database()
-        self.url = url
         self.oldPos = self.pos()
         self.ui = Ui_LicenseKeyDialog()
         self.ui.setupUi(self)
@@ -25,9 +23,8 @@ class LicenseKeyDialog(QtWidgets.QMainWindow):
 
     def submit(self):
         key = self.ui.key_edit.text()
-        hwid = str(uuid.UUID(int=uuid.getnode()))
         server = Server()
-        status = server.connect(self.url, key, hwid)
+        status = server.connect(key)
         if not status:
             self.ui.error.setText("Wrong Key")
             self.ui.key_edit.setText('')

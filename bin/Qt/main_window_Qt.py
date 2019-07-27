@@ -50,7 +50,7 @@ class Ui_Dialog(object):
         self.start.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.start.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("bin/img/start.bmp"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap(resource_path("bin/img/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.start.setIcon(icon3)
         self.start.setIconSize(QtCore.QSize(200, 150))
         self.start.setObjectName("start")

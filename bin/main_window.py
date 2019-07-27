@@ -7,17 +7,13 @@ from bin.bug_report import BugReportDialog
 import sys
 from db_connect import Database
 from bin.settings import SettingsDialog
-
 import time
-
 import os
 from bin.resource_to_exe import resource_path
 from bin.wow import wow_config as wow_folder
-
-
 from bin.wow.ahk_console import ahk_console
-
-
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.interval import IntervalTrigger
 #  pyuic5 license_key.py.ui -o license_key_Qt.py
 
 
@@ -63,6 +59,12 @@ class MainDialog(QtWidgets.QMainWindow):
         self.BindsDialog = None
         self.BugReport = None
 
+        # Обновление токена
+        self.token_updater = BackgroundScheduler()
+        trigger = IntervalTrigger(seconds=200)
+        self.token_updater.add_job(lambda: server.token_update(self), trigger)
+        self.token_updater.start()
+        # self.token_updater - поток, в котором крутится обновление
 
     def info_frame(self):
         if self.info_active:
