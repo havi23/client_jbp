@@ -22,7 +22,7 @@ class SpecDialog(QtWidgets.QDialog):
         self.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"bin/img/class/spec/spec_{class_}.png")))
         self.GnomeDialog = None
         #QtGui.QMouseEvent
-        if class_ not in ('dh', 'dru'):
+        if class_ not in ('Demon_Hunter', 'Druid'):
             self.ui.spec_1_.close()
             self.ui.spec_2_.close()
             self.ui.spec_3_.close()
@@ -43,7 +43,7 @@ class SpecDialog(QtWidgets.QDialog):
             self.ui.spec_4_.mouseReleaseEvent = lambda event: self.spec(main, class_, 4)
             self.ui.spec_2_.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
             self.ui.spec_3_.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-            if class_ == 'dru':
+            if class_ == 'Druid':
                 self.ui.spec_1_.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
                 self.ui.spec_4_.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
             else:
@@ -84,18 +84,18 @@ class ClassDialog(QtWidgets.QDialog):
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
-        self.ui.dh.clicked.connect(lambda: self.choose_spec(main, 'dh'))
-        self.ui.dk.clicked.connect(lambda: self.choose_spec(main, 'dk'))
-        self.ui.dru.clicked.connect(lambda: self.choose_spec(main, 'dru'))
-        self.ui.hun.clicked.connect(lambda: self.choose_spec(main, 'hun'))
-        self.ui.mag.clicked.connect(lambda: self.choose_spec(main, 'mag'))
-        self.ui.mon.clicked.connect(lambda: self.choose_spec(main, 'mon'))
-        self.ui.pal.clicked.connect(lambda: self.choose_spec(main, 'pal'))
-        self.ui.pri.clicked.connect(lambda: self.choose_spec(main, 'pri'))
-        self.ui.rog.clicked.connect(lambda: self.choose_spec(main, 'rog'))
-        self.ui.sha.clicked.connect(lambda: self.choose_spec(main, 'sha'))
-        self.ui.warr.clicked.connect(lambda: self.choose_spec(main, 'warr'))
-        self.ui.warl.clicked.connect(lambda: self.choose_spec(main, 'warl'))
+        self.ui.dh.clicked.connect(lambda: self.choose_spec(main, 'Demon_Hunter'))
+        self.ui.dk.clicked.connect(lambda: self.choose_spec(main, 'Death_Knight'))
+        self.ui.dru.clicked.connect(lambda: self.choose_spec(main, 'Druid'))
+        self.ui.hun.clicked.connect(lambda: self.choose_spec(main, 'Hunter'))
+        self.ui.mag.clicked.connect(lambda: self.choose_spec(main, 'Mage'))
+        self.ui.mon.clicked.connect(lambda: self.choose_spec(main, 'Monk'))
+        self.ui.pal.clicked.connect(lambda: self.choose_spec(main, 'Paladin'))
+        self.ui.pri.clicked.connect(lambda: self.choose_spec(main, 'Priest'))
+        self.ui.rog.clicked.connect(lambda: self.choose_spec(main, 'Rogue'))
+        self.ui.sha.clicked.connect(lambda: self.choose_spec(main, 'Shaman'))
+        self.ui.warr.clicked.connect(lambda: self.choose_spec(main, 'Warrior'))
+        self.ui.warl.clicked.connect(lambda: self.choose_spec(main, 'Warlock'))
 
         self.SpecDialog = None
     def mousePressEvent(self, event):

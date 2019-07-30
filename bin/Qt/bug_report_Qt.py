@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading bin file 'bug_report.bin'
+# Form implementation generated from reading ui file 'bug_report.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from bin.resource_to_exe import resource_path
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -20,7 +19,7 @@ class Ui_Dialog(object):
         self.bg = QtWidgets.QLabel(Dialog)
         self.bg.setGeometry(QtCore.QRect(-2, 0, 281, 263))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap(resource_path("bin\\img\\bug_report.png")))
+        self.bg.setPixmap(QtGui.QPixmap("bin/img/bug_report/bug_report.png"))
         self.bg.setObjectName("bg")
         self.send = QtWidgets.QPushButton(Dialog)
         self.send.setGeometry(QtCore.QRect(211, 232, 61, 21))
@@ -96,6 +95,7 @@ class Ui_Dialog(object):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
         self.send.setText(_translate("Dialog", "SEND"))
-        self.text.setPlaceholderText(_translate("Dialog", "Write a description of your problem here..."))
+        self.text.setPlaceholderText(_translate("Dialog", "Write a descriprion of your problem here..."))
         self.choose_screen.setText(_translate("Dialog", "+"))
         self.label_tooltip.setText(_translate("Dialog", "You can attach a screenshot"))
+

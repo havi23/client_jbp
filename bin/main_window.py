@@ -14,7 +14,7 @@ from bin.wow import wow_config as wow_folder
 from bin.wow.ahk_console import ahk_console
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
-#  pyuic5 license_key.py.ui -o license_key_Qt.py
+#  pyuic5 main_window.ui -o main_window_Qt.py
 
 
 class MainDialog(QtWidgets.QMainWindow):
@@ -45,9 +45,9 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.reload.clicked.connect(self.relaod_UI)
         self.ui.wow_text.mouseReleaseEvent = lambda event: self.wow_text_tooltip()
         self.start_icon = QtGui.QIcon()
-        self.start_icon.addPixmap(QtGui.QPixmap(resource_path("bin/img/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.start_icon.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.stop_icon = QtGui.QIcon()
-        self.stop_icon.addPixmap(QtGui.QPixmap(resource_path("bin/img/stop.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.stop_icon.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.listener = None
         self.m_label = None
         self.info_active = None
@@ -69,22 +69,22 @@ class MainDialog(QtWidgets.QMainWindow):
     def info_frame(self):
         if self.info_active:
             icon4 = QtGui.QIcon()
-            icon4.addPixmap(QtGui.QPixmap(resource_path("bin/img/info.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon4.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/info.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             self.ui.info.setIcon(icon4)
             self.ui.label.setGeometry(QtCore.QRect(442, 255, 261, 461))
             if self.class_ is not None:
-                self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/{self.class_}.png')))
+                self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/main/{self.class_}.png')))
             else:
-                self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/noclass.png')))
+                self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/main/noclass.png')))
             self.info_active = False
         else:
             icon4 = QtGui.QIcon()
-            icon4.addPixmap(QtGui.QPixmap(resource_path("bin/img/info_c.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            icon4.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/info_c.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
             self.ui.info.setIcon(icon4)
             self.ui.label.setGeometry(QtCore.QRect(121, 7, 1021, 861))
             self.ui.label.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.ui.label.setText("")
-            self.ui.label.setPixmap(QtGui.QPixmap(resource_path("bin\\img\\info_bg.png")))
+            self.ui.label.setPixmap(QtGui.QPixmap(resource_path("bin\\img\\main\\info_bg.png")))
             self.ui.label.setObjectName("info_bg")
             self.info_active = True
 
@@ -153,7 +153,7 @@ class MainDialog(QtWidgets.QMainWindow):
             self.account_data = self.DB.query('SELECT data FROM system where variable in ("account", "server", "character")')
 
             if self.class_ is not None:
-                self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/{self.class_}.png')))
+                self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/main/{self.class_}.png')))
             if self.wow_path is None:
                 if not self.GnomeDialog:
                     self.GnomeDialog = GnomeDialog(14, 'Hello, my Friend!\n\n'
