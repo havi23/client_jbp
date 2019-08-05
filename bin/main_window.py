@@ -160,8 +160,8 @@ class MainDialog(QtWidgets.QMainWindow):
                                                        'My name is Ho Linka and today i will help you to setup your routine.\n'
                                                        'First of all I need to know where your WoW client is.\n\n'
                                                        'Click "Settings"!')
-                self.GnomeDialog.show()
-                self.GnomeAwaits = self.settings.__name__
+                    self.GnomeDialog.show()
+                    self.GnomeAwaits = self.settings.__name__
             elif not (self.account_data[1][0] or self.GnomeDialog):
                 self.GnomeDialog = GnomeDialog(main=self, type='account', DB=self.DB, wow_path=self.wow_path)
                 self.GnomeDialog.show()

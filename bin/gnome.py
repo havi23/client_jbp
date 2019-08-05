@@ -82,7 +82,7 @@ class GnomeDialog(QtWidgets.QDialog):
         DB.execute(f'UPDATE system SET data="{self.character_edit.currentText()}" WHERE variable="character"')
         DB.commit()
         try:
-            main.ui.character_change
+            main.ui.character_change() # TODO Проверить 05.08
             main.ui.character_label.setText(self.character_edit.currentText())
         except:
             main.account_data = DB.query('SELECT data FROM system where variable in ("account", "server", "character")')
