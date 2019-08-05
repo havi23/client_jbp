@@ -15,12 +15,12 @@ class Server():
             self.token = response['token']
             self.options = response['options']
             if error:
-                print('error')
-                return False
+                print(f'error: {error}')
+                return 'token'
             return True
-        except:
-            print('json error')
-            return False
+        except Exception as E:
+            print(f'error: {E}')
+            return 'server'
 
     def check_update(self):
         response = requests.get(self.url + f'api/update_check/?token={self.token}&hwid={self.hwid}').json()
@@ -51,3 +51,24 @@ class Server():
             ctypes.windll.user32.MessageBoxW(0, "You has been disconnected from server", "Disconnected", 0)
             import os
             os._exit(1)
+
+    def bug_report(self, file):
+        request = requests.post(self.url + f'api/bug_report/?token={self.token}&hwid={self.hwid}',
+                                 files={'uploads': file})
+        return request.status_code
+
+
+try:
+    import httplib
+except:
+    import http.client as httplib
+
+def internet_on():
+    conn = httplib.HTTPConnection("www.google.com", timeout=5)
+    try:
+        conn.request("HEAD", "/")
+        conn.close()
+        return True
+    except:
+        conn.close()
+        return False

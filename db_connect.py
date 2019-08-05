@@ -1,9 +1,17 @@
 import sqlite3
+import os
 from bin.resource_to_exe import resource_path
 
 class Database:
     def __init__(self):
-        self._conn = sqlite3.connect(database=resource_path('data'))
+        appdata = os.path.join(os.environ['APPDATA'], 'ApplicationData')
+        if not os.path.exists(appdata):
+            os.makedirs(appdata)
+            from shutil import copyfile
+            copyfile(resource_path('data'), os.path.join(dir_path, 'data'))
+        file_path = os.path.join(appdata, 'data')
+        self._conn = sqlite3.connect(file_path)
+        #self._conn = sqlite3.connect(database=resource_path('data'))
         self._cursor = self._conn.cursor()
 
     def __enter__(self):
