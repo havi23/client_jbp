@@ -17,9 +17,9 @@ class BugReportDialog(QtWidgets.QDialog):
         self.oldPos = self.pos()
         self.ui = Ui_BugReportDialog()
         self.ui.setupUi(self)
-        self.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.Tool)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground | QtCore.Qt.WA_TranslucentBackground)
-        self.ui.close_.mousePressEvent = lambda event: self._exit(main)
+        self.ui.close_.mousePressEvent = lambda event: self._exit()
         self.ui.choose_screen.clicked.connect(self.scr_attach)
         self.ui.send.clicked.connect(self.send)
         self.ui.text.textChanged.connect(self.len_handler)
@@ -61,6 +61,11 @@ class BugReportDialog(QtWidgets.QDialog):
             with open(os.path.join(folder_path, 'binds.txt'), 'w') as binds_file:
                 # Форматирование с переносом строки для наглядности
                 binds_file.write('\n'.join(str(x) for x in self.binds))
+            # Загрузка логов ошибок
+            self.error_log = self.DB.query(f'select * from error_log')
+            with open(os.path.join(folder_path, 'error_log.txt'), 'w') as error_log_file:
+                # Форматирование с переносом строки для наглядности
+                error_log_file.write('\n'.join(str(x) for x in self.error_log))
         except Exception as E:  # Создание файла с текстом исключения
             with open(os.path.join(folder_path, 'exception.txt'), 'w') as exception_file:
                 exception_file.write(repr(E))

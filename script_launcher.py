@@ -47,5 +47,21 @@ def auth(key=None):
         KeyDialog.show()
         sys.exit(app.exec())
 
-if __name__ == '__main__':
+if __name__ == '__main__' and 1==0:
+    DB = Database()
+    def restarter(last_error=None):
+        try:
+            auth()
+        except Exception as E:
+            error = repr(E)
+            # Если ошибка повторяется
+            if error == last_error:
+                DB.execute(f'INSERT INTO error_log VALUES (CURRENT_TIMESTAMP, "SECOND: {error}")')
+                DB.commit()
+                return
+            DB.execute(f'INSERT INTO error_log VALUES (CURRENT_TIMESTAMP, "{error}")')
+            DB.commit()
+            restarter(error)
+    restarter()
+else:
     auth()

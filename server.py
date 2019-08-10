@@ -1,5 +1,5 @@
 import requests
-
+from bin.resource_to_exe import resource_path
 
 class Server():
     def __init__(self):
@@ -7,12 +7,18 @@ class Server():
         self.token = None
         self.options = None
         self.hwid = uuid.UUID(int=uuid.getnode())
-        self.url = 'http://127.0.0.1:8000/'
-    def connect(self, key):
+        #self.url = 'http://127.0.0.1:8000/'
+        self.url = 'https://justbecome.pro/'
+    def connect(self, key): # AKA auth
         try:
-            response = requests.get(self.url + f'api/auth/?key={key}&hwid={self.hwid}').json()
+            print(self.url + f'api/auth/?key={key}&hwid={self.hwid}')
+            response = requests.get(self.url + f'api/auth/?key={key}&hwid={self.hwid}',
+                                    verify=True)
+            print(response)
+            response = response.json()
             error = response['error']
             self.token = response['token']
+            print(self.token)
             self.options = response['options']
             if error:
                 print(f'error: {error}')
@@ -21,9 +27,12 @@ class Server():
         except Exception as E:
             print(f'error: {E}')
             return 'server'
-
+# 86b653066a7ccb857e6b6c0137cdf4ca
     def check_update(self):
-        response = requests.get(self.url + f'api/update_check/?token={self.token}&hwid={self.hwid}').json()
+        response = requests.get(self.url + f'api/update_check/?token={self.token}&hwid={self.hwid}',
+                                verify=True)
+        print(response)
+        response = response.json()
         error = response['error']
         if error:
             print(error)
@@ -54,7 +63,9 @@ class Server():
 
     def bug_report(self, file):
         request = requests.post(self.url + f'api/bug_report/?token={self.token}&hwid={self.hwid}',
-                                 files={'uploads': file})
+                                files={'uploads': file},
+                                verify=True)
+        print(self.url + f'api/bug_report/?token={self.token}&hwid={self.hwid}')
         return request.status_code
 
 

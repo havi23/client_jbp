@@ -8,7 +8,7 @@ class Database:
         if not os.path.exists(appdata):
             os.makedirs(appdata)
             from shutil import copyfile
-            copyfile(resource_path('data'), os.path.join(dir_path, 'data'))
+            copyfile(resource_path('data'), os.path.join(appdata, 'data'))
         file_path = os.path.join(appdata, 'data')
         self._conn = sqlite3.connect(file_path)
         #self._conn = sqlite3.connect(database=resource_path('data'))
