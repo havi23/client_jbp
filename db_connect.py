@@ -4,7 +4,7 @@ from bin.resource_to_exe import resource_path
 
 class Database:
     def __init__(self):
-        appdata = os.path.join(os.environ['APPDATA'], 'ApplicationData')
+        appdata = os.path.join(os.environ['APPDATA'], 'JBP_Data')
         if not os.path.exists(appdata):
             os.makedirs(appdata)
             from shutil import copyfile
