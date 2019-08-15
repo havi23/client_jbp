@@ -7,8 +7,8 @@ class Server():
         self.token = None
         self.options = None
         self.hwid = uuid.UUID(int=uuid.getnode())
-        #self.url = 'http://127.0.0.1:8000/'
-        self.url = 'https://justbecome.pro/'
+        self.url = 'http://127.0.0.1:8000/'
+        #self.url = 'https://justbecome.pro/'
     def connect(self, key): # AKA auth
         try:
             print(self.url + f'api/auth/?key={key}&hwid={self.hwid}')
@@ -61,11 +61,18 @@ class Server():
             import os
             os._exit(1)
 
-    def bug_report(self, file):
-        request = requests.post(self.url + f'api/bug_report/?token={self.token}&hwid={self.hwid}',
+    def bug_report(self, file, contact, contact_type, report_text, is_screen):
+        contact = contact.replace('&', '')
+        contact_type = contact_type.replace('&', '')
+        report_text = report_text.replace('&', '')
+        request = requests.post(self.url + f'api/bug_report/?token={self.token}&hwid={self.hwid}' +
+                                f'&contact={contact}&contact_type={contact_type}'
+                                f'&report_text={report_text}&is_screen={is_screen}',
                                 files={'uploads': file},
                                 verify=True)
-        print(self.url + f'api/bug_report/?token={self.token}&hwid={self.hwid}')
+        print(self.url + f'api/bug_report/?token={self.token}&hwid={self.hwid}' +
+                                f'&contact={contact}&contact_type={contact_type}'
+                                f'&report_text={report_text}&is_screen={is_screen}')
         return request.status_code
 
 

@@ -25,9 +25,7 @@ class MainDialog(QtWidgets.QMainWindow):
         self.LicenseKeyDialog = LicenseKeyDialog
         if self.LicenseKeyDialog:
             self.LicenseKeyDialog.close()
-        self.options = server.options
-        self.options = self.options.split('|')
-        print(self.options)
+        self.options = server.options.split('|')
         self.wow_correct = None
         self.oldPos = self.pos()
         self.ui = Ui_MainDialog()
@@ -154,6 +152,15 @@ class MainDialog(QtWidgets.QMainWindow):
 
             if self.class_ is not None:
                 self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/main/{self.class_}.png')))
+            else:
+                self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/main/noclass.png')))
+            if self.info_active:
+                icon4 = QtGui.QIcon()
+                icon4.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/info.bmp")), QtGui.QIcon.Normal,
+                                QtGui.QIcon.Off)
+                self.ui.info.setIcon(icon4)
+                self.ui.label.setGeometry(QtCore.QRect(442, 255, 261, 461))
+                self.info_active = False
             if self.wow_path is None:
                 if not self.GnomeDialog:
                     self.GnomeDialog = GnomeDialog(14, 'Hello, my Friend!\n\n'
