@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="data" uuid="e740b601-9456-44e0-b6e7-2987ed7781ca">
-      <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" dbms="SQLITE" exact-version="3.25.1">
+    <data-source name="data [2]" uuid="a8b47feb-d2af-493c-ad3d-e807af4ef947">
+      <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" dbms="SQLITE" exact-version="3.25.1" exact-driver-version="3.25">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
-      <introspection-schemas>*:main</introspection-schemas>
+      <auth-required>false</auth-required>
+      <introspection-schemas>*:@</introspection-schemas>
     </data-source>
-    <data-source name="data [2]" uuid="a8b47feb-d2af-493c-ad3d-e807af4ef947">
+    <data-source name="data" uuid="bc77f71c-dbaa-4a40-a7b8-eb8e73056257">
       <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" dbms="SQLITE" exact-version="3.25.1" exact-driver-version="3.25">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>

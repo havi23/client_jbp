@@ -26,7 +26,6 @@ class MainDialog(QtWidgets.QMainWindow):
         if self.LicenseKeyDialog:
             self.LicenseKeyDialog.close()
         self.options = server.options.split('|')
-        self.wow_correct = None
         self.oldPos = self.pos()
         self.ui = Ui_MainDialog()
         self.ui.setupUi(self)
@@ -46,16 +45,18 @@ class MainDialog(QtWidgets.QMainWindow):
         self.start_icon.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.stop_icon = QtGui.QIcon()
         self.stop_icon.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.ui.info.clicked.connect(self.info_frame)
         self.listener = None
         self.m_label = None
         self.info_active = None
-        self.ui.info.clicked.connect(self.info_frame)
         self.GnomeDialog = None
         self.GnomeAwaits = None
         self.ClassDialog = None
         self.SettingsDialog = None
         self.BindsDialog = None
         self.BugReport = None
+        self.rotation_key = None
+        self.wow_correct = None
 
         # Обновление токена
         self.token_updater = BackgroundScheduler()
@@ -82,7 +83,7 @@ class MainDialog(QtWidgets.QMainWindow):
             self.ui.label.setGeometry(QtCore.QRect(121, 7, 1021, 861))
             self.ui.label.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
             self.ui.label.setText("")
-            self.ui.label.setPixmap(QtGui.QPixmap(resource_path("bin\\img\\main\\info_bg.png")))
+            self.ui.label.setPixmap(QtGui.QPixmap(resource_path("bin/img/main/info_bg.png")))
             self.ui.label.setObjectName("info_bg")
             self.info_active = True
 
@@ -118,7 +119,6 @@ class MainDialog(QtWidgets.QMainWindow):
                 if proc.name() == 'Wow.exe':
                     return True
             return False
-
         if self.GnomeDialog: #  Если необходима настройка скрипта
             self.ui.wow_text.setText('You must configure\nthe script before run WoW')
             self.ui.wow_text.setStyleSheet('color: red;')
@@ -149,7 +149,7 @@ class MainDialog(QtWidgets.QMainWindow):
             self.spec = self.DB.query('SELECT data FROM system where variable="spec"')[0][0]
             self.class_= self.DB.query('SELECT data FROM system where variable="class"')[0][0]
             self.account_data = self.DB.query('SELECT data FROM system where variable in ("account", "server", "character")')
-
+            self.rotation_key = self.DB.query(f'select * from system WHERE variable="rotation_key"')[0][1]
             if self.class_ is not None:
                 self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/main/{self.class_}.png')))
             else:
@@ -166,7 +166,7 @@ class MainDialog(QtWidgets.QMainWindow):
                     self.GnomeDialog = GnomeDialog(14, 'Hello, my Friend!\n\n'
                                                        'My name is Ho Linka and today i will help you to setup your routine.\n'
                                                        'First of all I need to know where your WoW client is.\n\n'
-                                                       'Click "Settings"!')
+                                                       'Click "Settings"!', main=self)
                     self.GnomeDialog.show()
                     self.GnomeAwaits = self.settings.__name__
             elif not (self.account_data[1][0] or self.GnomeDialog):
@@ -175,7 +175,7 @@ class MainDialog(QtWidgets.QMainWindow):
             elif self.spec is None:
                 if not self.GnomeDialog:
                     self.GnomeDialog = GnomeDialog(14, 'Now you need to choose your class and specialisation\n\n\n'
-                                                       'Click "Class"!')
+                                                       'Click "Class"!', main=self)
                     self.GnomeDialog.show()
                     self.GnomeAwaits = self.change_class.__name__
             elif self.spec is not None:
@@ -183,12 +183,24 @@ class MainDialog(QtWidgets.QMainWindow):
                 for bind in binds:
                     if bind[3] and bind[2] is None:
                         if not self.GnomeDialog:
+                            print(bind)
                             self.GnomeDialog = GnomeDialog(14,
-                                                           f'У тебя нет бинда на обязательной клавише: {bind[0]}\n\n'
-                                                           'Click "Binds"!')
+                                                           f'\n\nAssign a required bind: {bind[0]}\n\n'
+                                                           'Click "Binds"!', main=self)
                         self.GnomeDialog.show()
-                        self.GnomeAwaits = self.binds.__name__
+                        self.GnomeAwaits = 'binds'
                         break
+                else:
+                    if self.GnomeAwaits == 'binds':
+                        self.GnomeDialog.close()
+            elif self.rotation_key is None:
+                if not self.GnomeDialog:
+                    self.GnomeDialog = GnomeDialog(14,
+                                                   f'\n\nAssign a required bind on\n'
+                                                   f'"Use next ability rotation key"'
+                                                   'Click "Binds"!', main=self)
+                self.GnomeDialog.show()
+                self.GnomeAwaits = 'binds'
             self.check_wow()
         return super(MainDialog, self).event(event)
 
@@ -208,7 +220,7 @@ class MainDialog(QtWidgets.QMainWindow):
         elif self.GnomeDialog is None and not self.wow_correct:
             self.GnomeDialog = GnomeDialog(14, "\nYou can't run routine while WoW launched not with script"
                                                "or not launched at all\n\n"
-                                               "You must launch WoW with 'Start WoW' button", True, self)
+                                               "You must launch WoW with 'Start WoW' button", True, main=self)
             self.GnomeDialog.show()
             return
         if not self.listener:

@@ -25,6 +25,7 @@ class Ui_Dialog(QWidget):
         font = QtGui.QFont()
         font.setFamily("Futura-Normal")
         font.setPointSize(22)
+        self.m_label = False #  Флаг нажатия на Label для перемещения окна
         font.setBold(False)
         font.setItalic(False)
         font.setUnderline(False)
@@ -32,21 +33,22 @@ class Ui_Dialog(QWidget):
         font.setStrikeOut(False)
         font.setKerning(True)
         self.formLayout = QFormLayout()
-        groupBox = QGroupBox("")
         self.widget_list = {}
-        abilitys = DB.query(f"select * from {spec}")
+        abilities = DB.query(f"select * from {spec}")
+        rotation_key = DB.query(f"select * from system WHERE variable='rotation_key'")[0][1]
+        rotation_row = ('Rotation: USE NEXT ABILITY', None, rotation_key, 1)
+        abilities.insert(0, rotation_row)
         self.input_waiting = None
         self.old_bind = None
-        for idx, spell in enumerate(abilitys, start=1):
+        for spell in abilities:
             bind = QPushButton()
-            #if abil[2] is not None: bind.addItem(abil[2])
             if spell[2] is None:
                 bind.setText('CLICK TO BIND')
             else:
-                bind.setText(spell[2])
+                bind.setText(str(spell[2]))
             bind.setMinimumSize(QtCore.QSize(85, 28))
             bind.setStyleSheet("background-color: silver;")
-            spell_label = QLabel(f'{spell[0]}*' if spell[3] else spell[0])
+            spell_label = QLabel(f'*{spell[0]}' if spell[3] else spell[0])
             spell_label.setFont(font)
             spell_label.setStyleSheet("color: silver;")
             spell_label.setMinimumSize(QtCore.QSize(0, 28))
@@ -54,9 +56,10 @@ class Ui_Dialog(QWidget):
             self.widget_list[spell_label].setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
             self.widget_list[spell_label].clicked.connect(lambda state, key=spell_label: self.key_input(key))
             self.formLayout.addRow(self.widget_list[spell_label], spell_label)
-        groupBox.setLayout(self.formLayout)
+        group_box = QGroupBox("")
+        group_box.setLayout(self.formLayout)
         scroll = QScrollArea()
-        scroll.setWidget(groupBox)
+        scroll.setWidget(group_box)
         scroll.setWidgetResizable(True)
         scroll.setFixedSize(480, 367)
         scroll.setStyleSheet("background-color:transparent;")
@@ -71,9 +74,7 @@ class Ui_Dialog(QWidget):
         move_label = QLabel(self)
         move_label.mousePressEvent = lambda event: self.move_pressed(event)
         move_label.setGeometry(2, 36, 473, 41)
-        self.m_label = False #  Флаг нажатия на Label для перемещения окна
         self.show()
-
 
     def set_text(self, text):
         self.widget_list[self.input_waiting].setText(text)
@@ -83,12 +84,13 @@ class Ui_Dialog(QWidget):
     def keyPressEvent(self, QKeyEvent):
         if QKeyEvent.key() in (16777216, 16777249, 16777251, 16777248):  # esc
             if self.input_waiting:
-                self.set_text(self.old_bind)
+                self.set_text('CLICK TO BIND') #self.old_bind)
                 #return
         elif len(str(QKeyEvent.key())) == 4 and str(QKeyEvent.key())[:2] == '10':  # если клавиша из русской раскладки
             if self.GnomeDialog:
                 self.GnomeDialog.close()
-            self.GnomeDialog = GnomeDialog(14, "\n\n\nYou must change your keyboard layout to ENG, my friend.", True, self)
+            self.GnomeDialog = GnomeDialog(14, "\n\n\nYou must change your keyboard layout to ENG, my friend.",
+                                           True, self)
             self.GnomeDialog.show()
             #return
         elif self.input_waiting:
@@ -130,12 +132,16 @@ class Ui_Dialog(QWidget):
     def save(self, main, spec):
         try:
             DB.execute(f'UPDATE {spec} SET bind=Null')
+            first = 0
             for spell, bind in self.widget_list.items():
-                new_bind = self.widget_list[spell].text()
-                DB.execute(f'UPDATE {spec} SET bind=? WHERE spell=?', (None if len(new_bind) > 3
-                                                                       else new_bind,
-                                                                       spell.text()[:-1] if '*' in spell.text()
-                                                                       else spell.text()))
+                bind = self.widget_list[spell].text()
+                bind = None if len(bind) > 3 else bind
+                spell = spell.text()[1:] if '*' in spell.text() else spell.text()
+                if first == 0:
+                    DB.execute(f'UPDATE system SET data=? WHERE variable="rotation_key"', (bind,))
+                    first += 1
+                else:
+                    DB.execute(f'UPDATE {spec} SET bind=? WHERE spell=?', (bind, spell))
             DB.commit()
         except Exception as E:
             if 'UNIQUE' in repr(E).upper():
@@ -148,6 +154,7 @@ class Ui_Dialog(QWidget):
         if self.GnomeDialog:
             self.close()
         main.show()
+        main.BindsDialog = None
         self.close()
 
     def move_pressed(self, event):

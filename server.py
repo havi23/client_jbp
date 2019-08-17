@@ -27,7 +27,6 @@ class Server():
         except Exception as E:
             print(f'error: {E}')
             return 'server'
-# 86b653066a7ccb857e6b6c0137cdf4ca
     def check_update(self):
         response = requests.get(self.url + f'api/update_check/?token={self.token}&hwid={self.hwid}',
                                 verify=True)

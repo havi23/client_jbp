@@ -9,7 +9,6 @@ class GnomeDialog(QtWidgets.QDialog):
         self.ui = Ui_GnomeDialog()
         self.ui.setupUi(self)
         self.main = main
-
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.FramelessWindowHint | QtCore.Qt.Tool)
@@ -65,6 +64,10 @@ class GnomeDialog(QtWidgets.QDialog):
         if 'SavedVariables' in server_list: server_list.remove('SavedVariables')
         self.server_edit.clear()
         self.server_edit.addItems(server_list)
+
+    def event(self, event):  # Срабатывает при каждом вызове main.show()
+        if event.type() == QtCore.QEvent.Close:
+            self.main.GnomeDialog = None
 
     def setCharacter(self, wow_path):
         character_list = next(os.walk(wow_path.split('_retail_')[0].replace('/', '\\') +
