@@ -588,7 +588,7 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f5e53c63-2bf4-4716-b539-bc1741525f03/console_1.sql" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f5e53c63-2bf4-4716-b539-bc1741525f03/console_2.sql" />
     <entry file="das://f5e53c63-2bf4-4716-b539-bc1741525f03/schema/main/table/colors" />
-    <entry file="das://f5e53c63-2bf4-4716-b539-bc1741525f03/schema/main/table/abilitys" />
+    <entry file="das://f5e53c63-2bf4-4716-b539-bc1741525f03/schema/main/table/abilities" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/os.py" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f5e53c63-2bf4-4716-b539-bc1741525f03/console_3.sql" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36/Lib/ntpath.py" />
@@ -675,7 +675,7 @@
       </provider>
     </entry>
     <entry file="das://0f41d6f6-cba8-43f5-932a-0512b30d8b7b/schema/main/table/colors" />
-    <entry file="das://0f41d6f6-cba8-43f5-932a-0512b30d8b7b/schema/main/table/abilitys" />
+    <entry file="das://0f41d6f6-cba8-43f5-932a-0512b30d8b7b/schema/main/table/abilities" />
     <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/1622369157/PyQt5/QtWidgets/QDialog.py" />
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">

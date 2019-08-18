@@ -72,7 +72,7 @@
      <x>8</x>
      <y>50</y>
      <width>265</width>
-     <height>173</height>
+     <height>143</height>
     </rect>
    </property>
    <property name="font">
@@ -220,6 +220,42 @@
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
+  <widget class="QComboBox" name="contact_type">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>196</y>
+     <width>82</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background: rgba(255,255,255, 0.5);</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="contact_text">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>197</y>
+     <width>181</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: transparent;
+    color: white;</string>
+   </property>
+   <property name="inputMethodHints">
+    <set>Qt::ImhMultiLine</set>
+   </property>
+   <property name="placeholderText">
+    <string>Your contact here...</string>
+   </property>
+  </widget>
   <zorder>bg</zorder>
   <zorder>scr_count</zorder>
   <zorder>send</zorder>
@@ -228,6 +264,8 @@
   <zorder>label_tooltip</zorder>
   <zorder>close_</zorder>
   <zorder>len_limit</zorder>
+  <zorder>contact_type</zorder>
+  <zorder>contact_text</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -22,7 +22,8 @@ class BugReportDialog(QtWidgets.QDialog):
         self.ui.close_.mousePressEvent = lambda event: self._exit()
         self.ui.choose_screen.clicked.connect(self.scr_attach)
         self.ui.send.clicked.connect(self.send)
-        self.ui.text.textChanged.connect(self.len_handler)
+        self.ui.text.textChanged.connect(self.report_len_handler)
+        self.ui.contact_text.textChanged.connect(self.contact_len_handler)
         self.attachments = list()
         self.system = list()
         self.binds = list()
@@ -30,13 +31,18 @@ class BugReportDialog(QtWidgets.QDialog):
         font.setFamily("Futura-Normal")
         font.setPointSize(8)
         self.ui.len_limit.setFont(font)
+        self.ui.contact_type.addItems(['Skype', 'Discord', 'E-Mail', 'Telegram', 'WhatsApp'])
 
     def send(self):
         # Не отправлять пустоту
-        if len(self.ui.text.toPlainText()) == 0 and self.ui.scr_count.intValue() == 0:
+        contact_type = self.ui.contact_type.currentText()
+        contact_text = self.ui.contact_text.text()
+        report_text = self.ui.text.toPlainText()
+        screen_count = self.ui.scr_count.intValue()
+        if len(contact_text) == 0 or (len(report_text) == 0 and self.ui.scr_count.intValue() == 0):
             return
         # Создание временной папки
-        appdata = os.path.join(os.environ['APPDATA'], 'ApplicationData')
+        appdata = os.path.join(os.environ['APPDATA'], 'JBP_Data')
         folder_path = os.path.join(appdata, 'bug_report')
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
@@ -69,9 +75,9 @@ class BugReportDialog(QtWidgets.QDialog):
         except Exception as E:  # Создание файла с текстом исключения
             with open(os.path.join(folder_path, 'exception.txt'), 'w') as exception_file:
                 exception_file.write(repr(E))
-        # Загрузка введенного текста проблемы
-        with open(os.path.join(folder_path, 'problem.txt'), 'w') as text_file:
-            text_file.write(self.ui.text.toPlainText())
+        # # Загрузка введенного текста проблемы
+        # with open(os.path.join(folder_path, 'problem.txt'), 'w') as text_file:
+        #     text_file.write(report_text)
         # Создание архива, перенос туда папки
         archive_path = os.path.join(appdata, 'bug_report_archive')
         shutil.make_archive(archive_path, 'zip', folder_path)
@@ -81,7 +87,8 @@ class BugReportDialog(QtWidgets.QDialog):
         # При создании архива не указывается расширение в пути, но оно необходимо при чтении
         with open(f'{archive_path}.zip', 'rb') as archive:
             archive_bytes = archive.read()
-        status_code = self.main.server.bug_report(archive_bytes)
+        status_code = self.main.server.bug_report(archive_bytes, contact_text, contact_type, report_text,
+                                                  screen_count > 0)
         print(f'File sent: {status_code}')
         self._exit()
 
@@ -120,13 +127,13 @@ class BugReportDialog(QtWidgets.QDialog):
                 self.ui.scr_count.display(count + 1)
 
 
-    def mousePressEvent(self, event):
-        self.oldPos = event.globalPos()
-
-    def mouseMoveEvent(self, event):
-        delta = QtCore.QPoint(event.globalPos() - self.oldPos)
-        self.move(self.x() + delta.x(), self.y() + delta.y())
-        self.oldPos = event.globalPos()
+    # def mousePressEvent(self, event):
+    #     self.oldPos = event.globalPos()
+    #
+    # def mouseMoveEvent(self, event):
+    #     delta = QtCore.QPoint(event.globalPos() - self.oldPos)
+    #     self.move(self.x() + delta.x(), self.y() + delta.y())
+    #     self.oldPos = event.globalPos()
 
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key_Escape:
@@ -134,15 +141,23 @@ class BugReportDialog(QtWidgets.QDialog):
         elif event.key() == QtCore.Qt.Key_Enter:
             self.send()
 
-    def len_handler(self):
-        current_length = len(self.ui.text.toPlainText())
+    def report_len_handler(self):
+        text = self.ui.text.toPlainText()
+        current_length = len(text)
         self.ui.len_limit.setText(f'{current_length}/2000')
         if current_length > 2000:
-            old_text = self.ui.text.toPlainText()[:2000]
+            old_text = text[:2000]
             self.ui.text.setText(old_text)
             cursor = self.ui.text.textCursor()
             cursor.setPosition(2000)
             self.ui.text.setTextCursor(cursor)
+
+    def contact_len_handler(self):
+        text = self.ui.contact_text.text()
+        current_length = len(text)
+        if current_length > 25:
+            old_text = text[:25]
+            self.ui.contact_text.setText(old_text)
 
     @pyqtSlot()
     def _exit(self):

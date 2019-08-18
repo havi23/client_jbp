@@ -27,7 +27,6 @@ class Server():
         except Exception as E:
             print(f'error: {E}')
             return 'server'
-# 86b653066a7ccb857e6b6c0137cdf4ca
     def check_update(self):
         response = requests.get(self.url + f'api/update_check/?token={self.token}&hwid={self.hwid}',
                                 verify=True)
@@ -61,11 +60,18 @@ class Server():
             import os
             os._exit(1)
 
-    def bug_report(self, file):
-        request = requests.post(self.url + f'api/bug_report/?token={self.token}&hwid={self.hwid}',
+    def bug_report(self, file, contact, contact_type, report_text, is_screen):
+        contact = contact.replace('&', '')
+        contact_type = contact_type.replace('&', '')
+        report_text = report_text.replace('&', '')
+        request = requests.post(self.url + f'api/bug_report/?token={self.token}&hwid={self.hwid}' +
+                                f'&contact={contact}&contact_type={contact_type}'
+                                f'&report_text={report_text}&is_screen={is_screen}',
                                 files={'uploads': file},
                                 verify=True)
-        print(self.url + f'api/bug_report/?token={self.token}&hwid={self.hwid}')
+        print(self.url + f'api/bug_report/?token={self.token}&hwid={self.hwid}' +
+                                f'&contact={contact}&contact_type={contact_type}'
+                                f'&report_text={report_text}&is_screen={is_screen}')
         return request.status_code
 
 
