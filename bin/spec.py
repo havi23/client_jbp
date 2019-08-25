@@ -20,7 +20,6 @@ class SpecDialog(QtWidgets.QDialog):
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.ui.bg.setPixmap(QtGui.QPixmap(resource_path(f"bin/img/class/spec/spec_{class_}.png")))
-        self.GnomeDialog = None
         #QtGui.QMouseEvent
         if class_ not in ('Demon_Hunter', 'Druid'):
             self.ui.spec_1_.close()
@@ -60,14 +59,16 @@ class SpecDialog(QtWidgets.QDialog):
 
     def spec(self, main, class_, spec):
         spec = DB.query(f'select * from specs where class="{class_}";')[0][spec]
-        if spec not in main.options:
-            if self.GnomeDialog is None:
-                self.GnomeDialog = GnomeDialog(14, f"\n\nYou dont have this spec on your key\n"
-                                                   "You can buy it on our Web-Site", True, self)
-                self.GnomeDialog.show()
-            return
-        DB.query(f'update system set data = "{spec}" where variable ="spec";')
-        DB.query(f'update system set data = "{class_}" where variable ="class";')
+        if spec.upper() not in main.options:
+            if main.GnomeDialog is None:
+                main.GnomeDialog = GnomeDialog(14, f"\n\nYou dont have this spec on your key\n"
+                                                   "You can buy it on our Web-Site", True, main)
+                main.GnomeDialog.show()
+                spec = None
+                class_ = None
+            #return
+        DB.query(f'update system set data = ? where variable ="spec";', (spec,))
+        DB.query(f'update system set data = ? where variable ="class";', (class_,))
         DB.commit()
         if main is not None:
             main.show()

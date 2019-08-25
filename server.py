@@ -21,8 +21,7 @@ class Server():
             print(self.token)
             self.options = response['options']
             if error:
-                print(f'error: {error}')
-                return 'token'
+                return error
             return True
         except Exception as E:
             print(f'error: {E}')

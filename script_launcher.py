@@ -25,6 +25,7 @@ def update_check(server):
             server.load_updater()
             ctypes.windll.user32.MessageBoxW(0, "You must run update.exe before starting", "Update required", 0)
             sys.exit()
+
 def auth(key=None):
     if not key:
         key = DB.query('SELECT data FROM system WHERE variable="license_key"')[0][0]
@@ -32,14 +33,14 @@ def auth(key=None):
     if key:
         server = Server()
         status = server.connect(key)
-        update_check(server)
-        if status in ('server', 'token'):
+        print(status)
+        if status in ('server', 'token', 'key', 'hwid'):
             # TODO if 'server' - сделать уведомление. + сделать msgbox
             DB.execute('UPDATE system SET data=? WHERE variable="license_key"', (None,))
             DB.commit()
             auth()
-        else:
-            run_UI(server)
+        update_check(server)
+        run_UI(server)
     else:
         from bin.license_key import LicenseKeyDialog
         app = QtWidgets.QApplication([])
