@@ -4,7 +4,7 @@ import os
 
 class GnomeDialog(QtWidgets.QDialog):
     # clicked = QtCore.pyqtSignal(str)
-    def __init__(self, size=16, text='', button=None, main=None, type=None, DB=None, wow_path=None, parent=None):
+    def __init__(self, size=16, text='', button=None, main=None, _type=None, DB=None, wow_path=None, parent=None):
         super(GnomeDialog, self).__init__(parent)
         self.ui = Ui_GnomeDialog()
         self.ui.setupUi(self)
@@ -21,7 +21,7 @@ class GnomeDialog(QtWidgets.QDialog):
         self.ui.text.setFont(QtGui.QFont("Times", size, QtGui.QFont.StyleItalic))
         self.ui.text.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignHCenter)
         self.ui.text.setText(text)
-        if type == 'account':
+        if _type == 'account':
             self.ui.okay.clicked.connect(lambda: self.save(main, DB))
             self.setAccount(wow_path)
         elif button:
@@ -68,6 +68,9 @@ class GnomeDialog(QtWidgets.QDialog):
     def event(self, event):  # Срабатывает при каждом вызове main.show()
         if event.type() == QtCore.QEvent.Close:
             self.main.GnomeDialog = None
+            return True
+        else:
+            return False
 
     def setCharacter(self, wow_path):
         character_list = next(os.walk(wow_path.split('_retail_')[0].replace('/', '\\') +
@@ -92,7 +95,8 @@ class GnomeDialog(QtWidgets.QDialog):
         self._close(main)
 
     def _close(self, main):
-        if main:
-            main.GnomeDialog = None
+        # if main:
+        #     if main.GnomeDialog:
+        #         main.GnomeDialog = None
         self.close()
 
