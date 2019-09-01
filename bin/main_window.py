@@ -228,7 +228,7 @@ class MainDialog(QtWidgets.QMainWindow):
             wow = ahk.get_wow()
             if wow:
                 self.ui.start.setIcon(self.stop_icon)
-                self.listener = ahk.rotation_listener(wow, 'F1')
+                self.listener = ahk.rotation_listener(wow, 'F1', '775B5B', '3', '17', '26')
         else:
             self.ui.start.setIcon(self.start_icon)
             self.listener.stop()

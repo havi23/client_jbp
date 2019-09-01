@@ -26,27 +26,35 @@ def update_check(server):
             ctypes.windll.user32.MessageBoxW(0, "You must run update.exe before starting", "Update required", 0)
             sys.exit()
 
-def auth(key=None, error_message=None):
+def auth(key=None, error_code=None):
     if not key:
         key = DB.query('SELECT data FROM system WHERE variable="license_key"')[0][0]
-    if key:
-        server = Server()
-        error_code = server.connect(key)
-        print(error_code)
-        #if error_code in ('server', 'token', 'key', 'hwid', 'date', 'params'):
-        if not error_code:
-            # TODO if 'server' - сделать уведомление. + сделать msgbox
-            DB.execute('UPDATE system SET data=? WHERE variable="license_key"', (None,))
-            DB.commit()
-            auth(error_code=error_code)
-        update_check(server)
-        run_UI(server)
-    else:
-        from bin.license_key import LicenseKeyDialog
-        app = QtWidgets.QApplication([])
-        KeyDialog = LicenseKeyDialog(error_message=error_message)
-        KeyDialog.show()
-        sys.exit(app.exec())
+        try:
+            if key:
+                server = Server()
+                error_code = server.connect(key)
+                print(f'>{error_code}')
+                #if error_code in ('server', 'token', 'key', 'hwid', 'date', 'params'):
+                if not error_code:
+                    # TODO if 'server' - сделать уведомление. + сделать msgbox
+                    DB.execute('UPDATE system SET data=? WHERE variable="license_key"', (None,))
+                    DB.commit()
+                    auth(error_code=error_code)
+                else:
+                    error_code = 'key'
+                    raise Exception
+                update_check(server)
+                run_UI(server)
+            else:
+                error_code = 'server'
+                raise Exception
+        except Exception as E:
+            print(repr(E))
+            from bin.license_key import LicenseKeyDialog
+            app = QtWidgets.QApplication([])
+            KeyDialog = LicenseKeyDialog(error_code=error_code)
+            KeyDialog.show()
+            sys.exit(app.exec())
 
 if __name__ == '__main__' and 1==0:
     DB = Database()
@@ -66,3 +74,4 @@ if __name__ == '__main__' and 1==0:
     restarter()
 else:
     auth()
+
