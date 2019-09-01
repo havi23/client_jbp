@@ -55,7 +55,6 @@ class BugReportDialog(QtWidgets.QDialog):
             with open(os.path.join(folder_path, f'{idx}.jpg'), 'wb') as file:
                 file.write(bytes_)
         try:  # В случае, если проблема с базой данных
-            # TODO Загрузка логов
             # Загрузка системных файлов
             self.system = self.DB.query('select * from system')
             with open(os.path.join(folder_path, 'system.txt'), 'w') as system_file:
@@ -105,6 +104,7 @@ class BugReportDialog(QtWidgets.QDialog):
                     site_name = self.DB.query('select data from system where variable="site_name"')[0][0]
                     current_text = self.ui.text.toPlainText()
                     gift = 'AF63D1C-03D712-D12734'#  TODO Gift post
+                    #  TODO Generating 1 time and writes to DB.
                     self.ui.text.setText(f'{gift}'
                                          f'\n/\ This is your gift promo code for a 20% discount on {site_name}'
                                          f'\n\n{current_text}')

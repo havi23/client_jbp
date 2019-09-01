@@ -22,7 +22,7 @@ class Server():
             self.options = response['options']
             if error:
                 return error
-            return True
+            return None  # None error
         except Exception as E:
             print(f'error: {E}')
             return 'server'

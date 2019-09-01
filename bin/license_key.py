@@ -4,42 +4,46 @@ from server import Server, internet_on
 from db_connect import Database
 from bin.main_window import MainDialog
 
+
 #  pyuic5 license_key.ui -o license_key_Qt.py
 
 class LicenseKeyDialog(QtWidgets.QMainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, error_code=None):
         super(LicenseKeyDialog, self).__init__(parent)
         from db_connect import Database
         self.DB = Database()
         # self.oldPos = self.pos()
         self.ui = Ui_LicenseKeyDialog()
         self.ui.setupUi(self)
+        # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        # self.setAttribute(QtCore.Qt.WA_NoSystemBackground | QtCore.Qt.WA_TranslucentBackground)
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.FramelessWindowHint | QtCore.Qt.Tool)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.ui.submit.mousePressEvent = lambda event: self.submit()
         self.ui.website.mousePressEvent = lambda event: self.website()
         self.ui.exit_.mousePressEvent = lambda event: self.exit_()
-        self.ui.error.setText("WARNING: A computer will be attached to the key. "
-                              "The key you entered will not work on another PC")
+        self.error_dictionary = {
+            'server': 'Check your internet connection' if internet_on
+            else 'We have a problems with our server now. Try again later.',
+            'token': 'This key is not exists or has been activated early on another PC.\n" \
+                                          "Go to website for support.',
+            'key': 'Your key is incorrect.\nTry again or contact support',
+            'hwid': 'This key has beed attached to another PC. Your cant use it',
+            'date': 'Your subscribtion has ended.\nUpdate your key on JustBecome.PRO',
+            'params': 'Unknown error. \nPlease contact support.',
+            None: 'WARNING: A computer will be attached to the key. " \
+                                       "The key you entered will not work on another PC'
+            }
+        self.ui.error.setText(self.error_dictionary[error_code])
         self.ui.key_edit.setPlaceholderText("Enter a license key")
-
 
     def submit(self):
         key = self.ui.key_edit.text()
         server = Server()
-        status = server.connect(key)
-        if status == 'token':
-            self.ui.error.setText("This key is not exists or has been activated early on another PC.\n"
-                                  "Go to website for support.")
-            self.ui.key_edit.setPlaceholderText('Enter a license key')
-        elif status == 'server':
-            if internet_on:
-                self.ui.error.setText("We have a problems with our server now. Try again later.")
-                self.ui.key_edit.setPlaceholderText('Sorry ):')
-            else:
-                self.ui.error.setText("Check your internet connection")
-        else:
+        error_code = server.connect(key)
+        self.ui.error.setText(self.error_dictionary[error_code])
+        if not error_code:
             DB = Database()
             DB.execute('UPDATE system SET data=? WHERE variable="license_key"', (key,))
             DB.commit()

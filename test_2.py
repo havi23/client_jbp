@@ -26,7 +26,10 @@ def get_sale(currency, is_first, spec_count, plan):
         if is_first:
             first_buy_value = (spec_count*10)
         else:
-            first_buy_value = (spec_count*3)
+            if spec_count > 1 and plan >= 3:
+                first_buy_value = (spec_count*10)
+            else:
+                first_buy_value = (spec_count*3)
         sale = plan_value_corrector*2 + subscribe_value + first_buy_value * 2
     else:
         sale = 0
@@ -34,12 +37,11 @@ def get_sale(currency, is_first, spec_count, plan):
     # Итоговая цена
     total_cost = clear_cost - (clear_cost/100*sale)
     return total_cost, sale
-currency = 'RUB'
+currency = 'EUR'
 row = list()
 print(f'   1    3    6    12')
 for spec_count in (1,2,3):
     for plan in (1, 3, 6, 12):
-        row.append(round(get_sale(currency, True, spec_count, plan)[0]))
+        row.append(round(get_sale(currency, False, spec_count, plan)[0]))
     print(f'{spec_count} {row}')
     row.clear()
-
