@@ -3,8 +3,13 @@ from bin.gnome import GnomeDialog
 import os
 
 
-def default_config(window, GnomeDialog, wow_path):
+def default_config(main, GnomeDialog, wow_path):
     wow_path = PureWindowsPath(os.path.dirname(os.path.abspath(wow_path)))
+    addon_path = Path(wow_path) / 'Interface' / 'Addons'
+    account_data = main.account_data
+    print(account_data) #  [('102603599#1',), ('Баклажановая',), ('Гордунни',)]
+    print(addon_path) #  G:\World of Warcraft\_retail_\Interface\Addons
+    return
     config_path = Path(wow_path) / 'WTF' / 'Config.wtf'
     old_config_path = Path(wow_path) / 'WTF' / 'Config.wtf.old'
     if config_path.exists():
@@ -25,11 +30,11 @@ def default_config(window, GnomeDialog, wow_path):
             config_file.writelines(lines)
             config_file.close()
     else:
-        if not window.GnomeDialog:
-            window.GnomeDialog = GnomeDialog(14, 'Something going wrong!\n'
+        if not main.GnomeDialog:
+            main.GnomeDialog = GnomeDialog(14, 'Something going wrong!\n'
                                                  'I guess you must choose WoW directory again.\n\n'
                                                  'Go Settings > Click "Choose WoW directory"!')
-            window.GnomeDialog.show()
-            window.GnomeAwaits = 'settings'
+            main.GnomeDialog.show()
+            main.GnomeAwaits = 'settings'
         print('Не найден файл Config.wtf')
         return

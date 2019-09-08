@@ -34,22 +34,20 @@ def auth(key=None, error_code=None):
                 server = Server()
                 error_code = server.connect(key)
                 print(f'>{error_code}')
-                #if error_code in ('server', 'token', 'key', 'hwid', 'date', 'params'):
-                if not error_code:
-                    # TODO if 'server' - сделать уведомление. + сделать msgbox
+                if error_code in ('server', 'token', 'key', 'hwid', 'date', 'params'):
+                # if not error_code:
                     DB.execute('UPDATE system SET data=? WHERE variable="license_key"', (None,))
                     DB.commit()
                     auth(error_code=error_code)
-                else:
-                    error_code = 'key'
-                    raise Exception
+                # else:
+                #     error_code = 'key'
+                #     raise Exception
                 update_check(server)
                 run_UI(server)
             else:
-                error_code = 'server'
                 raise Exception
         except Exception as E:
-            print(repr(E))
+            print(f'script_launcher.auth EXCEPTION: {repr(E)}')
             from bin.license_key import LicenseKeyDialog
             app = QtWidgets.QApplication([])
             KeyDialog = LicenseKeyDialog(error_code=error_code)

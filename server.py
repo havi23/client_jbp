@@ -24,7 +24,7 @@ class Server():
                 return error
             return None  # None error
         except Exception as E:
-            print(f'error: {E}')
+            print(f'conn error: {E}')
             return 'server'
     def check_update(self):
         response = requests.get(self.url + f'api/update_check/?token={self.token}&hwid={self.hwid}',
@@ -85,6 +85,7 @@ def internet_on():
         conn.request("HEAD", "/")
         conn.close()
         return True
-    except:
+    except Exception as E:
+        print(f'Checking internet connection: {repr(E)}')
         conn.close()
         return False

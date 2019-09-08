@@ -14,6 +14,7 @@ class SettingsDialog(QtWidgets.QDialog):
         self.ui = Ui_SettingsDialog()
         self.oldPos = self.pos()
         self.ui.setupUi(self)
+        self.main = main
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
@@ -21,7 +22,7 @@ class SettingsDialog(QtWidgets.QDialog):
         self.GnomeAwaits = None
         self.wow_path = DB.query('SELECT data FROM system where variable="wow_path"')[0][0]
         self.ui.cwp.clicked.connect(self.cwp)
-        self.ui.save.clicked.connect(lambda: self.save(main))
+        self.ui.save.clicked.connect(self.save)
         self.ui.character_label.setText(character)
         self.ui.character_change.clicked.connect(self.character_change)
         if self.wow_path is None:
@@ -34,9 +35,9 @@ class SettingsDialog(QtWidgets.QDialog):
             self.GnomeDialog = GnomeDialog(main=self, type='account', DB=DB, wow_path=self.wow_path)
             self.GnomeDialog.show()
 
-    def save(self, main):
-        if main is not None:
-            main.show()
+    def save(self):
+        if self.main is not None:
+            self.main.show()
         self.close()
 
     def cwp(self):
@@ -53,7 +54,7 @@ class SettingsDialog(QtWidgets.QDialog):
             return
         DB.query(f'UPDATE system SET data=? WHERE variable="wow_path"', (wow_path,))
         DB.commit()
-        wow_folder.default_config(self, GnomeDialog, wow_path)
+        wow_folder.default_config(self.main, GnomeDialog, wow_path)
         # TODO Проверить аддон, загрузить, если его нет, настроить ТМВ, переписать конфиг
 
 

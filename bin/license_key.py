@@ -24,7 +24,7 @@ class LicenseKeyDialog(QtWidgets.QMainWindow):
         self.ui.website.mousePressEvent = lambda event: self.website()
         self.ui.exit_.mousePressEvent = lambda event: self.exit_()
         self.error_dictionary = {
-            'server': 'Check your internet connection' if internet_on
+            'server': 'Check your internet connection' if not internet_on()
             else 'We have a problems with our server now. Try again later.',
             'token': 'This key is not exists or has been activated early on another PC.\n" \
                                           "Go to website for support.',
