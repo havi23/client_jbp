@@ -58,7 +58,7 @@ class SpecDialog(QtWidgets.QDialog):
         self.oldPos = event.globalPos()
 
     def spec(self, main, class_, spec):
-        spec = DB.query(f'select * from specs where class="{class_}";')[0][spec]
+        spec = DB.query(f'select * from specs where class=LOWER("{class_}");')[0][spec]
         if spec.upper() not in main.options:
             if main.GnomeDialog is None:
                 main.GnomeDialog = GnomeDialog(14, f"\n\nYou dont have this spec on your key\n"

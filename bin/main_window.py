@@ -150,6 +150,12 @@ class MainDialog(QtWidgets.QMainWindow):
             self.class_= self.DB.query('SELECT data FROM system where variable="class"')[0][0]
             self.account_data = self.DB.query('SELECT data FROM system where variable in ("account", "server", "character")')
             self.rotation_key = self.DB.query(f'select * from system WHERE variable="rotation_key"')[0][1]
+            print(self.wow_path)
+            print(self.spec)
+            print(self.class_)
+            print(self.account_data)
+            print(self.rotation_key)
+
             if self.class_ is not None:
                 self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/main/{self.class_}.png')))
             else:
@@ -181,7 +187,8 @@ class MainDialog(QtWidgets.QMainWindow):
             elif self.spec is not None:
                 binds = self.DB.query(f'SELECT * FROM {self.spec}')
                 for bind in binds:
-                    if bind[3] and bind[2] is None:
+                    spell_name = bind[0]
+                    if spell_name is None:
                         if not self.GnomeDialog:
                             print(bind)
                             self.GnomeDialog = GnomeDialog(14,
@@ -205,6 +212,7 @@ class MainDialog(QtWidgets.QMainWindow):
         return super(MainDialog, self).event(event)
 
     def binds(self):
+
         if self.GnomeDialog is not None and self.GnomeAwaits != self.binds.__name__:
             self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path("bin/img/gnome/nani.png")))
             return

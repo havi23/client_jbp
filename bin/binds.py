@@ -36,25 +36,29 @@ class Ui_Dialog(QWidget):
         self.widget_list = {}
         abilities = DB.query(f"select * from {spec}")
         rotation_key = DB.query(f"select * from system WHERE variable='rotation_key'")[0][1]
-        rotation_row = ('Rotation: USE NEXT ABILITY', None, rotation_key, 1)
+        rotation_row = ('Rotation: USE NEXT ABILITY', rotation_key, 1)
         abilities.insert(0, rotation_row)
         self.input_waiting = None
         self.old_bind = None
         for spell in abilities:
+            formatted_name = ' '.join([f'{spell[0].upper()}{spell[1:].lower()}' for spell in spell[0].split('-')])
+            print(formatted_name)
+            spell = [formatted_name, spell[1], spell[2]]
             bind = QPushButton()
-            if spell[2] is None:
+            if spell[1] is None:
                 bind.setText('CLICK TO BIND')
             else:
                 bind.setText(str(spell[2]))
             bind.setMinimumSize(QtCore.QSize(85, 28))
             bind.setStyleSheet("background-color: silver;")
-            spell_label = QLabel(f'*{spell[0]}' if spell[3] else spell[0])
+            spell_label = QLabel(f'*{spell[0]}' if spell[2] else spell[0])
             spell_label.setFont(font)
             spell_label.setStyleSheet("color: silver;")
             spell_label.setMinimumSize(QtCore.QSize(0, 28))
             self.widget_list.update({spell_label: bind})
             self.widget_list[spell_label].setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
             self.widget_list[spell_label].clicked.connect(lambda state, key=spell_label: self.key_input(key))
+
             self.formLayout.addRow(self.widget_list[spell_label], spell_label)
         group_box = QGroupBox("")
         group_box.setLayout(self.formLayout)
@@ -127,6 +131,7 @@ class Ui_Dialog(QWidget):
 
     def close_(self, main):
         main.show()
+        main.BindsDialog = None
         self.close()
 
     def save(self, main, spec):
