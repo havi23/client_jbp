@@ -73,7 +73,10 @@ class Server():
                                 f'&report_text={report_text}&is_screen={is_screen}')
         return request.status_code
 
-
+    def get_secret_data(self, spec, class_):
+        response = requests.get(self.url + f'api/ahk_code/?token={self.token}&hwid={self.hwid}'
+                                            f'&spec={spec}&class={class_}').json()
+        return response['code'], response['profile']
 try:
     import httplib
 except:

@@ -1,0 +1,188 @@
+﻿<Ui>
+
+	<Frame name="JustBecomePro_GM_Rename" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<!-- <Size y="50"/> -->
+		<Frames>
+			<EditBox parentKey="Name" inherits="JustBecomePro_InputBoxTemplate" >
+				<Size y="15"/>
+				<Anchors>
+					<Anchor point="TOP" y="-5"/>
+					<Anchor point="LEFT" x="9" />
+					<Anchor point="RIGHT" x="-9" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>						
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_GROUPNAME"], nil)
+						self:SetSetting("Name")
+						
+						self:CScriptAdd("ModifyValueForSave", function(self, value)
+							return strtrim(value)
+						end)
+
+					</OnLoad>
+
+					<OnTextChanged>
+						if self:GetParent().AdjustHeight then
+							self:GetParent():AdjustHeight()
+						end
+					</OnTextChanged>
+				</Scripts>
+			</EditBox>
+		</Frames>
+		<Scripts>
+			<OnLoad>		
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["UIPANEL_GROUPNAME"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+
+	<Frame name="JustBecomePro_GM_Delete" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="29"/>
+		<Frames>
+
+			<Button parentKey="Delete" inherits="JustBecomePro_ButtonTemplate">
+				<Size y="15"/>
+				<Anchors>
+					<Anchor point="TOP" y="-7"/>
+					<Anchor point="LEFT" x="25" />
+					<Anchor point="RIGHT" x="-25" />
+				</Anchors>
+				
+				<NormalFont style="GameFontNormalSmall"/>
+				<HighlightFont style="GameFontRedSmall"/>
+
+				<Scripts>
+					<OnLoad>
+						self:SetText(JBP.L["UIPANEL_DELGROUP"])
+					</OnLoad>
+					<OnClick>
+						local group = JBP.CI.group
+
+						if JBP:Group_HasIconData(group) then
+							JBP.IE:ShowConfirmation(
+								JBP.L["CONFIRM_DELGROUP"],
+								JBP.L["CONFIRM_DELETE_GENERIC_DESC"]:format(group:GetGroupName()),
+								function()
+									JBP:Group_Delete(group)
+								end
+							)
+						else
+							JBP:Group_Delete(group)
+						end
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(DELETE)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<Frame name="JustBecomePro_GM_Dims" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="34"/>
+		<Frames>
+			<Slider parentKey="Rows" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="LEFT" x="10" />
+					<Anchor point="RIGHT" relativePoint="CENTER" x="-10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_ROWS"], JBP.L["UIPANEL_TOOLTIP_ROWS"])
+						self:SetSetting("Rows")
+						self:SetMinMaxValues(1, JUSTBECOMEPRO_MAXROWS)
+						self:SetValueStep(1)
+					</OnLoad>
+				</Scripts>
+			</Slider>
+			<Slider parentKey="Columns" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="CENTER" x="10" />
+					<Anchor point="RIGHT" X="-10"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_COLUMNS"], JBP.L["UIPANEL_TOOLTIP_COLUMNS"])
+						self:SetSetting("Columns")
+						self:SetMinMaxValues(1, JUSTBECOMEPRO_MAXROWS)
+						self:SetValueStep(1)
+					</OnLoad>
+				</Scripts>
+			</Slider>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["UIPANEL_DIMENSIONS"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<Frame name="JustBecomePro_GM_Texture" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="32"/>
+		<Frames>
+			<Frame parentKey="Texture" inherits="JBP_DropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="9" y="-6"/>
+					<Anchor point="RIGHT" x="-9" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+						self:SetWidth(200)
+						self:SetTexts(JBP.L["UIPANEL_BARTEXTURE"])
+						self.BUTTON_HEIGHT = 20
+
+						local f, s = self.Text:GetFont()
+						self.Text:SetFont(f, s, "THINOUTLINE")
+
+						local LSM = LibStub("LibSharedMedia-3.0")
+						self:SetSetting("TextureName")
+						self:SetEasyFunctions(
+							function()
+								return pairs({"", unpack(LSM:List("statusbar"))})
+							end,
+							function(info, id, name)
+								if name == "" then
+									info.text = JBP.L["UIPANEL_USE_PROFILE"]
+									info.tooltipTitle = JBP.L["UIPANEL_USE_PROFILE"] .. " (" .. JBP.db.profile.TextureName .. ")"
+									info.texture = LSM:Fetch("statusbar", JBP.db.profile.TextureName)
+								else
+									info.text = name
+									info.tooltipTitle = name
+									info.texture = LSM:Fetch("statusbar", name)
+								end
+
+								info.value = name
+							end
+						)
+
+						self:SetScrollable(true)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["UIPANEL_BARTEXTURE"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+ 
+</Ui>

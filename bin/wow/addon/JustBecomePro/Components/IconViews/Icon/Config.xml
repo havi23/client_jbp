@@ -1,0 +1,84 @@
+<Ui>
+
+	<Frame name="JustBecomePro_GM_IconView" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="70"/>
+		<Frames>
+
+			<Slider parentKey="BorderIcon" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="LEFT" x="10" />
+					<Anchor point="TOP" y="-9"/>
+					<Anchor point="RIGHT" relativePoint="CENTER" x="-10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_BORDERICON"], JBP.L["UIPANEL_BAR_BORDERICON_DESC"])
+						self:SetSetting("BorderIcon")
+
+						self:SetMinMaxValues(0, 5)
+						--self:SetRange(3)
+						--self:SetMode(self.MODE_ADJUSTING)
+						self:SetValueStep(0.1)
+						self:SetWheelStep(0.1)
+
+						self:SetTextFormatter(JBP.C.Formatter.PIXELS, JBP.C.Formatter.F_0)
+
+					</OnLoad>
+				</Scripts>
+			</Slider>
+
+			<Button parentKey="BorderColor" inherits="JustBecomePro_ColorButtonTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.BorderIcon" />
+					<Anchor point="LEFT" relativePoint="CENTER" x="10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_BORDERCOLOR"], JBP.L["UIPANEL_BAR_BORDERCOLOR_DESC"])
+						self:SetSetting("BorderColor")
+						self:SetHasOpacity(true)
+					</OnLoad>
+				</Scripts>
+			</Button>
+
+			<CheckButton parentKey="BorderInset" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.BorderIcon" relativePoint="BOTTOM" y="-5" />
+					<Anchor point="LEFT"  x="5" y="-1"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_ICONBORDERINSET"], JBP.L["UIPANEL_BAR_ICONBORDERINSET_DESC"])
+						self:SetSetting("BorderInset")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:CScriptAdd("ReloadRequested", function()
+					self:SetTitle(JBP.CI.group.viewData.name)
+				end)
+				
+				self:CScriptAdd("SettingTableRequested", function(requester)
+					if JBP.CI.gs.View == "icon" then
+						return JBP.CI.group:GetSettingsPerView()
+					else
+						-- prevent the settings from loading if the current view is wrong.
+						return false
+					end
+				end)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+ 
+</Ui>

@@ -1,0 +1,12 @@
+﻿<Ui>
+
+	<EditBox name="JustBecomePro_UnitEditBox" inherits="JustBecomePro_InputBoxTemplate" virtual="true" multiline="true" autoFocus="false">
+		<Size y="15"/>
+		<Scripts>
+			<OnEvent>
+				JBP:TT_Update(self)
+			</OnEvent>
+		</Scripts>
+	</EditBox>
+
+</Ui>

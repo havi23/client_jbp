@@ -1,0 +1,321 @@
+﻿<Ui>
+
+	<Frame name="JustBecomePro_CLEUOptions" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="250"/>
+		<Frames>
+		
+			<Frame parentKey="CLEUEvents" name="$parentCLEUEvents" inherits="JBP_DropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="5" y="-5"/>
+					<Anchor point="RIGHT" x="-5" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+				
+						self:SetTexts(JBP.L["CLEU_EVENTS"], JBP.L["CLEU_EVENTS_DESC"])
+						self:SetFunction(JBP.Types.cleu.Config.EventMenu)
+
+						self.SHOW_TIME = 0.5
+
+						self.Button:HookScript("OnClick", function(self)
+							JBP.IE:SaveSettings()
+						end)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			
+			<EditBox parentKey="CLEUDur" name="$parentCLEUDur" inherits="JustBecomePro_TimeEditBoxTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parentCLEUEvents" relativePoint="BOTTOMLEFT" y="-7"/>
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString parentKey="text2" wordwrap="true" justifyH="LEFT" inherits="GameFontHighlightSmall">
+							<Anchors>
+								<Anchor point="LEFT" relativePoint="RIGHT" x="5"/>
+								<Anchor point="RIGHT" relativeto="JustBecomePro_CLEUOptions" x="-5"/>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Scripts>
+					<OnLoad>
+						self.text2:SetText(JBP.L["CLEU_TIMER"])
+						self.text2:SetWidth(self:GetParent().CLEUEvents:GetWidth() - self:GetWidth() - 35)
+						self.setting = "CLEUDur"
+						
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["CLEU_TIMER"], JBP.L["CLEU_TIMER_DESC"])
+						self:SetSetting("CLEUDur")
+					</OnLoad>
+				</Scripts>
+			</EditBox>
+
+			<CheckButton parentKey="CLEUNoRefresh" name="$parentCLEUNoRefresh" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.CLEUDur" relativePoint="RIGHT" x="2" y="-1"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetFrameLevel(self:GetFrameLevel() + 2) -- sometimes it ends up under the type dropdown which makes half of the checkbox unclickable
+					
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_CLEU_NOREFRESH"], JBP.L["ICONMENU_CLEU_NOREFRESH_DESC"])
+						self:SetSetting("CLEUNoRefresh")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+
+			<CheckButton parentKey="OnlyIfConditions" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.CLEUDur" relativePoint="BOTTOMLEFT" x="0" y="-3"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_ONLYIFCONDITIONS"], JBP.L["ICONMENU_ONLYIFCONDITIONS_DESC"])
+						self:SetSetting("OnlyIfConditions")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+			
+			<EditBox parentKey="SourceUnit" name="$parentSourceUnit" inherits="JustBecomePro_UnitEditBox">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.OnlyIfConditions" relativePoint="BOTTOMLEFT" x="0" y="-13"/>
+					<Anchor point="RIGHT" x="-5" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetSetting("SourceUnit")
+						self:SetTexts(JBP.L["CLEU_SOURCEUNITS"], function()
+							if IsModifierKeyDown() then
+								return JBP.UNITS:GetUnitInputDetailedTooltip(self)
+							else
+								return JBP.L["CLEU_SOURCEUNITS_DESC"]
+							end
+						end)
+						
+						self:CScriptAdd("ModifyValueForSave", function(self, value)
+							return JBP:CleanString(value)
+						end)
+
+						JBP.SUG:EnableEditBox(self, "units")
+						self:RegisterEvent("MODIFIER_STATE_CHANGED")
+					</OnLoad>
+					<OnEvent>
+						JBP:TT_Update(self)
+					</OnEvent>
+					<OnTextChanged>
+						if self:GetParent().AdjustHeight then
+							self:GetParent():AdjustHeight()
+						end
+					</OnTextChanged>
+				</Scripts>
+			</EditBox>
+			<Frame parentKey="SourceFlags" name="$parentSourceFlags" inherits="JBP_DropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.SourceUnit" relativePoint="BOTTOM" y="-2"/>
+					<Anchor point="LEFT" relativeKey="$parent.SourceUnit"/>
+					<Anchor point="RIGHT" relativePoint="CENTER" x="-5" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+				
+						self:SetTexts(JBP.L["CLEU_FLAGS_SOURCE"], JBP.L["CLEU_FLAGS_DESC"])
+						self:SetFunction(JBP.Types.cleu.Config.FlagsMenu)
+
+						self.SHOW_TIME = 0.5
+
+						self.flagSet = "SourceFlags" -- the setting name, basically
+						self.Button:HookScript("OnClick", function(self)
+							JBP.IE:SaveSettings()
+						end)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+
+			<Button parentKey="SourceConditions" name="$parentSourceConditions" inherits="JustBecomePro_ButtonTemplate" motionScriptsWhileDisabled="true">
+				<Size x="160" y="16"/>
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.SourceFlags" relativePoint="RIGHT" x="10" />
+					<Anchor point="RIGHT" relativeKey="$parent.SourceUnit"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetScale(0.9)
+						self:SetFrameLevel(self:GetParent():GetFrameLevel()+2)
+						self.Background:SetAlpha(0.7)
+
+						JBP:TT(self, "CLEU_CONDITIONS_SOURCE", "CLEU_CONDITIONS_DESC")
+
+						self:CScriptAdd("ReloadRequested", function()
+							local settings = self:GetSettingTable()
+							local SourceUnit = settings.SourceUnit
+
+							if not SourceUnit or SourceUnit == "" or select(2, JBP:GetUnits(nil, SourceUnit)).mightHaveWackyUnitRefs then
+								self:Disable()
+							else
+								self:Enable()
+							end
+						end)
+					</OnLoad>
+					<OnUpdate>
+						local text = JBP.CNDT:GetTabText("CLEUSource")
+						text = text:gsub(JBP.L["CLEU_CONDITIONS_SOURCE"], JBP.L["CONDITIONS"])
+						self:SetText(text)
+					</OnUpdate>
+					<OnClick>
+						JBP.CNDT:LoadConfig("CLEUSource")
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<EditBox parentKey="DestUnit" name="$parentDestUnit" inherits="JustBecomePro_UnitEditBox">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.SourceFlags" relativePoint="BOTTOM" y="-20"/>
+					<Anchor point="LEFT" relativeKey="$parent.SourceUnit"/>
+					<Anchor point="RIGHT" relativeKey="$parent.SourceUnit"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetSetting("DestUnit")
+						self:SetTexts(JBP.L["CLEU_DESTUNITS"], function()
+							if IsModifierKeyDown() then
+								return JBP.UNITS:GetUnitInputDetailedTooltip(self)
+							else
+								return JBP.L["CLEU_DESTUNITS_DESC"]
+							end
+						end)
+						
+						self:CScriptAdd("ModifyValueForSave", function(self, value)
+							return JBP:CleanString(value)
+						end)
+
+						JBP.SUG:EnableEditBox(self, "units")
+						self:RegisterEvent("MODIFIER_STATE_CHANGED")
+					</OnLoad>
+					<OnEvent>
+						JBP:TT_Update(self)
+					</OnEvent>
+					<OnTextChanged>
+						if self:GetParent().AdjustHeight then
+							self:GetParent():AdjustHeight()
+						end
+					</OnTextChanged>
+				</Scripts>
+			</EditBox>
+			<Frame parentKey="DestFlags" name="$parentDestFlags" inherits="JBP_DropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.DestUnit" relativePoint="BOTTOM" y="-2"/>
+					<Anchor point="LEFT" relativeKey="$parent.DestUnit"/>
+					<Anchor point="RIGHT" relativePoint="CENTER" x="-5" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+				
+						self:SetTexts(JBP.L["CLEU_FLAGS_DEST"], JBP.L["CLEU_FLAGS_DESC"])
+						self:SetFunction(JBP.Types.cleu.Config.FlagsMenu)
+
+						self.SHOW_TIME = 0.5 --TODO: make a method for this.
+
+						self.flagSet = "DestFlags" -- the setting name, basically
+						self.Button:HookScript("OnClick", function(self)
+							JBP.IE:SaveSettings()
+						end)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+
+			<Button parentKey="DestConditions" name="$parentDestConditions" inherits="JustBecomePro_ButtonTemplate" motionScriptsWhileDisabled="true">
+				<Size x="160" y="16"/>
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.DestFlags" relativePoint="RIGHT" x="10" />
+					<Anchor point="RIGHT" relativeKey="$parent.DestUnit"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetScale(0.9)
+						self:SetFrameLevel(self:GetParent():GetFrameLevel()+2)
+						self.Background:SetAlpha(0.7)
+
+						JBP:TT(self, "CLEU_CONDITIONS_DEST", "CLEU_CONDITIONS_DESC")
+
+						self:CScriptAdd("ReloadRequested", function()
+							local settings = self:GetSettingTable()
+							local DestUnit = settings.DestUnit
+
+							if not DestUnit or DestUnit == "" or select(2, JBP:GetUnits(nil, DestUnit)).mightHaveWackyUnitRefs then
+								self:Disable()
+							else
+								self:Enable()
+							end
+						end)
+
+					</OnLoad>
+					<OnUpdate>
+						local text = JBP.CNDT:GetTabText("CLEUDest")
+						text = text:gsub(JBP.L["CLEU_CONDITIONS_DEST"], JBP.L["CONDITIONS"])
+						self:SetText(text)
+					</OnUpdate>
+					<OnClick>
+						JBP.CNDT:LoadConfig("CLEUDest")
+					</OnClick>
+				</Scripts>
+			</Button>
+
+		</Frames>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString parentKey="SourceHeader" inherits="GameFontNormalSmall" justifyH="LEFT" >
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.SourceUnit" relativePoint="TOPLEFT" x="0" y="1"/>
+						<Anchor point="RIGHT" x="0"/>
+					</Anchors>
+				</FontString>
+				<FontString parentKey="DestHeader" inherits="GameFontNormalSmall" justifyH="LEFT" >
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeKey="$parent.DestUnit" relativePoint="TOPLEFT" x="0" y="1"/>
+						<Anchor point="RIGHT" x="0"/>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+
+				self:CScriptAdd("ReloadRequested", function()
+					JBP.Types.cleu.Config:LoadConfig()
+				end)
+				
+				self:SetTitle(JBP.L["CONFIGPANEL_CLEU_HEADER"])
+
+				self.SourceHeader:SetText(JBP.L["CLEU_HEADER_SOURCE"])
+				self.DestHeader:SetText(JBP.L["CLEU_HEADER_DEST"])
+				
+				JBP.IE:DistributeFrameAnchorsLaterally(self, 2, self.CLEUDur, self.CLEUNoRefresh)
+				self.CLEUDur:SetPoint("LEFT", 8, 0)
+				
+				self.CLEUNoRefresh:ConstrainLabel(self, "RIGHT")
+
+				self.CLEUDur.text2:SetPoint("RIGHT", self.CLEUNoRefresh, "LEFT")
+				self.CLEUDur.text2:SetHeight(30)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	
+</Ui>

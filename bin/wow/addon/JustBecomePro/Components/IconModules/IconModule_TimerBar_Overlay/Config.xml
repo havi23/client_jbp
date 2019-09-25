@@ -1,0 +1,131 @@
+﻿<Ui>
+
+	<Frame name="JustBecomePro_CBarOptions" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="90"/>
+		<Frames>
+			<CheckButton parentKey="ShowCBar" name="$parentShowCBar" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="TOP" y="-1"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_ENABLE"], JBP.L["ICONMENU_SHOWCBAR_DESC"])
+						self:SetSetting("ShowCBar")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+			<CheckButton parentKey="InvertCBar" name="$parentInvertCBar" inherits="JustBecomePro_CheckTemplate">
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_INVERTBARS"], JBP.L["ICONMENU_INVERTCBAR_DESC"])
+						self:SetSetting("InvertCBar")
+						
+						self:CScriptAdd("ReloadRequested", function()
+							local settings = self:GetSettingTable()
+							self:SetShown(settings.ShowCBar)
+						end)
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+			<EditBox parentKey="CBarOffs" name="$parentCBarOffs" inherits="JustBecomePro_TimeEditBoxTemplate" autoFocus="false">
+				<Size x="45" y="15"/>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parentInvertCBar" relativePoint="RIGHT" y="1"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self.text:SetText(JBP.L["ICONMENU_OFFS"])
+						self.text:SetWidth(50)
+						self.setting = "CBarOffs"
+						
+						self.text:ClearAllPoints()
+						self.text:SetPoint("LEFT", self, "RIGHT", 1, 0)
+						
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_OFFS"], JBP.L["ICONMENU_BAROFFS"])
+						self:SetSetting("CBarOffs")
+						
+						self:CScriptAdd("ReloadRequested", function()
+							local settings = self:GetSettingTable()
+							self:SetShown(settings.ShowCBar)
+						end)
+					</OnLoad>
+				</Scripts>
+			</EditBox>
+			
+
+			<CheckButton parentKey="EnableColors" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="$parentShowCBar" relativePoint="BOTTOM" y="2"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["COLOR_OVERRIDE_GROUP"], JBP.L["COLOR_OVERRIDE_GROUP_DESC"])
+						self:SetSetting("TimerBar_EnableColors")
+						
+						self:CScriptAdd("ReloadRequested", function()
+							local settings = self:GetSettingTable()
+							self:SetShown(settings.ShowCBar)
+						end)
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+			
+			<CheckButton parentKey="Overlay_BarGCD" name="$parentOverlay_BarGCD" inherits="JustBecomePro_CheckTemplate">
+				<!-- Left anchor is handled by DistributeFrameAnchorsLaterally in parent's OnLoad -->
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_ALLOWGCD"], JBP.L["ICONMENU_ALLOWGCD_DESC"])
+						self:SetSetting("Overlay_BarGCD")
+						
+						self:CScriptAdd("ReloadRequested", function()
+							local settings = self:GetSettingTable()
+
+							self:SetShown(settings.ShowCBar and not JBP.CI.icon.typeData.hasNoGCD)
+						end)
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+
+
+			<Frame inherits="JustBecomePro_TimerBarColorsTemplate">
+				<Scripts>
+					<OnLoad inherit="prepend">
+						self:CScriptAdd("ReloadRequested", function()
+							local settings = self:GetSettingTable()
+							self:SetShown(settings.ShowCBar and settings.TimerBar_EnableColors)
+						end)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["CONFIGPANEL_CBAR_HEADER"])
+				
+				self.ShowCBar:ConstrainLabel(self.InvertCBar)
+				self.InvertCBar:ConstrainLabel(self.CBarOffs)
+
+				self.EnableColors:ConstrainLabel(self.Overlay_BarGCD)
+				self.Overlay_BarGCD:ConstrainLabel(self, "RIGHT")
+				
+				JBP.IE:DistributeFrameAnchorsLaterally(self, 3, self.ShowCBar, self.InvertCBar, self.CBarOffs)
+				JBP.IE:DistributeFrameAnchorsLaterally(self, 2, self.EnableColors, self.Overlay_BarGCD)
+
+				self:SetAutoAdjustHeight(true)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+ 
+</Ui>

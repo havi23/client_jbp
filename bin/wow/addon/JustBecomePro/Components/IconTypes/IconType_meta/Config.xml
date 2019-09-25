@@ -1,0 +1,154 @@
+﻿<Ui>
+
+	<Frame name="JustBecomePro_MetaGroup" virtual="true">
+		<Size y="30"/>
+		<Frames>
+			<Frame parentKey="Icon" inherits="JBP_IconDropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="LEFT" x="7"/>
+					<Anchor point="RIGHT" x="-26"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+				
+						self:RegisterForDrag("LeftButton", "RightButton")
+						self:SetTexts(JBP.L["CHOOSEICON"], JBP.L["CHOOSEICON_DESC"])
+						self:SetFunction(JBP.Types.meta.Config.IconMenu)
+
+						self:SetPreviewSize(21)
+					</OnLoad>
+					<OnDragStart>
+						local Config = JBP.Types.meta.Config
+
+						Config.draggingFrame = self
+						Config.draggingButton = button
+						Config.draggingOriginalFrame = self
+					</OnDragStart>
+					<OnDragStop>
+						local Config = JBP.Types.meta.Config
+
+						Config.draggingFrame = nil
+						Config.draggingButton = nil
+						Config.draggingOriginalFrame = nil
+					</OnDragStop>
+					<OnUpdate>
+						local Config = JBP.Types.meta.Config
+
+						if (self:IsMouseOver() or self.IconPreview:IsMouseOver()) and Config.draggingFrame and self ~= Config.draggingFrame then
+							if Config.draggingButton == "LeftButton" then
+								local sourceID = Config.draggingFrame:GetParent():GetID()
+								local destID = self:GetParent():GetID()
+								local delta = abs(sourceID - destID)
+								
+								if sourceID > destID then
+									for i = destID, sourceID - 1, 1 do
+										Config:SwapIcons(i, i + 1)
+									end
+								else
+									for i = sourceID, destID - 1, 1 do
+										Config:SwapIcons(i, i + 1)
+									end
+								end
+								
+								Config.draggingFrame = self
+								
+							elseif Config.draggingButton == "RightButton" then
+							
+								Config:SwapIcons(Config.draggingFrame:GetParent():GetID(), Config.draggingOriginalFrame:GetParent():GetID())
+								Config:SwapIcons(self:GetParent():GetID(), Config.draggingOriginalFrame:GetParent():GetID())
+								
+								Config.draggingFrame = self
+							end
+						end
+					</OnUpdate>
+				</Scripts>
+			</Frame>
+			
+			<Button parentKey="Delete" inherits="JustBecomePro_DeleteButtonTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.Icon" relativePoint="RIGHT" x="5" y="0"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:TT(self, "METAPANEL_REMOVE", "METAPANEL_REMOVE_DESC")
+					</OnLoad>
+					<OnClick>
+						JBP:ClickSound()
+
+						JBP.Types.meta.Config:Delete(self)
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP.Types.meta.Config[self:GetID()] = self
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<Frame name="JustBecomePro_MetaIconOptions" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="20"/>
+		<Frames>
+			<Button parentKey="Add" inherits="JustBecomePro_ButtonTemplate">
+				<Size x="160" y="16"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" x="7" y="-7"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+					
+						self:SetText([[|TInterface\PaperDollInfoFrame\Character-Plus:0|t ]] .. JBP.L["META_ADDICON"])
+						
+						JBP:TT(self, "META_ADDICON", "META_ADDICON_DESC")
+						
+						self:SetWidth(self:GetTextWidth()+15)
+						self:SetFrameLevel(self:GetParent():GetFrameLevel()+4)
+						self.Background:SetAlpha(0.7)
+					</OnLoad>
+					<OnClick>
+						JBP:ClickSound()
+						
+						tinsert(JBP.CI.ics.Icons, "")
+						JBP.Types.meta.Config:Reload()
+					</OnClick>
+				</Scripts>
+			</Button>
+			
+			<CheckButton parentKey="CheckNext" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<!-- <Anchor point="TOPLEFT" x="5" y="-6"/> -->
+					<Anchor point="LEFT" relativeKey="$parent.Add" relativePoint="RIGHT" x="8" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>						
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_CHECKNEXT"], JBP.L["ICONMENU_CHECKNEXT_DESC"])
+						self:SetSetting("CheckNext")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+			
+			<Frame name="$parent1" inherits="JustBecomePro_MetaGroup" id="1">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.CheckNext" relativePoint="BOTTOM" y="1"/>
+					<Anchor point="LEFT" />
+					<Anchor point="RIGHT" />
+				</Anchors>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+
+				self:CScriptAdd("ReloadRequested", function()
+					JBP.Types.meta.Config:LoadConfig()
+				end)
+				
+				self:SetTitle(JBP.L["ICONMENU_COMPONENTICONS"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

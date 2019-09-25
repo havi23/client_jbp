@@ -1,0 +1,14 @@
+﻿	
+<Bindings>
+<!-- User interface key bindings -->
+	<Binding name="JUSTBECOMEPRO_ICONEDITOR_UNDO" header="JUSTBECOMEPRO">
+		if JustBecomePro_IconEditor and JustBecomePro_IconEditor:IsShown() then
+			JBP.IE:DoUndoRedo(-1)
+		end
+	</Binding>
+	<Binding name="JUSTBECOMEPRO_ICONEDITOR_REDO" >
+		if JustBecomePro_IconEditor and JustBecomePro_IconEditor:IsShown() then
+			JBP.IE:DoUndoRedo(1)
+		end
+	</Binding>
+</Bindings>

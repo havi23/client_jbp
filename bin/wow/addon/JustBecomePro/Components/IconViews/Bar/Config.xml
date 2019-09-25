@@ -1,0 +1,232 @@
+<Ui>
+
+	<Frame name="JustBecomePro_GM_Bar" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="166"/>
+		<Frames>
+
+			<CheckButton parentKey="Icon" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT"  x="5" y="-1"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_SHOWICON"], JBP.L["UIPANEL_BAR_SHOWICON_DESC"])
+						self:SetSetting("Icon")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+
+			<CheckButton parentKey="Flip" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.Icon"/>
+					<Anchor point="LEFT" relativePoint="CENTER" x="5" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_FLIP"], JBP.L["UIPANEL_BAR_FLIP_DESC"])
+						self:SetSetting("Flip")
+
+						self:CScriptAdd("ReloadRequested", function()
+							local settings = self:GetSettingTable()
+							if settings then
+								self:SetEnabled(settings.Icon)
+							end
+						end)
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+
+			<Button parentKey="BorderColor" inherits="JustBecomePro_ColorButtonTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.Icon" relativePoint="BOTTOMLEFT" x="4" y="-6" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_BORDERCOLOR"], JBP.L["UIPANEL_BAR_BORDERCOLOR_DESC"])
+						self:SetSetting("BorderColor")
+						self:SetHasOpacity(true)
+					</OnLoad>
+				</Scripts>
+			</Button>
+
+			<Slider parentKey="Padding" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.BorderColor" />
+					<Anchor point="LEFT" relativePoint="CENTER" x="10" />
+					<Anchor point="RIGHT" x="-10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_PADDING"], JBP.L["UIPANEL_BAR_PADDING_DESC"])
+						self:SetSetting("Padding")
+						
+						self:SetMinMaxValues(0, math.huge)
+						self:SetRange(10)
+						self:SetMode(self.MODE_ADJUSTING)
+						self:SetValueStep(0.1)
+						self:SetWheelStep(0.5)
+
+						self:SetTextFormatter(JBP.C.Formatter.PIXELS, JBP.C.Formatter.F_0)
+
+						self:CScriptAdd("ReloadRequested", function()
+							local settings = self:GetSettingTable()
+							if settings then
+								self:SetEnabled(settings.Icon)
+							end
+						end)
+					</OnLoad>
+				</Scripts>
+			</Slider>
+
+			<Slider parentKey="BorderIcon" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="LEFT" x="10" />
+					<Anchor point="TOP" relativeKey="$parent.BorderColor" relativePoint="BOTTOM" y="-14"/>
+					<Anchor point="RIGHT" relativePoint="CENTER" x="-10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_BORDERICON"], JBP.L["UIPANEL_BAR_BORDERICON_DESC"])
+						self:SetSetting("BorderIcon")
+
+						self:SetMinMaxValues(0, 5)
+						--self:SetRange(3)
+						--self:SetMode(self.MODE_ADJUSTING)
+						self:SetValueStep(0.1)
+						self:SetWheelStep(0.5)
+
+						self:SetTextFormatter(JBP.C.Formatter.PIXELS, JBP.C.Formatter.F_0)
+
+						self:CScriptAdd("ReloadRequested", function()
+							local settings = self:GetSettingTable()
+							if settings then
+								self:SetEnabled(settings.Icon)
+							end
+						end)
+					</OnLoad>
+				</Scripts>
+			</Slider>
+
+			<Slider parentKey="BorderBar" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.BorderIcon" />
+					<Anchor point="RIGHT" x="-10" />
+					<Anchor point="LEFT" relativePoint="CENTER" x="10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_BORDERBAR"], JBP.L["UIPANEL_BAR_BORDERBAR_DESC"])
+						self:SetSetting("BorderBar")
+
+						self:SetMinMaxValues(0, 5)
+						--self:SetRange(3)
+						--self:SetMode(self.MODE_ADJUSTING)
+						self:SetValueStep(0.1)
+						self:SetWheelStep(0.5)
+
+						self:SetTextFormatter(JBP.C.Formatter.PIXELS, JBP.C.Formatter.F_0)
+					</OnLoad>
+				</Scripts>
+			</Slider>
+
+			<Slider parentKey="SizeX" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.BorderIcon" relativePoint="BOTTOM"  y="-14"/>
+					<Anchor point="LEFT" relativeKey="$parent.BorderIcon" />
+					<Anchor point="RIGHT" relativeKey="$parent.BorderIcon" />
+					
+				</Anchors>
+				<Scripts>
+					<OnLoad>						
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_SIZE_X"], JBP.L["UIPANEL_BAR_SIZE_X_DESC"])
+						self:SetSetting("SizeX")
+
+						self:SetMode(self.MODE_ADJUSTING)
+						self:SetMinMaxValues(1, 2000)
+						self:SetRange(20)
+						self:SetValueStep(0.1)
+						self:SetWheelStep(1)
+						
+						self:SetTextFormatter(JBP.C.Formatter.F_1, JBP.C.Formatter.F_0)
+					</OnLoad>
+				</Scripts>
+			</Slider>
+
+			<Slider parentKey="SizeY" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.SizeX" />
+					<Anchor point="LEFT" relativeKey="$parent.BorderBar" />
+					<Anchor point="RIGHT" relativeKey="$parent.BorderBar" />
+					
+				</Anchors>
+				<Scripts>
+					<OnLoad>						
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_SIZE_Y"], JBP.L["UIPANEL_BAR_SIZE_Y_DESC"])
+						self:SetSetting("SizeY")
+
+						self:SetMode(self.MODE_ADJUSTING)
+						self:SetMinMaxValues(1, 2000)
+						self:SetRange(20)
+						self:SetValueStep(0.1)
+						self:SetWheelStep(1)
+						
+						self:SetTextFormatter(JBP.C.Formatter.F_1, JBP.C.Formatter.F_0)
+					</OnLoad>
+				</Scripts>
+			</Slider>
+
+			<CheckButton parentKey="BorderInset" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.SizeX" relativePoint="BOTTOM" y="-5" />
+					<Anchor point="LEFT"  x="5" y="-1"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_BAR_ICONBORDERINSET"], JBP.L["UIPANEL_BAR_ICONBORDERINSET_DESC"])
+						self:SetSetting("BorderInset")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self.Icon:ConstrainLabel(self.Flip)
+				self.Flip:ConstrainLabel(self, "RIGHT")
+
+				self:CScriptAdd("ReloadRequested", function()
+					self:SetTitle(JBP.CI.group.viewData.name)
+				end)
+				
+				self:CScriptAdd("SettingTableRequested", function(requester)
+					if JBP.CI.gs.View == "bar" or JBP.CI.gs.View == "barv" then
+						return JBP.CI.group:GetSettingsPerView()
+					else
+						-- prevent the settings from loading if the current view is wrong.
+						return false
+					end
+				end)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+ 
+</Ui>

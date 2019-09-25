@@ -1,0 +1,63 @@
+<Ui>
+
+	<Frame name="JustBecomePro_GM_IconPosition" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="34"/>
+		<Frames>
+			<Slider parentKey="X" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="LEFT" x="10"/>
+					<Anchor point="RIGHT" relativePoint="CENTER" x="-10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_ICONSPACINGX"], JBP.L["UIPANEL_ICONSPACING_DESC"])
+						self:SetSetting("SpacingX")
+
+						self:SetMinMaxValues(-100, 100)
+						self:SetRange(10)
+						self:SetValueStep(0.1)
+						self:SetWheelStep(1)
+						self:SetMode(self.MODE_ADJUSTING)
+						self:SetTextFormatter(JBP.C.Formatter.PIXELS, JBP.C.Formatter.PASS)
+					</OnLoad>
+				</Scripts>
+			</Slider>
+			<Slider parentKey="Y" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="RIGHT" x="-10" />
+					<Anchor point="LEFT" relativePoint="CENTER" x="10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_ICONSPACINGY"], JBP.L["UIPANEL_ICONSPACING_DESC"])
+						self:SetSetting("SpacingY")
+
+						self:SetMinMaxValues(-100, 100)
+						self:SetRange(10)
+						self:SetValueStep(0.1)
+						self:SetWheelStep(1)
+						self:SetMode(self.MODE_ADJUSTING)
+						self:SetTextFormatter(JBP.C.Formatter.PIXELS, JBP.C.Formatter.PASS)
+
+					</OnLoad>
+				</Scripts>
+			</Slider>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["UIPANEL_ICONSPACING"])
+				
+				self:CScriptAdd("SettingTableRequested", function(requester)
+					return JBP.CI.group:GetSettingsPerView()
+				end)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+ 
+</Ui>

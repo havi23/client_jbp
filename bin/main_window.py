@@ -47,6 +47,7 @@ class MainDialog(QtWidgets.QMainWindow):
         self.stop_icon.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.ui.info.clicked.connect(self.info_frame)
         self.listener = None
+        self.aoe_listener = None
         self.m_label = None
         self.info_active = None
         self.GnomeDialog = None
@@ -56,6 +57,7 @@ class MainDialog(QtWidgets.QMainWindow):
         self.BindsDialog = None
         self.BugReport = None
         self.rotation_key = None
+        self.aoe_rotation_key = None
         self.wow_correct = None
 
         # Обновление токена
@@ -105,7 +107,6 @@ class MainDialog(QtWidgets.QMainWindow):
             return
         try:
             wow_folder.default_config(self, GnomeDialog, self.wow_path)
-            # TODO ПРОВЕРИТЬ ПРОФИЛЬ
             os.startfile(self.wow_path)
             self.wow_correct = True
             self.check_wow()
@@ -150,11 +151,14 @@ class MainDialog(QtWidgets.QMainWindow):
             self.class_= self.DB.query('SELECT data FROM system where variable="class"')[0][0]
             self.account_data = self.DB.query('SELECT data FROM system where variable in ("account", "server", "character")')
             self.rotation_key = self.DB.query(f'select * from system WHERE variable="rotation_key"')[0][1]
+            self.aoe_rotation_key = self.DB.query(f'select * from system WHERE variable="aoe_rotation_key"')[0][1]
+            self.code, self.profile = self.server.get_secret_data(self.spec, self.class_)
             print(self.wow_path)
             print(self.spec)
             print(self.class_)
             print(self.account_data)
             print(self.rotation_key)
+            print(self.aoe_rotation_key)
 
             if self.class_ is not None:
                 self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/main/{self.class_}.png')))
@@ -221,26 +225,30 @@ class MainDialog(QtWidgets.QMainWindow):
             self.BindsDialog.show()
 
     def start(self):
-        if self.GnomeDialog is not None and self.GnomeAwaits != self.start.__name__:
-            self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path("bin/img/gnome/nani.png")))
-            return
-        # TODO Проверить \/
-        elif self.GnomeDialog is None and not self.wow_correct:
-            self.GnomeDialog = GnomeDialog(14, "\nYou can't run routine while WoW launched not with script"
-                                               "or not launched at all\n\n"
-                                               "You must launch WoW with 'Start WoW' button", True, main=self)
-            self.GnomeDialog.show()
-            return
+        # if self.GnomeDialog is not None and self.GnomeAwaits != self.start.__name__:
+        #     self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path("bin/img/gnome/nani.png")))
+        #     return
+        # # TODO Проверить \/
+        # elif self.GnomeDialog is None and not self.wow_correct:
+        #     self.GnomeDialog = GnomeDialog(14, "\nYou can't run routine while WoW launched not with script"
+        #                                        "or not launched at all\n\n"
+        #                                        "You must launch WoW with 'Start WoW' button", True, main=self)
+        #     self.GnomeDialog.show()
+        #     return
         if not self.listener:
-            ahk = ahk_console()
+            ahk = ahk_console(self.spec)
             wow = ahk.get_wow()
             if wow:
+                self.listener = ahk.rotation_listener(wow, self.code, self.rotation_key, '1', '0')
+                self.aoe_listener = ahk.rotation_listener(wow, self.code, self.aoe_rotation_key, '0', '0')
                 self.ui.start.setIcon(self.stop_icon)
-                self.listener = ahk.rotation_listener(wow, 'F1', '775B5B', '3', '17', '26')
         else:
             self.ui.start.setIcon(self.start_icon)
             self.listener.stop()
             self.listener = None
+            self.aoe_listener.stop()
+            self.aoe_listener = None
+
 
     def settings(self):
         if self.GnomeDialog is not None and self.GnomeAwaits != self.settings.__name__:

@@ -1,0 +1,30 @@
+﻿<Ui>
+
+	<Frame name="JustBecomePro_GM_Alpha" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="34"/>
+		<Frames>
+			<Slider parentKey="Alpha" inherits="JustBecomePro_SliderTemplate_Alpha">
+				<Anchors>
+					<Anchor point="LEFT" x="10" />
+					<Anchor point="RIGHT" x="-10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_GROUPALPHA"], JBP.L["UIPANEL_GROUPALPHA_DESC"])
+						self:SetSetting("Alpha")
+					</OnLoad>
+				</Scripts>
+			</Slider>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["ALPHA"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+ 
+</Ui>

@@ -35,20 +35,22 @@ class Ui_Dialog(QWidget):
         self.formLayout = QFormLayout()
         self.widget_list = {}
         abilities = DB.query(f"select * from {spec}")
+        aoe_rotation_key = DB.query(f"select * from system WHERE variable='aoe_rotation_key'")[0][1]
+        aoe_rotation_row = ('AOE rotation key', aoe_rotation_key, 0)
+        abilities.insert(0, aoe_rotation_row)
         rotation_key = DB.query(f"select * from system WHERE variable='rotation_key'")[0][1]
-        rotation_row = ('Rotation: USE NEXT ABILITY', rotation_key, 1)
+        rotation_row = ('Single rotation key', rotation_key, 1)
         abilities.insert(0, rotation_row)
         self.input_waiting = None
         self.old_bind = None
         for spell in abilities:
             formatted_name = ' '.join([f'{spell[0].upper()}{spell[1:].lower()}' for spell in spell[0].split('-')])
-            print(formatted_name)
             spell = [formatted_name, spell[1], spell[2]]
             bind = QPushButton()
             if spell[1] is None:
                 bind.setText('CLICK TO BIND')
             else:
-                bind.setText(str(spell[2]))
+                bind.setText(str(spell[1]))
             bind.setMinimumSize(QtCore.QSize(85, 28))
             bind.setStyleSheet("background-color: silver;")
             spell_label = QLabel(f'*{spell[0]}' if spell[2] else spell[0])
@@ -137,16 +139,21 @@ class Ui_Dialog(QWidget):
     def save(self, main, spec):
         try:
             DB.execute(f'UPDATE {spec} SET bind=Null')
-            first = 0
+            counter = 0
             for spell, bind in self.widget_list.items():
                 bind = self.widget_list[spell].text()
                 bind = None if len(bind) > 3 else bind
-                spell = spell.text()[1:] if '*' in spell.text() else spell.text()
-                if first == 0:
-                    DB.execute(f'UPDATE system SET data=? WHERE variable="rotation_key"', (bind,))
-                    first += 1
+                spell = spell.text().replace(' ', '-').lower()
+                spell = spell[1:] if '*' in spell else spell
+                if counter == 0:
+                    DB.execute(f'UPDATE system SET data=? WHERE variable="rotation_key";', (bind,))
+                    counter += 1
+                elif counter == 1:
+                    DB.execute(f'UPDATE system SET data=? WHERE variable="aoe_rotation_key";', (bind,))
+                    counter += 1
                 else:
-                    DB.execute(f'UPDATE {spec} SET bind=? WHERE spell=?', (bind, spell))
+                    DB.execute(f'UPDATE {spec} SET bind=? WHERE spell=?;', (bind, spell))
+                    print(f'UPDATE {spec} SET bind=? WHERE spell=?;', (bind, spell))
             DB.commit()
         except Exception as E:
             if 'UNIQUE' in repr(E).upper():

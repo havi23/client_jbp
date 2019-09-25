@@ -1,0 +1,134 @@
+﻿-- --------------------
+-- JustBecomePro
+-- Originally by Nephthys of Hyjal <lieandswell@yahoo.com>
+
+-- Other contributions by:
+--		Sweetmms of Blackrock, Oozebull of Twisting Nether, Oodyboo of Mug'thol,
+--		Banjankri of Blackrock, Predeter of Proudmoore, Xenyr of Aszune
+
+-- Currently maintained by
+-- Cybeloras of Aerie Peak
+-- --------------------
+
+
+if not JBP then return end
+
+local JBP = JBP
+local L = JBP.L
+local print = JBP.print
+
+local LSM = LibStub("LibSharedMedia-3.0")
+
+	
+local Backdrop = JBP:NewClass("IconModule_Backdrop", "IconModule")
+
+Backdrop:RegisterIconDefaults{
+	BackdropColor        = "7f333333",
+	BackdropColor_Enable = false,
+}
+
+JBP:MergeDefaultsTables({
+	BackdropColor        = "7f333333",
+	BackdropColor_Enable = false,
+}, JBP.Group_Defaults)
+
+JBP:MergeDefaultsTables({
+	BackdropColor        = "7f333333",
+}, JBP.Defaults.global)
+
+
+JBP:RegisterUpgrade(80003, {
+	icon = function(self, ics)
+		ics.BackdropColor = JBP:RGBATableToStringWithFallback(ics.BackdropColor, "7f333333")
+
+		if ics.BackdropColor ~= "7f333333" then
+			ics.BackdropColor_Enable = true
+		end
+	end,
+})
+
+JBP:RegisterUpgrade(72411, {
+	icon = function(self, ics)
+		if type(ics.BackdropColor) == "table" then
+			-- These values were accidentally switched in code.
+			-- Swap them when upgrading to keep the user's old color.
+			ics.BackdropColor.g, ics.BackdropColor.b =
+			ics.BackdropColor.b, ics.BackdropColor.g
+		end
+	end,
+})
+
+JBP:RegisterUpgrade(72330, {
+	icon = function(self, ics)
+		if type(ics.BackdropColor) == "table" then
+			ics.BackdropColor.a = ics.BackdropAlpha or 0.5
+		end
+	end,
+})
+
+
+Backdrop:RegisterConfigPanel_XMLTemplate(216, "JustBecomePro_BackdropOptions_Icon")
+
+Backdrop:RegisterConfigPanel_XMLTemplate(53, "JustBecomePro_BackdropOptions_Group")
+	:SetPanelSet("group")
+	:SetColumnIndex(1)
+
+
+Backdrop:RegisterConfigPanel_XMLTemplate(53, "JustBecomePro_BackdropOptions_Global")
+	:SetPanelSet("global")
+	:SetColumnIndex(2)
+
+
+
+--Backdrop:RegisterAnchorableFrame("Backdrop")
+
+function Backdrop:OnNewInstance(icon)
+	self.container = CreateFrame("Frame", nil, icon)
+	self.backdrop = self.container:CreateTexture(self:GetChildNameBase() .. "Backdrop", "BACKGROUND", nil, -8)
+	self.backdrop:SetAllPoints(self.container)
+	self.backdrop:Show()
+	--self:SetSkinnableComponent("NULL", self.backdrop)
+end
+
+function Backdrop:OnEnable()
+	self.container:Show()
+end
+function Backdrop:OnDisable()
+	self.container:Hide()
+	self:SetBorder(0, "ffffffff")
+end
+
+function Backdrop:SetOrientation(orientation)
+	if orientation == "HORIZONTAL" then
+		self.backdrop:SetTexCoord(0, 0, 0, 1, 1, 0, 1, 1)
+	elseif orientation == "VERTICAL" then
+		self.backdrop:SetTexCoord(1, 0, 0, 0, 1, 1, 0, 1)
+	end
+end
+
+function Backdrop:SetBorder(size, color)
+	if not self.border and size ~= 0 then
+		self.border = CreateFrame("Frame", nil, self.container, "JustBecomePro_GenericBorder")
+	end
+
+	if self.border then
+		self.border:SetBorderSize(size)
+		self.border:SetColor(JBP:StringToRGBA(color))
+	end
+end
+
+function Backdrop:SetupForIcon(icon)
+	local texture = icon.group.TextureName
+	if texture == "" then
+		texture = JBP.db.profile.TextureName
+	end
+	self.backdrop:SetTexture(LSM:Fetch("statusbar", texture))
+	
+	local color = JBP:GetColors("BackdropColor", "BackdropColor_Enable",
+		                        icon:GetSettings(), icon.group:GetSettings(), JBP.db.global)
+
+	local c = JBP:StringToCachedRGBATable(color)
+	self.backdrop:SetVertexColor(c.r, c.g, c.b, 1)
+	self.backdrop:SetAlpha(c.a)
+end
+	

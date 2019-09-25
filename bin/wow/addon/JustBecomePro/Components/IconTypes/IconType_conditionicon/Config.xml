@@ -1,0 +1,96 @@
+﻿<Ui>
+
+
+
+	<Frame name="JustBecomePro_ConditionIconSettings" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="95"/>
+		<Frames>
+
+			<Frame parentKey="Condition" inherits="JustBecomePro_TimeEditBoxWithCheckTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="6" y="-5"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetSettings("ConditionDurEnabled", "ConditionDur")
+						self:SetTexts(JBP.L["ICONMENU_ONSUCCEED"], JBP.L["CONDITION_TIMERS_SUCCEED_DESC"])
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			<Frame parentKey="UnCondition" inherits="JustBecomePro_TimeEditBoxWithCheckTemplate">
+				<Anchors>
+					<Anchor point="LEFT" relativeKey="$parent.Condition" relativePoint="RIGHT" x="30"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetSettings("UnConditionDurEnabled", "UnConditionDur")
+						self:SetTexts(JBP.L["ICONMENU_ONFAIL"], JBP.L["CONDITION_TIMERS_FAIL_DESC"])
+					</OnLoad>
+				</Scripts>
+			</Frame>
+
+			
+			<CheckButton parentKey="OnlyIfCounting" name="$parentOnlyIfCounting" inherits="JustBecomePro_CheckTemplate">
+				<Size x="28" y="28"/>
+				<Anchors>
+					<Anchor point="LEFT" x="5" />
+					<Anchor point="TOP" relativeKey="$parent.Condition" relativePoint="BOTTOM" y="-1"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>						
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_ONLYIFCOUNTING"], JBP.L["ICONMENU_ONLYIFCOUNTING_DESC"])
+						self:SetSetting("OnlyIfCounting")
+
+						self:CScriptAdd("SettingSaved", function()
+							local settings = self:GetSettingTable()
+							if settings.OnlyIfCounting then
+								settings.OnlyIfNotCounting = false
+							end
+						end)
+						
+						self:ConstrainLabel(self:GetParent(), "RIGHT")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+			
+			<CheckButton parentKey="OnlyIfNotCounting" name="$parentOnlyIfNotCounting" inherits="JustBecomePro_CheckTemplate">
+				<Size x="28" y="28"/>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.OnlyIfCounting" relativePoint="BOTTOMLEFT" x="0" y="2"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>						
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_ONLYIFNOTCOUNTING"], JBP.L["ICONMENU_ONLYIFNOTCOUNTING_DESC"])
+						self:SetSetting("OnlyIfNotCounting")
+
+						self:CScriptAdd("SettingSaved", function()
+							local settings = self:GetSettingTable()
+							if settings.OnlyIfNotCounting then
+								settings.OnlyIfCounting = false
+							end
+						end)
+						
+						self:ConstrainLabel(self:GetParent(), "RIGHT")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["CONFIGPANEL_CNDTTIMERS_HEADER"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	
+</Ui>

@@ -1,0 +1,696 @@
+<Ui>
+
+	<Frame parentKey="Changelog" inherits="JustBecomePro_IE_PageTemplate">
+		<Frames>
+
+			<Frame parentKey="Container">
+				<Anchors>
+					<Anchor point="TOP" y="-5"/>
+					<Anchor point="BOTTOM" y="5"/>
+					<Anchor point="LEFT" x="5" />
+					<Anchor point="RIGHT" x="-2" />
+				</Anchors>
+
+				<Frames>
+					<SimpleHTML parentKey="HTML" justifyH="LEFT" justifyV="TOP">
+						<Size x="1" y="1"/>
+						<Anchors>
+							<Anchor point="TOPLEFT" y="-10" X="10" />
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								local font = "Interface/Addons/JustBecomePro/Fonts/OpenSans-Regular.ttf"
+
+								-- Just incase they haven't restarted after installing the version
+								-- that first included this font (v7.3.5)
+								if not self:SetFont(font, 12) then
+									font = "Fonts\\FRIZQT__.TTF"
+								end
+
+								self:SetFont(font, 12)
+								self:SetFont("h1", font, 20)
+								self:SetFont("h2", font, 14)
+
+								self:SetSpacing("h1", 10)
+								self:SetSpacing("h2", 6)
+								self:SetSpacing("p", 5)
+								self:SetIndentedWordWrap("p", true)
+
+								self:SetTextColor("h1", 0xFF/0xFF, 0x63/0xFF, 0x00/0xFF)
+								self:SetTextColor("h2", 0x00/0xFF, 0xF1/0xFF, 0xFF/0xFF)
+							</OnLoad>
+						</Scripts>
+					</SimpleHTML>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						JBP:ConvertContainerToScrollFrame(self, false, 0, 12)
+						self.ScrollFrame:SetWheelStepAmount(25)
+					</OnLoad>
+					<OnShow>
+						JBP.IE:ShowChangelog()
+						self:GetScript("OnSizeChanged")(self)
+					</OnShow>
+					<OnSizeChanged>
+						-- SimpleHTML doesn't wrap properly with anchors set on the left and right.
+						-- We have to set one only on the left, and use this to adjust the wrappping.
+						-- The SetText call is absolutely required for the wrapping to get recalculated.
+
+						self.HTML:SetWidth(self:GetWidth()-35)
+						self.HTML:SetText(self.HTML.text)
+					</OnSizeChanged>
+				</Scripts>
+			</Frame>
+
+		</Frames>
+	</Frame>
+
+	<Frame name="JustBecomePro_HelpSection" virtual="true" >
+		<Size y="100"/>
+		<KeyValues>
+			<KeyValue key="jbpClass" type="string" value="Config_Frame"/>
+		</KeyValues>
+		
+		<Anchors>
+			<Anchor point="LEFT"/>
+			<Anchor point="RIGHT" />
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture parentKey="Background" setAllPoints="true"/>
+				<Texture parentKey="Logo" >
+					<Anchors>
+						<Anchor point="TOPLEFT" x="10" y="-10" />
+						<!-- <Anchor point="BOTTOMRIGHT" y="0.5"/> -->
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString parentKey="Header" wordwrap="false" inherits="GameFontNormalHuge3" justifyH="CENTER" alpha="1">
+					<Anchors>
+						<Anchor point="BOTTOM" relativePoint="TOP" y="0"/>
+						<Anchor point="LEFT" x="1" />
+						<Anchor point="RIGHT" x="-1" />
+					</Anchors>
+				</FontString>
+
+				<FontString parentKey="Desc" inherits="GameFontHighlight" justifyH="LEFT">
+					<Anchors>
+						<Anchor point="TOP" y="-10"/>
+						<Anchor point="LEFT" relativeKey="$parent.Logo" relativePoint="RIGHT" x="25" />
+						<Anchor point="RIGHT" x="-20" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<EditBox parentKey="Url" inherits="JustBecomePro_InputBoxTemplate" >
+				<Size y="25"/>
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.Desc" relativePoint="BOTTOM" y="-15"/>
+					<Anchor point="LEFT" relativeKey="$parent.Desc" />
+					<Anchor point="RIGHT" relativeKey="$parent.Desc" />
+				</Anchors>
+
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+						self:SetFontObject(GameFontHighlightLarge)
+					</OnLoad>
+					<OnTextChanged>
+
+						if not self.text then
+							self.text = self:GetText()
+						end
+
+						if not userInput then return end
+
+						self:SetText(self.text)
+					</OnTextChanged>
+				</Scripts>
+			</EditBox>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				self:Show()
+				self.Background:SetColorTexture(.66, .66, .66, 0.09)
+			</OnLoad>
+			<OnSizeChanged>
+				self:AdjustHeight(10)
+			</OnSizeChanged>
+		</Scripts>
+	</Frame>
+	
+	<Frame parentKey="Help" inherits="JustBecomePro_IE_PageTemplate">
+		<Frames>
+
+			<Frame parentKey="Container">
+				<Anchors>
+					<Anchor point="TOP" y="-5"/>
+					<Anchor point="BOTTOM" y="5"/>
+					<Anchor point="LEFT" x="70" />
+					<Anchor point="RIGHT" x="-70" />
+				</Anchors>
+						
+				<Layers>
+					<Layer level="BACKGROUND">
+						
+<!-- 						
+						<Texture parentKey="discord" file="Interface\AddOns\JustBecomePro\Textures\discord-logo-white">
+							<Size x="128" y="128"/>
+							<Anchors>
+								<Anchor point="TOPLEFT" relativeKey="$parent.github" relativePoint="BOTTOMLEFT" x="-18" y="-0.5"/>
+							</Anchors>
+						</Texture> -->
+					</Layer>
+				</Layers>
+
+				<Frames>
+					<Frame parentKey="Github" inherits="JustBecomePro_HelpSection" >
+						<Size y="100"/>
+
+						<Anchors>
+							<Anchor point="TOP" y="-40" />
+						</Anchors>
+
+						<Scripts>
+							<OnLoad inherit="prepend">
+								self.Logo:SetSize(50, 50)
+								self.Url:SetText("https://git.io/fhbL9")
+								self.Logo:SetTexture("Interface/AddOns/JustBecomePro/Textures/github-mark-light")
+								self.Header:SetText(JBP.L["HELP_ISSUES"])
+								self.Desc:SetText(JBP.L["HELP_ISSUES_DESC"])
+								self:AdjustHeight(10)
+							</OnLoad>
+						</Scripts>
+					</Frame>
+
+					<Frame parentKey="Discord" inherits="JustBecomePro_HelpSection"  >
+						<Size y="100"/>
+						<Anchors>
+							<Anchor point="TOP" relativeKey="$parent.Github" relativePoint="BOTTOM" y="-50" />
+						</Anchors>
+						<Scripts>
+							<OnLoad inherit="prepend">
+								self.Logo:SetSize(64, 64)
+								self.Url:SetText("https://discord.gg/NH7RmcP")
+								self.Logo:SetTexture("Interface/AddOns/JustBecomePro/Textures/discord-logo-white")
+								self.Logo:SetPoint("TOPLEFT", 5, -5)
+								self.Header:SetText(JBP.L["HELP_COMMUNITY"])
+								self.Desc:SetText(JBP.L["HELP_COMMUNITY_DESC"])
+								self:AdjustHeight(10)
+							</OnLoad>
+						</Scripts>
+					</Frame>
+				</Frames>
+				<Scripts>
+					<OnLoad>
+						JBP:ConvertContainerToScrollFrame(self, false, 0, 12)
+						self.ScrollFrame:SetWheelStepAmount(25)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+
+		</Frames>
+	</Frame>
+
+
+	<Frame parentKey="Main" inherits="JustBecomePro_IE_PageTemplate">
+		<Frames>
+
+			<Frame parentKey="PanelsLeft" inherits="JustBecomePro_IE_PanelColumn">
+				<Anchors>
+					<Anchor point="LEFT" x="7"/>
+					<Anchor point="RIGHT" relativePoint="TOP" x="-6"/>
+				</Anchors>
+			</Frame>
+
+			<Frame parentKey="PanelsRight" inherits="JustBecomePro_IE_PanelColumn">
+				<Anchors>
+					<Anchor point="LEFT" relativePoint="TOP" x="5"/>
+					<Anchor point="RIGHT" x="-9"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad inherit="prepend">
+						self:CScriptAdd("SettingTableRequested", function()
+							return JBP.db.global
+						end)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+
+			<Frame parentKey="Profile" inherits="JBP_DropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="TOP" y="-8"/>
+					<Anchor point="LEFT" relativeKey="$parent.PanelsLeft" x="7" />
+					<Anchor point="RIGHT" relativeKey="$parent.PanelsLeft" x="-7" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["PROFILES_SET"], JBP.L["PROFILES_SET_DESC"])
+
+						self:SetEasyFunctions(
+							function()
+								return JBP:OrderedPairs(JBP.db:GetProfiles(), nil, true)
+							end,
+							function(info, i, name)
+								info.text = name
+								info.tooltipTitle = name
+								info.value = name
+								info.checked = name == JBP.db:GetCurrentProfile()
+							end,
+							function(button, dropdown)
+								JBP.db:SetProfile(button.value)
+
+								dropdown:CloseDropDownMenus()
+							end
+						)
+
+						self:CScriptAdd("ReloadRequested", function()
+							self:SetText("|cff666666" .. JBP.L["PROFILES_SET_LABEL"] .. ": |r" .. JBP.db:GetCurrentProfile())
+						end)
+
+						self:SetScrollable(true)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+
+			<CheckButton parentKey="Locked" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent" relativePoint="TOP" x="0" y="-4"/>
+					<Anchor point="LEFT" relativeKey="$parent.PanelsRight" relativePoint="LEFT" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_LOCKUNLOCK"], JBP.L["UIPANEL_SUBTEXT2"])
+						self:SetSetting("Locked")
+
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+
+				self:CScriptAdd("SettingTableRequested", function(requester)
+					return JBP.db.profile
+				end)
+
+				self:CScriptAdd("DescendantSettingSaved", function(requester)
+					JBP:ScheduleUpdate(0.1)
+				end)
+
+				self:CScriptAdd("ReloadRequested", function(requester)
+
+					local panelList = {}
+					for ComponentClass in pairs(JBP.C.GenericComponent.inheritedBy) do
+						for _, panelInfo in pairs(ComponentClass.ConfigPanels) do
+							if panelInfo.panelSet == "profile" then
+								panelInfo:SetColumnIndex(1)
+								tinsert(panelList, panelInfo)
+							elseif panelInfo.panelSet == "global" then
+								panelInfo:SetColumnIndex(2)
+								tinsert(panelList, panelInfo)
+							end
+						end		
+					end
+
+					JBP.tRemoveDuplicates(panelList)
+
+					JBP.IE:PositionPanels("Main", panelList)
+				end)
+
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+
+
+	<Frame name="JustBecomePro_Main_Efficiency" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="110"/>
+		<Frames>
+			<Slider parentKey="Interval" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOP" y="-20"/>
+					<Anchor point="LEFT" x="10"/>
+					<Anchor point="RIGHT" relativePoint="CENTER" x="-10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_UPDATEINTERVAL"], JBP.L["UIPANEL_TOOLTIP_UPDATEINTERVAL"])
+						self:SetSetting("Interval")
+
+						self:SetMinMaxValues(0, 0.5)
+						self:SetValueStep(0.01)
+						self:SetTextFormatter(JBP.C.Formatter.S_SECONDS, JBP.C.Formatter.F_1)
+					</OnLoad>
+				</Scripts>
+			</Slider>
+
+			<Button parentKey="OpenProfiling" inherits="JustBecomePro_ButtonTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.Interval" />
+					<Anchor point="RIGHT" x="-10" />
+					<Anchor point="LEFT" relativePoint="CENTER" x="10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						self:SetText(JBP.L["UIPANEL_OPENCPUPROFILE"], JBP.L["UIPANEL_OPENCPUPROFILE_DESC"])
+						self:SetWidth(self:GetTextWidth()+15)
+					</OnLoad>
+					<OnClick>
+						JBP:SlashCommand("cpu")
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<!-- No longer applicable in WoW BfA - UnitAura doesn't allow query by name anymore. -->
+			<!-- <Slider parentKey="EffThreshold" inherits="JustBecomePro_SliderTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.Interval" />
+					<Anchor point="RIGHT" x="-10" />
+					<Anchor point="LEFT" relativePoint="CENTER" x="10" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_EFFTHRESHOLD"], JBP.L["UIPANEL_EFFTHRESHOLD_DESC"])
+						self:SetSetting("EffThreshold")
+
+						self:SetMinMaxValues(1, 40)
+						self:SetValueStep(1)
+					</OnLoad>
+				</Scripts>
+			</Slider> -->
+
+			<CheckButton parentKey="BackupDbInOptions" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.Interval" relativePoint="BOTTOM" y="-8"/>
+					<Anchor point="LEFT" x="5"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_ENABLEBACKUP"], JBP.L["UIPANEL_ENABLEBACKUP_DESC"])
+						self:SetSetting("BackupDbInOptions")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+
+			<CheckButton parentKey="CreateImportBackup" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeKey="$parent.BackupDbInOptions" relativePoint="BOTTOMLEFT"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["UIPANEL_ENABLEIMPORTBACKUP"], JBP.L["UIPANEL_ENABLEIMPORTBACKUP_DESC"])
+						self:SetSetting("CreateImportBackup")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["DOMAIN_GLOBAL_NC"] .. ": " .. JBP.L["UIPANEL_PERFORMANCE"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<Frame name="JustBecomePro_Main_Media" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="45"/>
+		<Frames>
+			<Frame parentKey="SoundChannel" inherits="JBP_DropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="LEFT" x="10"/>
+					<Anchor point="RIGHT" relativePoint="CENTER" x="-10" />
+					<Anchor point="BOTTOM" y="7"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+						self:SetTexts(JBP.L["SOUND_CHANNEL"], JBP.L["SOUND_CHANNEL_DESC"])
+						self:SetLabel(JBP.L["SOUND_CHANNEL"])
+
+						local values = {
+							SFX = SOUND_VOLUME,
+							Music = MUSIC_VOLUME,
+							Ambience = AMBIENCE_VOLUME,
+							Dialog = DIALOG_VOLUME,
+							Master = JBP.L["SOUND_CHANNEL_MASTER"],
+						}
+
+						self:SetSetting("SoundChannel")
+						self:SetEasyFunctions(
+							function()
+								return JBP:OrderedPairs(values, nil, true)
+							end,
+							function(info, id, name)
+								info.text = name
+								info.tooltipTitle = name
+								info.value = id
+							end
+						)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+
+			<Frame parentKey="Texture" inherits="JBP_DropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="RIGHT" x="-10" />
+					<Anchor point="LEFT" relativePoint="CENTER" x="10" />
+					<Anchor point="BOTTOM" y="7"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+						self:SetWidth(200)
+						self:SetTexts(JBP.L["UIPANEL_BARTEXTURE"])
+						self:SetLabel(JBP.L["UIPANEL_BARTEXTURE"])
+						self.BUTTON_HEIGHT = 20
+
+						local f, s = self.Text:GetFont()
+						self.Text:SetFont(f, s, "THINOUTLINE")
+
+						local values = {
+							SFX = SOUND_VOLUME,
+							Music = MUSIC_VOLUME,
+							Ambience = AMBIENCE_VOLUME,
+							Dialog = DIALOG_VOLUME,
+							Master = JBP.L["SOUND_CHANNEL_MASTER"],
+						}
+
+						local LSM = LibStub("LibSharedMedia-3.0")
+						self:SetSetting("TextureName")
+						self:SetEasyFunctions(
+							function()
+								return pairs(LSM:List("statusbar"))
+							end,
+							function(info, id, name)
+								info.text = name
+								info.tooltipTitle = name
+								info.texture = LSM:Fetch("statusbar", name)
+								info.value = name
+							end
+						)
+
+						self:SetScrollable(true)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["DOMAIN_PROFILE"] .. ": " .. JBP.L["CONFIGPANEL_MEDIA_HEADER"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+
+	<Frame name="JustBecomePro_Main_Profiles" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="66"/>
+		<Frames>
+			<!-- <Frame parentKey="Set" inherits="JBP_DropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="LEFT" x="10"/>
+					<Anchor point="RIGHT" x="-10"/>
+					<Anchor point="TOP" y="-10"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad >
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["PROFILES_SET"], JBP.L["PROFILES_SET_DESC"])
+
+
+						self:SetEasyFunctions(
+							function()
+								return JBP:OrderedPairs(JBP.db:GetProfiles(), nil, true)
+							end,
+							function(info, i, name)
+								info.text = name
+								info.tooltipTitle = name
+								info.value = name
+								info.checked = name == JBP.db:GetCurrentProfile()
+							end,
+							function(button, dropdown)
+								JBP.db:SetProfile(button.value)
+
+								dropdown:CloseDropDownMenus()
+							end
+						)
+
+						self:CScriptAdd("ReloadRequested", function()
+							self:SetText(JBP.db:GetCurrentProfile())
+						end)
+
+						self:SetScrollable(true)
+					</OnLoad>
+				</Scripts>
+			</Frame> -->
+
+			<EditBox parentKey="New" inherits="JustBecomePro_InputBoxTemplate">
+				<Anchors>
+					<!-- <Anchor point="TOP" relativeKey="$parent.Set" relativePoint="BOTTOM" y="-10"/> -->
+					<Anchor point="TOP" y="-10"/>
+					<Anchor point="LEFT" x="10"/>
+					<Anchor point="RIGHT" x="-10"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+						self:SetTexts(JBP.L["PROFILES_NEW"], JBP.L["PROFILES_NEW_DESC"])
+					</OnLoad>
+					<OnEnterPressed>
+						local name = self:GetText():trim()
+						if name ~= "" then
+							JBP.db:SetProfile(name)
+							self:SetText("")
+						end
+					</OnEnterPressed>
+				</Scripts>
+			</EditBox>
+
+			<Frame parentKey="Copy" inherits="JBP_DropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="LEFT" x="10"/>
+					<Anchor point="TOP" relativeKey="$parent.New" relativePoint="BOTTOM" y="-10"/>
+					<Anchor point="RIGHT" relativePoint="CENTER" x="-5" />
+				</Anchors>
+				<Scripts>
+					<OnLoad >
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["PROFILES_COPY"], JBP.L["PROFILES_COPY_DESC"])
+
+
+						self:SetEasyFunctions(
+							function()
+								local currentProfile = JBP.db:GetCurrentProfile()
+								local profiles = {}
+								for i, v in pairs(JBP.db:GetProfiles()) do 
+									if v ~= currentProfile then 
+										tinsert(profiles, v)
+									end 
+								end
+
+								return JBP:OrderedPairs(profiles, nil, true)
+							end,
+							function(info, i, name)
+								info.text = name
+								info.tooltipTitle = name
+								info.value = name
+							end,
+							function(button, dropdown)
+								local value = button.value
+								JBP.IE:ShowConfirmation(
+									JBP.L["PROFILES_COPY_CONFIRM"], 
+									JBP.L["PROFILES_COPY_CONFIRM_DESC"]:format(JBP.db:GetCurrentProfile(), value), 
+									function()
+										JBP.db:CopyProfile(value)
+									end
+								)
+
+								dropdown:CloseDropDownMenus()
+							end
+						)
+
+						self:SetScrollable(true)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+
+			<Frame parentKey="Delete" inherits="JBP_DropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="RIGHT" x="-10"/>
+					<Anchor point="TOP" relativeKey="$parent.Copy" relativePoint="TOP"/>
+					<Anchor point="LEFT" relativePoint="CENTER" x="5" />
+				</Anchors>
+				<Scripts>
+					<OnLoad >
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["PROFILES_DELETE"], JBP.L["PROFILES_DELETE_DESC"])
+
+
+						self:SetEasyFunctions(
+							function()
+								local currentProfile = JBP.db:GetCurrentProfile()
+								local profiles = {}
+								for i, v in pairs(JBP.db:GetProfiles()) do 
+									if v ~= currentProfile then 
+										tinsert(profiles, v)
+									end 
+								end
+
+								return JBP:OrderedPairs(profiles, nil, true)
+							end,
+							function(info, i, name)
+								info.text = name
+								info.tooltipTitle = name
+								info.value = name
+							end,
+							function(button, dropdown)
+								local value = button.value
+								JBP.IE:ShowConfirmation(
+									JBP.L["PROFILES_DELETE_CONFIRM"], 
+									JBP.L["PROFILES_DELETE_CONFIRM_DESC"]:format(value), 
+									function()
+										JBP.db:DeleteProfile(value)
+									end
+								)
+
+								dropdown:CloseDropDownMenus()
+							end
+						)
+
+						self:SetScrollable(true)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["UIPANEL_PROFILES"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>

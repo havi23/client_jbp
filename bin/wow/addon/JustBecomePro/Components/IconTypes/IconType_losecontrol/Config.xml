@@ -1,0 +1,40 @@
+﻿<Ui>
+
+	<Frame name="JustBecomePro_LoseControlTypes" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="33"/>
+		<Frames>
+		
+			<Frame parentKey="LocTypes" name="$parentLocTypes" inherits="JBP_DropDownMenuTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="7" y="-6"/>
+					<Anchor point="RIGHT" x="-7" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+				
+						self:SetTexts(JBP.L["LOSECONTROL_DROPDOWNLABEL"], JBP.L["LOSECONTROL_DROPDOWNLABEL_DESC"])
+						self:SetFunction(JBP.Types.losecontrol.Config.DropdownMenu_SelectTypes)
+
+						self:CScriptAdd("ReloadRequested", function()
+							JBP.Types.losecontrol.Config:DropdownMenu_SetText()
+						end)
+						
+						self.Button:HookScript("OnClick", function(self)
+							JBP.IE:SaveSettings()
+						end)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+			
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["LOSECONTROL_DROPDOWNLABEL"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+	
+</Ui>

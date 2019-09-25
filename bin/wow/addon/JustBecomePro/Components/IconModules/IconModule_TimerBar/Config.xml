@@ -1,0 +1,131 @@
+<Ui>
+
+	<Frame name="JustBecomePro_TimerBarColorsTemplate" virtual="true">>
+		<Size y="30"/>
+		<Anchors>
+			<Anchor point="TOP" relativeKey="$parent.EnableColors" relativePoint="BOTTOM" y="-3" />
+			<Anchor point="LEFT" />
+			<Anchor point="RIGHT" />
+		</Anchors>
+		<Frames>
+			<Button parentKey="ColorStart" inherits="JustBecomePro_ColorButtonTemplate">
+				<Anchors>
+					<Anchor point="TOP" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_BAR_COLOR_START"], JBP.L["ICONMENU_BAR_COLOR_START_DESC"])
+						self:SetSetting("TimerBar_StartColor")
+						self:SetHasOpacity(true)
+					</OnLoad>
+				</Scripts>
+			</Button>
+
+			<Button parentKey="ColorMiddle" inherits="JustBecomePro_ColorButtonTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.ColorStart" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_BAR_COLOR_MIDDLE"], JBP.L["ICONMENU_BAR_COLOR_MIDDLE_DESC"])
+						self:SetSetting("TimerBar_MiddleColor")
+						self:SetHasOpacity(true)
+					</OnLoad>
+				</Scripts>
+			</Button>
+
+			<Button parentKey="ColorComplete" inherits="JustBecomePro_ColorButtonTemplate">
+				<Anchors>
+					<Anchor point="TOP" relativeKey="$parent.ColorStart" />
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["ICONMENU_BAR_COLOR_COMPLETE"], JBP.L["ICONMENU_BAR_COLOR_COMPLETE_DESC"])
+						self:SetSetting("TimerBar_CompleteColor")
+						self:SetHasOpacity(true)
+					</OnLoad>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self, "Config_Frame")
+
+				self.ColorStart:ConstrainLabel(self.ColorMiddle)
+				self.ColorMiddle:ConstrainLabel(self.ColorComplete)
+				self.ColorComplete:ConstrainLabel(self, "RIGHT")
+
+				JBP.IE:DistributeFrameAnchorsLaterally(self, 3, self.ColorStart, self.ColorMiddle, self.ColorComplete)
+
+				self.ColorStart:SetPoint("LEFT", 10, 0)
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+
+	<Frame name="JustBecomePro_TimerBar_GroupColors" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="90"/>
+		<Frames>
+			<CheckButton parentKey="EnableColors" inherits="JustBecomePro_CheckTemplate">
+				<Anchors>
+					<Anchor point="TOPLEFT" x="5" y="-1"/>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+						JBP:CInit(self)
+
+						self:SetTexts(JBP.L["COLOR_OVERRIDE_GLOBAL"], JBP.L["COLOR_OVERRIDE_GLOBAL_DESC"])
+						self:SetSetting("TimerBar_EnableColors")
+					</OnLoad>
+				</Scripts>
+			</CheckButton>
+
+			<Frame inherits="JustBecomePro_TimerBarColorsTemplate">
+				<Scripts>
+					<OnLoad inherit="prepend">
+						self:CScriptAdd("ReloadRequested", function()
+							local settings = self:GetSettingTable()
+							self:SetShown(settings.TimerBar_EnableColors)
+
+							self:GetParent():AdjustHeight()
+						end)
+					</OnLoad>
+				</Scripts>
+			</Frame>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["CONFIGPANEL_TIMERBAR_BARDISPLAY_HEADER"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+
+	<Frame name="JustBecomePro_TimerBar_GlobalColors" inherits="JustBecomePro_OptionsModuleContainer" virtual="true">
+		<Size y="30"/>
+		<Frames>
+			<Frame inherits="JustBecomePro_TimerBarColorsTemplate">
+				<Anchors>
+					<Anchor point="TOP" y="-5"/>
+				</Anchors>
+			</Frame>
+		</Frames>
+
+		<Scripts>
+			<OnLoad>
+				JBP:CInit(self)
+				
+				self:SetTitle(JBP.L["DOMAIN_GLOBAL_NC"] .. ": " .. JBP.L["CONFIGPANEL_TIMERBAR_BARDISPLAY_HEADER"])
+			</OnLoad>
+		</Scripts>
+	</Frame>
+</Ui>
