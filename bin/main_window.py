@@ -44,7 +44,7 @@ class MainDialog(QtWidgets.QMainWindow):
         self.start_icon = QtGui.QIcon()
         self.start_icon.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.stop_icon = QtGui.QIcon()
-        self.stop_icon.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.stop_icon.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/stop.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.ui.info.clicked.connect(self.info_frame)
         self.listener = None
         self.aoe_listener = None

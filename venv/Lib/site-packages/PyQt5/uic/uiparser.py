@@ -1011,10 +1011,19 @@ class UIParser(object):
         )
 
         document = parse(filename)
-        version = document.getroot().attrib["version"]
-        DEBUG("UI version is %s" % (version,))
+        root = document.getroot()
+
+        if root.tag != 'ui':
+            raise SyntaxError("not created by Qt Designer")
+
+        version = root.attrib.get('version')
+        if version is None:
+            raise SyntaxError("missing version number")
+
         # Right now, only version 4.0 is supported.
-        assert version in ("4.0",)
+        if version != '4.0':
+            raise SyntaxError("only Qt Designer files v4.0 are supported")
+
         for tagname, actor in branchHandlers:
             elem = document.find(tagname)
             if elem is not None:

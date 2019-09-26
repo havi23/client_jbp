@@ -11,13 +11,16 @@ class ahk_console():
         self.spec = spec
         self.DB = Database()
         try:
-            path = resource_path(os.path.join("drivers", "a64.exe"))
-            self.ahk = AHK(executable_path=path)
+            path = resource_path(os.path.join("bin", "wow", "drivers", "a64.exe"))
+            #print(path)
+            os.environ['AHK_PATH'] = path
+            self.ahk = AHK()#executable_path=path)
             print(self.ahk)
-            # for proc in psutil.process_iter():
-            #     if proc.name() == 'a64.exe':
-            #         self.ahk_pid = proc.pid
-            #         break
+            for proc in psutil.process_iter():
+                if proc.name() == 'a64.exe':
+                    self.ahk_pid = proc.pid
+                    print(self.ahk_pid)
+                    break
         except Exception as E:
             print('Ошибка загрузки модуля AY')
             print(repr(E))
@@ -28,7 +31,9 @@ class ahk_console():
                 print(proc)
                 print(proc.name())
                 print(proc.pid)
-                return Window.from_pid(self.ahk, pid=proc.pid)
+                win = Window.from_pid(self.ahk, pid=proc.pid)
+                print(win)
+                return win
         print('Не найден WoW')
         return False
 
@@ -51,11 +56,11 @@ class ahk_console():
 
 
 if __name__ == '__main__':
-    spec = 'unholy'
+    spec = 'elemental'
     ahk = ahk_console(spec)
     wow = ahk.get_wow()
     if wow:
-        with open('unholy.ahk', 'r', encoding='utf-8') as code_file:
+        with open('elemental.ahk', 'r', encoding='utf-8') as code_file:
             script = code_file.read()
         listener = ahk.rotation_listener(wow, script, 'e', '1', '0')
         listener = ahk.rotation_listener(wow, script, 'q', '0', '0')

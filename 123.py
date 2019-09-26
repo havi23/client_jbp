@@ -12,8 +12,9 @@ with open('spell_dict.csv', 'r', encoding='utf-8') as csv_file:
             spec_list = DB.query(f'select * from specs where lower(class)="{class_}"')
             spec_list = spec_list[0][1:4]
         for spec in spec_list:
+            if 'restoration' in spec:
+                continue
             try:
-                print(spec)
                 DB.execute(f'INSERT INTO {spec} VALUES ("{spell_name}", Null, 1);')
             except Exception as E:
                 if 'UNIQUE' not in str(E):

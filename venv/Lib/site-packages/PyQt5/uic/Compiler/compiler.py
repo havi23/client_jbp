@@ -110,10 +110,6 @@ class UICompiler(UIParser):
         createCodeIndenter(output_stream)
         w = self.parse(input_stream, resource_suffix)
 
-        indenter = getIndenter()
-        indenter.write("")
-        indenter.write("")
-
         self.factory._cpolicy._writeOutImports()
 
         for res in self._resources:
