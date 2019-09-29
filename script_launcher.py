@@ -54,13 +54,14 @@ def auth(key=None, error_code=None):
             KeyDialog.show()
             sys.exit(app.exec())
 
-if __name__ == '__main__' and 1==0:
+if __name__ == 'main' and 1!=0:
     DB = Database()
     def restarter(last_error=None):
         try:
             auth()
         except Exception as E:
             error = repr(E)
+            print(error)
             # Если ошибка повторяется
             if error == last_error:
                 DB.execute(f'INSERT INTO error_log VALUES (CURRENT_TIMESTAMP, "SECOND: {error}")')

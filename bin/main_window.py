@@ -147,13 +147,18 @@ class MainDialog(QtWidgets.QMainWindow):
     def event(self, event):  # Срабатывает при каждом вызове main.show()
         if event.type() == QtCore.QEvent.Show and not self.isHidden():
             self.wow_path = self.DB.query('SELECT data FROM system where variable="wow_path"')[0][0]
+            print(self.wow_path)
             self.spec = self.DB.query('SELECT data FROM system where variable="spec"')[0][0]
             self.class_= self.DB.query('SELECT data FROM system where variable="class"')[0][0]
             self.account_data = self.DB.query('SELECT data FROM system where variable in ("account", "server", "character")')
             self.rotation_key = self.DB.query(f'select * from system WHERE variable="rotation_key"')[0][1]
             self.aoe_rotation_key = self.DB.query(f'select * from system WHERE variable="aoe_rotation_key"')[0][1]
+            print(self.server.get_secret_data(self.spec, self.class_))
             self.code, self.profile = self.server.get_secret_data(self.spec, self.class_)
-            print(self.wow_path)
+            nickname = self.account_data[1][0]
+            server = self.account_data[2][0]
+            self.profile = str(self.profile).replace('_nickname_', nickname).replace('_server_', server)
+            print(self.code)
             print(self.spec)
             print(self.class_)
             print(self.account_data)
@@ -189,7 +194,7 @@ class MainDialog(QtWidgets.QMainWindow):
                     self.GnomeDialog.show()
                     self.GnomeAwaits = self.change_class.__name__
             elif self.spec is not None:
-                binds = self.DB.query(f'SELECT * FROM {self.spec}')
+                binds = self.DB.query(f'SELECT * FROM {self.spec};')
                 for bind in binds:
                     spell_name = bind[0]
                     if spell_name is None:
@@ -216,7 +221,6 @@ class MainDialog(QtWidgets.QMainWindow):
         return super(MainDialog, self).event(event)
 
     def binds(self):
-
         if self.GnomeDialog is not None and self.GnomeAwaits != self.binds.__name__:
             self.GnomeDialog.ui.bg.setPixmap(QtGui.QPixmap(resource_path("bin/img/gnome/nani.png")))
             return
@@ -235,7 +239,7 @@ class MainDialog(QtWidgets.QMainWindow):
         #                                        "You must launch WoW with 'Start WoW' button", True, main=self)
         #     self.GnomeDialog.show()
         #     return
-        if not self.listener:
+        if not self.listener and not self.aoe_listener:
             ahk = ahk_console(self.spec)
             wow = ahk.get_wow()
             if wow:
@@ -270,8 +274,12 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ClassDialog = ClassDialog(self)
         self.ClassDialog.show()
 
-
     def close(self):
+        if self.listener and self.aoe_listener:
+            self.listener.stop()
+            self.listener = None
+            self.aoe_listener.stop()
+            self.aoe_listener = None
         sys.exit()
 
     def mousePressEvent(self, event):
