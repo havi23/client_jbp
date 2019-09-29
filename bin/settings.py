@@ -32,7 +32,7 @@ class SettingsDialog(QtWidgets.QDialog):
 
     def character_change(self):
         if not self.GnomeDialog:
-            self.GnomeDialog = GnomeDialog(main=self, _type='account', DB=DB, wow_path=self.wow_path)
+            self.GnomeDialog = GnomeDialog(main=self, _type='account', DB=DB, wow_path=self.wow_path, settings=self)
             self.GnomeDialog.show()
 
     def save(self):

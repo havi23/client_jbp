@@ -157,8 +157,9 @@ class MainDialog(QtWidgets.QMainWindow):
             self.code, self.profile = self.server.get_secret_data(self.spec, self.class_)
             nickname = self.account_data[1][0]
             server = self.account_data[2][0]
-            self.profile = str(self.profile).replace('_nickname_', nickname).replace('_server_', server)
-            print(self.code)
+            if server and nickname:
+                self.profile = str(self.profile).replace('_nickname_', nickname).replace('_server_', server)
+                print(self.profile)
             print(self.spec)
             print(self.class_)
             print(self.account_data)
@@ -184,8 +185,8 @@ class MainDialog(QtWidgets.QMainWindow):
                                                        'Click "Settings"!', main=self)
                     self.GnomeDialog.show()
                     self.GnomeAwaits = self.settings.__name__
-            elif not (self.account_data[1][0] or self.GnomeDialog):
-                self.GnomeDialog = GnomeDialog(main=self, type='account', DB=self.DB, wow_path=self.wow_path)
+            elif not (nickname or self.GnomeDialog):
+                self.GnomeDialog = GnomeDialog(main=self, _type='account', DB=self.DB, wow_path=self.wow_path)
                 self.GnomeDialog.show()
             elif self.spec is None:
                 if not self.GnomeDialog:

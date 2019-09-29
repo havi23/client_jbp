@@ -105,11 +105,11 @@ class ahk_console():
 
 #
 if __name__ == '__main__':
-    spec = 'protection_warrior'
+    spec = 'shadow'
     ahk = ahk_console(spec)
     wow = ahk.get_wow()
     if wow:
-        with open('protection_warrior.ahk', 'r', encoding='utf-8') as code_file:
+        with open('shadow.ahk', 'r', encoding='utf-8') as code_file:
             script = code_file.read()
         listener = ahk.rotation_listener(wow, script, 'e', '1', '0')
         listener = ahk.rotation_listener(wow, script, 'q', '0', '0')
