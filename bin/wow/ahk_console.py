@@ -39,7 +39,7 @@ class ahk_console():
         return False
 
     def macro_1(self):
-        script = '''
+        _1 = '''
         MouseGetPos, xpos, ypos 
         MouseClick, left, 1352, 586
         Sleep, 60
@@ -59,9 +59,9 @@ class ahk_console():
         Sleep, 60
         MouseClick, left, %xpos%, %ypos%
         '''
-        hk = Hotkey(self.ahk, 's', script)
-        hk.start()  # listener process activated
-        script = '''
+        __1 = Hotkey(self.ahk, 's', _1)
+        __1.start()  # listener process activated
+        _2 = '''
                 MouseGetPos, xpos, ypos 
                 MouseClick, left, 1750, 84
                 Sleep, 60
@@ -70,17 +70,17 @@ class ahk_console():
                 Send {BACKSPACE}
                 MouseClick, left, %xpos%, %ypos%
                 '''
-        hk = Hotkey(self.ahk, 'z', script)
-        hk.start()  # listener process activated
-        script = '''
+        __2 = Hotkey(self.ahk, 'z', _2)
+        __2.start()  # listener process activated
+        _3 = '''
                         MouseGetPos, xpos, ypos 
                         MouseClick, left, 1650, 187
                         Sleep, 60
                         MouseClick, left, %xpos%, %ypos%
                         '''
-        hk = Hotkey(self.ahk, 'x', script)
-        hk.start()  # listener process activated
-        return hk
+        __3 = Hotkey(self.ahk, 'x', _3)
+        __3.start()  # listener process activated
+        return True
 
     def rotation_listener(self, wow, script, dmg_key, x, y):
         binds = self.DB.query(f'SELECT * FROM {self.spec}')
@@ -105,11 +105,11 @@ class ahk_console():
 
 #
 if __name__ == '__main__':
-    spec = 'subtlety'
+    spec = 'demonology'
     ahk = ahk_console(spec)
     wow = ahk.get_wow()
     if wow:
-        with open('subtlety.ahk', 'r', encoding='utf-8') as code_file:
+        with open('demonology.ahk', 'r', encoding='utf-8') as code_file:
             script = code_file.read()
         listener = ahk.rotation_listener(wow, script, 'e', '1', '0')
         listener = ahk.rotation_listener(wow, script, 'q', '0', '0')

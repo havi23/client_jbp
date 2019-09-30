@@ -21,7 +21,6 @@ with open('C:\\Users\\Max\\Documents\\GitHub\\framework_jbp\\JBP_Tool\\jbp\\tmw\
             #spec_list.remove('discipline')
         specs_done = []
         for spec in spec_list:
-            if spec == 'mutilate': spec = 'outlaw'
             if spec in specs_done:
                 continue
             specs_done.append(spec)
