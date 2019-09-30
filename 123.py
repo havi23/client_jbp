@@ -17,14 +17,15 @@ with open('C:\\Users\\Max\\Documents\\GitHub\\framework_jbp\\JBP_Tool\\jbp\\tmw\
         if spec_list[0] == 'all':
             spec_list = DB.query(f'select * from specs where lower(class)="{class_}"')
             spec_list = list(spec_list[0][1:4])
-            spec_list.remove('holy_priest')
-            spec_list.remove('discipline')
+            #spec_list.remove('holy_priest')
+            #spec_list.remove('discipline')
         specs_done = []
         for spec in spec_list:
+            if spec == 'mutilate': spec = 'outlaw'
             if spec in specs_done:
                 continue
             specs_done.append(spec)
-            if spec is None or spec == 'holy' or spec == 'discipline':
+            if spec is None: #or spec == 'holy' or spec == 'discipline':
                 continue
             try:
                 DB.execute(f'INSERT INTO {spec} VALUES ("{spell_name}", Null, 1);')
