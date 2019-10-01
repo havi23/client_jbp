@@ -32,8 +32,8 @@ class LicenseKeyDialog(QtWidgets.QMainWindow):
             'hwid': 'This key has beed attached to another PC. Your cant use it',
             'date': 'Your subscribtion has ended.\nUpdate your key on JustBecome.PRO',
             'params': 'Unknown error. \nPlease contact support.',
-            None: 'WARNING: A computer will be attached to the key. " \
-                                       "The key you entered will not work on another PC'
+            None: 'WARNING: A computer will be attached to the key. '
+                  'The key you entered will not work on another PC'
             }
         self.ui.error.setText(self.error_dictionary[error_code])
         self.ui.key_edit.setPlaceholderText("Enter a license key")

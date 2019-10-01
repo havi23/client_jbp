@@ -7,8 +7,8 @@ class Server():
         self.token = None
         self.options = None
         self.hwid = uuid.UUID(int=uuid.getnode())
-        self.url = 'http://127.0.0.1:8000/'
-        #self.url = 'https://justbecome.pro/'
+        #self.url = 'http://127.0.0.1:8000/'
+        self.url = 'https://justbecome.pro/'
     def connect(self, key): # AKA auth
         try:
             print(self.url + f'api/auth/?key={key}&hwid={self.hwid}')
