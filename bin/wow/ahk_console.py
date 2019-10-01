@@ -11,8 +11,8 @@ class ahk_console():
         self.spec = spec
         self.DB = Database()
         try:
-            #path = resource_path(os.path.join("bin", "wow", "drivers", "a64.exe"))
-            path = resource_path(os.path.join("drivers", "a64.exe"))
+            path = resource_path(os.path.join("bin", "wow", "drivers", "a64.exe"))
+            #path = resource_path(os.path.join("drivers", "a64.exe"))
             #print(path)
             os.environ['AHK_PATH'] = path
             self.ahk = AHK()#executable_path=path)
