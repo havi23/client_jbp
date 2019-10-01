@@ -14,12 +14,12 @@ class ahk_console():
             path = resource_path(os.path.join("bin", "wow", "drivers", "a64.exe"))
             #path = resource_path(os.path.join("drivers", "a64.exe"))
             #print(path)
-            os.environ['AHK_PATH'] = path
-            self.ahk = AHK()#executable_path=path)
+            #os.environ['AHK_PATH'] = path
+            self.ahk = AHK(executable_path=path)
             print(self.ahk)
             for proc in psutil.process_iter():
                 if proc.name() == 'a64.exe':
-                    self.ahawk_pid = proc.pid
+                    self.ahk_pid = proc.pid
                     print(self.ahk_pid)
                     break
         except Exception as E:
