@@ -5,7 +5,6 @@ from bin.resource_to_exe import resource_path
 import os
 import psutil
 
-
 class ahk_console():
     def __init__(self, spec):
         self.spec = spec
@@ -17,11 +16,11 @@ class ahk_console():
             #os.environ['AHK_PATH'] = path
             self.ahk = AHK(executable_path=path)
             print(self.ahk)
-            for proc in psutil.process_iter():
-                if proc.name() == 'a64.exe':
-                    self.ahk_pid = proc.pid
-                    print(self.ahk_pid)
-                    break
+            # for proc in psutil.process_iter():
+            #     if proc.name() == 'a64.exe':
+            #         self.ahk_pid = proc.pid
+            #         print(self.ahk_pid)
+            #         break
         except Exception as E:
             print('Ошибка загрузки модуля AY')
             print(repr(E))
@@ -29,7 +28,6 @@ class ahk_console():
     def get_wow(self):
         for proc in psutil.process_iter():
             if proc.name() == 'Wow.exe':
-                print(proc)
                 print(proc.name())
                 print(proc.pid)
                 win = Window.from_pid(self.ahk, pid=proc.pid)
@@ -105,6 +103,17 @@ class ahk_console():
 
 #
 if __name__ == '__main__':
+    import ctypes, sys
+    def is_admin():
+        try:
+            return ctypes.windll.shell32.IsUserAnAdmin()
+        except:
+            return False
+
+    if not is_admin():
+        # Re-run the program with admin rights
+        ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
+
     spec = 'demonology'
     ahk = ahk_console(spec)
     wow = ahk.get_wow()

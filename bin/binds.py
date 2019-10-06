@@ -11,6 +11,7 @@ class Ui_Dialog(QWidget):
         super().__init__()
         self.GnomeDialog = None
         main.hide()
+        self.setWindowIcon(QtGui.QIcon(resource_path('bin\\img\\settings.png')))
         self.oldPos = self.pos()
         self.title = "Bind settings"
         self.resize(554, 535)

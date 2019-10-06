@@ -1,9 +1,9 @@
 from bin.Qt.license_key_Qt import Ui_Dialog as Ui_LicenseKeyDialog
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 from server import Server, internet_on
 from db_connect import Database
 from bin.main_window import MainDialog
-
+from bin.resource_to_exe import resource_path
 
 #  pyuic5 license_key.ui -o license_key_Qt.py
 
@@ -15,6 +15,7 @@ class LicenseKeyDialog(QtWidgets.QMainWindow):
         # self.oldPos = self.pos()
         self.ui = Ui_LicenseKeyDialog()
         self.ui.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon(resource_path('bin\\img\\key.png')))
         # self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         # self.setAttribute(QtCore.Qt.WA_NoSystemBackground | QtCore.Qt.WA_TranslucentBackground)
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)

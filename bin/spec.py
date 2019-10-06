@@ -97,7 +97,10 @@ class ClassDialog(QtWidgets.QDialog):
         self.ui.sha.clicked.connect(lambda: self.choose_spec(main, 'Shaman'))
         self.ui.warr.clicked.connect(lambda: self.choose_spec(main, 'Warrior'))
         self.ui.warl.clicked.connect(lambda: self.choose_spec(main, 'Warlock'))
-
+        if main.GnomeDialog is not None:
+            main.GnomeDialog = None
+        if main.GnomeAwaits is not None:
+            main.GnomeAwaits = None
         self.SpecDialog = None
     def mousePressEvent(self, event):
         self.oldPos = event.globalPos()

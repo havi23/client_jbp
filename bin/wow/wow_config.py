@@ -12,7 +12,9 @@ def default_config(main, GnomeDialog, wow_path):
     print(account_path)
     config_path = Path(f'{wow_path}\\WTF\\Config.wtf')
     old_config_path = Path(f'{wow_path}\\WTF\\Config.wtf.old')
-    if config_path.exists() and account_path.exists():
+    if config_path.exists() and not account_path.exists():
+        return
+    if config_path.exists() and account_path.exists(): # TODO TEST OR!
         shutil.copy(config_path, old_config_path)
         with open(config_path, 'r', encoding='UTF-8') as config_file:
             lines = config_file.readlines()

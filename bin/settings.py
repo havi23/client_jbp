@@ -14,12 +14,15 @@ class SettingsDialog(QtWidgets.QDialog):
         self.ui = Ui_SettingsDialog()
         self.oldPos = self.pos()
         self.ui.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon(resource_path('bin\\img\\settings.png')))
         self.main = main
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.GnomeDialog = None
         self.GnomeAwaits = None
+        self.ui.aim.setCursor(QtGui.QCursor(QtCore.Qt.ForbiddenCursor))
+        self.ui.aim.setToolTip('The addon will be installed automatically after setting the character and WoW path')
         self.wow_path = DB.query('SELECT data FROM system where variable="wow_path"')[0][0]
         self.ui.cwp.clicked.connect(self.cwp)
         self.ui.save.clicked.connect(self.save)
@@ -55,6 +58,8 @@ class SettingsDialog(QtWidgets.QDialog):
         DB.query(f'UPDATE system SET data=? WHERE variable="wow_path"', (wow_path,))
         DB.commit()
         wow_folder.default_config(self.main, GnomeDialog, wow_path)
+        if self.main.GnomeDialog:
+            self.main.GnomeDialog = None
         # TODO Проверить аддон, загрузить, если его нет, настроить ТМВ, переписать конфиг
 
 

@@ -54,11 +54,23 @@ def auth(key=None, error_code=None):
             KeyDialog.show()
             sys.exit(app.exec())
 
-if __name__ == 'main' and 1!=0:
+if __name__ == '__main__':
+    import ctypes, sys
+
     DB = Database()
     def restarter(last_error=None):
         try:
-            auth()
+            def is_admin():
+                try:
+                    return ctypes.windll.shell32.IsUserAnAdmin()
+                except:
+                    return False
+
+            if is_admin():
+                auth()
+            else:
+                # Re-run the program with admin rights
+                ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, __file__, None, 1)
         except Exception as E:
             error = repr(E)
             print(error)
@@ -72,5 +84,6 @@ if __name__ == 'main' and 1!=0:
             restarter(error)
     restarter()
 else:
+
     auth()
 

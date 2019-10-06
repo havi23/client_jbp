@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from bin.resource_to_exe import resource_path
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -19,7 +21,7 @@ class Ui_Dialog(object):
         self.bg = QtWidgets.QLabel(Dialog)
         self.bg.setGeometry(QtCore.QRect(-2, 0, 281, 263))
         self.bg.setText("")
-        self.bg.setPixmap(QtGui.QPixmap("bin/img/bug_report/bug_report.png"))
+        self.bg.setPixmap(QtGui.QPixmap(resource_path("bin/img/bug_report/bug_report.png")))
         self.bg.setObjectName("bg")
         self.send = QtWidgets.QPushButton(Dialog)
         self.send.setGeometry(QtCore.QRect(211, 237, 61, 19))
@@ -29,12 +31,12 @@ class Ui_Dialog(object):
         self.send.setFont(font)
         self.send.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.send.setStyleSheet("    color: #fff;\n"
-"    border: 1px solid #00aeff;\n"
-"    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);\n"
-"    background-color: #0e86ca;\n"
-"    transition: color .2s,background-color .2s,border-color .2s;\n"
-"    cursor: pointer;\n"
-"    white-space: normal")
+                                "    border: 1px solid #00AEFF;\n"
+                                "    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);\n"
+                                "    background-color: #0e86ca;\n"
+                                "    transition: color .2s,background-color .2s,border-color .2s;\n"
+                                "    cursor: pointer;\n"
+                                "    white-space: normal;")
         self.send.setObjectName("send")
         self.text = QtWidgets.QTextEdit(Dialog)
         self.text.setGeometry(QtCore.QRect(8, 50, 265, 143))
@@ -46,20 +48,20 @@ class Ui_Dialog(object):
         self.text.setMouseTracking(False)
         self.text.setAutoFillBackground(True)
         self.text.setStyleSheet("background-color: transparent;\n"
-"    color: white;")
+                                "    color: white;")
         self.text.setOverwriteMode(False)
         self.text.setObjectName("text")
         self.choose_screen = QtWidgets.QToolButton(Dialog)
         self.choose_screen.setGeometry(QtCore.QRect(10, 233, 21, 19))
         self.choose_screen.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.choose_screen.setStyleSheet("    color: #fff;\n"
-"    border: 1px solid #00aeff;\n"
-"    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);\n"
-"    background-color: #0e86ca;\n"
-"    transition: color .2s,background-color .2s,border-color .2s;\n"
-"    cursor: pointer;\n"
-"    ;\n"
-"    white-space: normal")
+                                         "    border: 1px solid #00aeff;\n"
+                                         "    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);\n"
+                                         "    background-color: #0e86ca;\n"
+                                         "    transition: color .2s,background-color .2s,border-color .2s;\n"
+                                         "    cursor: pointer;\n"
+                                         "    ;\n"
+                                         "    white-space: normal")
         self.choose_screen.setObjectName("choose_screen")
         self.label_tooltip = QtWidgets.QLabel(Dialog)
         self.label_tooltip.setGeometry(QtCore.QRect(50, 232, 161, 20))
@@ -97,7 +99,7 @@ class Ui_Dialog(object):
         self.contact_text = QtWidgets.QLineEdit(Dialog)
         self.contact_text.setGeometry(QtCore.QRect(8, 197, 181, 22))
         self.contact_text.setStyleSheet("background-color: transparent;\n"
-"    color: white;")
+                                        "    color: white;")
         self.contact_text.setInputMethodHints(QtCore.Qt.ImhMultiLine)
         self.contact_text.setObjectName("contact_text")
         self.bg.raise_()
@@ -123,4 +125,3 @@ class Ui_Dialog(object):
         self.label_tooltip.setText(_translate("Dialog", "You can attach a screenshot"))
         self.len_limit.setText(_translate("Dialog", "0/2000"))
         self.contact_text.setPlaceholderText(_translate("Dialog", "Your contact here..."))
-

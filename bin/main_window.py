@@ -15,11 +15,12 @@ from bin.wow.ahk_console import ahk_console
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 #  pyuic5 main_window.ui -o main_window_Qt.py
-
+import apscheduler
 
 class MainDialog(QtWidgets.QMainWindow):
     def __init__(self, server, LicenseKeyDialog=None):
         super(MainDialog, self).__init__()
+        self.setWindowIcon(QtGui.QIcon(resource_path('bin\\img\\icon.png')))
         self.DB = Database()
         self.server = server
         self.LicenseKeyDialog = LicenseKeyDialog
@@ -40,7 +41,7 @@ class MainDialog(QtWidgets.QMainWindow):
         self.ui.start_wow.clicked.connect(self.start_wow)
         self.ui.bug_report.clicked.connect(self.bug_report)
         self.ui.reload.clicked.connect(self.relaod_UI)
-        self.ui.wow_text.mouseReleaseEvent = lambda event: self.wow_text_tooltip()
+        self.ui.wow_text.mouseReleaseEvent = lambda event: self.info_frame()#self.wow_text_tooltip()
         self.start_icon = QtGui.QIcon()
         self.start_icon.addPixmap(QtGui.QPixmap(resource_path("bin/img/main/start.bmp")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.stop_icon = QtGui.QIcon()
@@ -61,8 +62,16 @@ class MainDialog(QtWidgets.QMainWindow):
         self.wow_correct = None
 
         # Обновление токена
-        self.token_updater = BackgroundScheduler()
-        trigger = IntervalTrigger(seconds=200)
+        from tzlocal import get_localzone
+        print('Trying to get timezone')
+        tz = get_localzone()
+        print(tz)
+        with open('test.txt', 'w', encoding='utf-8') as f:
+            f.write(str(tz))
+        self.token_updater = BackgroundScheduler({'apscheduler.timezone': tz})
+        print(self.token_updater)
+        trigger = IntervalTrigger(seconds=200, timezone=tz)
+        print(trigger)
         self.token_updater.add_job(lambda: server.token_update(self), trigger)
         self.token_updater.start()
         # self.token_updater - поток, в котором крутится обновление
@@ -149,23 +158,30 @@ class MainDialog(QtWidgets.QMainWindow):
             self.wow_path = self.DB.query('SELECT data FROM system where variable="wow_path"')[0][0]
             print(self.wow_path)
             self.spec = self.DB.query('SELECT data FROM system where variable="spec"')[0][0]
+            try:
+                prev_class = self.class_
+            except Exception as E:
+                prev_class = False
+                print(repr(E))
             self.class_= self.DB.query('SELECT data FROM system where variable="class"')[0][0]
             self.account_data = self.DB.query('SELECT data FROM system where variable in ("account", "server", "character")')
             self.rotation_key = self.DB.query(f'select * from system WHERE variable="rotation_key"')[0][1]
             self.aoe_rotation_key = self.DB.query(f'select * from system WHERE variable="aoe_rotation_key"')[0][1]
-            print(self.server.get_secret_data(self.spec, self.class_))
-            self.code, self.profile = self.server.get_secret_data(self.spec, self.class_)
-            nickname = self.account_data[1][0]
-            server = self.account_data[2][0]
-            if server and nickname:
-                self.profile = str(self.profile).replace('_nickname_', nickname).replace('_server_', server)
-                print(self.profile)
-            print(self.spec)
-            print(self.class_)
-            print(self.account_data)
-            print(self.rotation_key)
-            print(self.aoe_rotation_key)
 
+            try:
+                prev_nickname = self.nickname
+            except Exception as E:
+                prev_nickname = False
+                print(repr(E))
+            self.nickname = self.account_data[1][0]
+            print(f'nickname - {self.nickname}')
+            server = self.account_data[2][0]
+            if server and self.nickname != prev_nickname and prev_class != self.class_: # Проверка на класс и ник
+                self.code, self.profile = self.server.get_secret_data(self.spec, self.class_)
+                self.profile = str(self.profile).replace('_nickname_', self.nickname).replace('_server_', server)
+                #print(self.profile)
+                print('# PROFILE LOADED')
+            print(f'class and spec = {self.class_}, {self.spec}')
             if self.class_ is not None:
                 self.ui.label.setPixmap(QtGui.QPixmap(resource_path(f'bin/img/main/{self.class_}.png')))
             else:
@@ -185,7 +201,7 @@ class MainDialog(QtWidgets.QMainWindow):
                                                        'Click "Settings"!', main=self)
                     self.GnomeDialog.show()
                     self.GnomeAwaits = self.settings.__name__
-            elif not (nickname or self.GnomeDialog):
+            elif not (self.nickname or self.GnomeDialog):
                 self.GnomeDialog = GnomeDialog(main=self, _type='account', DB=self.DB, wow_path=self.wow_path)
                 self.GnomeDialog.show()
             elif self.spec is None:

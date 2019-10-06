@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="data" uuid="97b1ad81-4141-4728-bebe-d43d296cd606">
+    <data-source name="data [2]" uuid="08c18efa-bb7a-49f9-bb04-5c37b0098f47">
       <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" dbms="SQLITE" exact-version="3.25.1" exact-driver-version="3.25">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
@@ -9,11 +9,20 @@
       <auth-required>false</auth-required>
       <introspection-schemas>*:@</introspection-schemas>
     </data-source>
-    <data-source name="data [2]" uuid="08c18efa-bb7a-49f9-bb04-5c37b0098f47">
+    <data-source name="data" uuid="6474dfa2-4a48-43d3-91f8-4622a546f40f">
       <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" dbms="SQLITE" exact-version="3.25.1" exact-driver-version="3.25">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <auth-required>false</auth-required>
+      <introspection-schemas>*:@</introspection-schemas>
+    </data-source>
+    <data-source name="data_potato_4" uuid="47617a15-df61-46e3-b4ff-f8f275f782da">
+      <database-info product="SQLite" version="3.25.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.25.1" dbms="SQLITE" exact-version="3.25.1" exact-driver-version="3.25">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <secret-storage>master_key</secret-storage>
       <auth-required>false</auth-required>
       <introspection-schemas>*:@</introspection-schemas>
     </data-source>

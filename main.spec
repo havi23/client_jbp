@@ -65,4 +65,5 @@ exe = EXE(pyz,
           strip=False,
           upx=True,
           runtime_tmpdir=None,
-          console=False )
+          console=False,
+          icon='C:\\Users\\Max\\Documents\\GitHub\\client_jbp\\bin\\img\\icon.ico')

@@ -4,7 +4,7 @@ from bin.Qt.bug_report_Qt import Ui_Dialog as Ui_BugReportDialog
 import os
 from bin.gnome import GnomeDialog
 import shutil
-
+from bin.resource_to_exe import resource_path
 #  pyuic5 bug_report.ui -o bug_report_Qt.py
 
 class BugReportDialog(QtWidgets.QDialog):
@@ -17,6 +17,7 @@ class BugReportDialog(QtWidgets.QDialog):
         self.oldPos = self.pos()
         self.ui = Ui_BugReportDialog()
         self.ui.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon(resource_path('bin\\img\\report.png')))
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_NoSystemBackground | QtCore.Qt.WA_TranslucentBackground)
         self.ui.close_.mousePressEvent = lambda event: self._exit()

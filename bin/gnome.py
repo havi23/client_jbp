@@ -89,6 +89,7 @@ class GnomeDialog(QtWidgets.QDialog):
         self.character_edit.update()
 
 
+
     def save(self, main, DB):
         nickname = self.character_edit.currentText()
         DB.execute(f'UPDATE system SET data="{self.account_edit.currentText()}" WHERE variable="account"')
@@ -108,6 +109,11 @@ class GnomeDialog(QtWidgets.QDialog):
         # if main:
         #     if main.GnomeDialog:
         #         main.GnomeDialog = None
-        self.main.GnomeDialog = None
+        main.GnomeDialog = None
+        try:
+            self.main.hide()
+            self.main.show()
+        except Exception as E:
+            print(f'gnome#1 - {repr(E)}')
         self.close()
 
