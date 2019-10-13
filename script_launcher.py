@@ -22,9 +22,12 @@ def update_check(server):
         global_version = float(update)
         if local_version < global_version:
             print('running updater')
-            server.load_updater()
+            server.load_updater(global_version, DB)
             ctypes.windll.user32.MessageBoxW(0, "You must run update.exe before starting", "Update required", 0)
             sys.exit()
+        else:
+            if 1.01 < global_version:
+                ctypes.windll.user32.MessageBoxW(0, "You trying to run old version or program ", "Wrong version", 0)
 
 def auth(key=None, error_code=None):
     if not key:

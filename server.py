@@ -38,8 +38,10 @@ class Server():
         else:
             return response['global_version']
 
-    def load_updater(self):
+    def load_updater(self, global_version, DB):
         response = requests.get(self.url + f'api/update_soft/?file=updater')
+        DB.execute(F'UPDATE system SET DATA="{global_version}" WHERE VARIABLE="global_version"')
+        DB.commit()
         with open('update.exe', 'wb') as f:
             f.write(response.content)
             return True
